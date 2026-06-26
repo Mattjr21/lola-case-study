@@ -477,11 +477,23 @@ h2.lola-scroll-title {
   margin-bottom: 0;
 }
 
+.fold1-overview-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 44rem;
+}
+
+.fold1-overview-body .fold1-case-intro,
+.fold1-overview-body .fold1-case-body {
+  margin: 0;
+}
+
 .fold1-overview-facts {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.25rem;
-  margin: 1.5rem 0 0;
+  margin: 2rem 0 0;
   padding: 0;
   max-width: 56rem;
 }

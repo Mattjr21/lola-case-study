@@ -231,15 +231,17 @@ export const FOLD1_SECTION_SUBHEAD =
 export const FOLD1_OVERVIEW = {
   eyebrow: "Overview",
   title: "A bilingual WhatsApp assistant for La Bodega's weekly shop",
-  intro:
-    "La Bodega is an independent Hispanic grocer in Calhoun, GA. Each weekly deal blast reaches ~1,200 loyalty families on WhatsApp — and replies stack up as hours questions, SNAP checks, voice notes, and pickup lists in one staff inbox. I designed Lola's conversation flows and EN/ES copy, and built wacrm, the staff dashboard where counter teams manage threads, quotes, and orders. Both are live in production.",
+  lead:
+    "La Bodega is an independent Hispanic grocer in Calhoun, GA. Its weekly WhatsApp flyer reaches ~1,200 loyalty families, but replies quickly turn into a mix of English, Spanish, voice notes, SNAP questions, and pickup lists inside one staff inbox.",
+  role:
+    "I designed Lola's EN/ES conversation flows, order handoff logic, and voice/text experience — then built WACRM, the staff dashboard where teams manage threads, quotes, reminders, and pickup orders. The pilot is live in production.",
   facts: [
     { label: "Client", detail: "La Bodega Supermarket · Calhoun, GA" },
     { label: "Timeline", detail: "May – Jun 2026 · live pilot" },
     {
       label: "What I delivered",
       detail:
-        "WhatsApp flows for questions, pickup orders, and reminders — plus the staff dashboard store teams use for quotes and fulfillment.",
+        "Lola on WhatsApp — six flows, bilingual copy, voice + text. WACRM — staff inbox, quotes, and pickup orders. Both live in production.",
     },
   ],
 } as const;

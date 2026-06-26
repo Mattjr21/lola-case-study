@@ -45,7 +45,10 @@ export function Fold1Credentials() {
       <section className="fold1-case-block fold1-case-block--last" aria-labelledby="fold1-overview-label">
         <FoldSubhead id="fold1-overview-label">{FOLD1_OVERVIEW.eyebrow}</FoldSubhead>
         <FoldTitle>{FOLD1_OVERVIEW.title}</FoldTitle>
-        <p className="fold1-case-intro">{FOLD1_OVERVIEW.intro}</p>
+        <div className="fold1-overview-body">
+          <p className="fold1-case-intro">{FOLD1_OVERVIEW.lead}</p>
+          <p className="fold1-case-body">{FOLD1_OVERVIEW.role}</p>
+        </div>
 
         <dl className="fold1-overview-facts" aria-label="Project at a glance">
           {FOLD1_OVERVIEW.facts.map((fact) => (
