@@ -46,8 +46,8 @@ export function Fold1Credentials() {
         <FoldSubhead id="fold1-overview-label">{FOLD1_OVERVIEW.eyebrow}</FoldSubhead>
         <FoldTitle>{FOLD1_OVERVIEW.title}</FoldTitle>
         <div className="fold1-overview-body">
-          <p className="fold1-case-intro">{FOLD1_OVERVIEW.lead}</p>
-          <p className="fold1-case-body">{FOLD1_OVERVIEW.role}</p>
+          <p>{FOLD1_OVERVIEW.lead}</p>
+          <p>{FOLD1_OVERVIEW.role}</p>
         </div>
 
         <dl className="fold1-overview-facts" aria-label="Project at a glance">
