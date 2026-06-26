@@ -70,16 +70,16 @@ export function StaffOpsPreview() {
           <header className="cs-section-intro max-w-[52ch]">
             <h3 className="cs-h3 max-w-[24ch]">Staff alerts without another app</h3>
             <p className="cs-body">
-              When a pickup list is ready, staff are notified in{" "}
+              When a pickup list is ready, staff are notified in the{" "}
               <a
                 href={WHATSAPP_LIVE.staffUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[var(--cs-brand)] hover:underline underline-offset-2"
               >
-                wacrm
-              </a>
-              — the staff dashboard I built for WhatsApp threads, quotes, and pickup orders.
+                staff dashboard
+              </a>{" "}
+              I built for WhatsApp threads, quotes, and pickup orders.
             </p>
           </header>
           <p className="cs-staff-process-line" aria-label="Pickup alert process">
@@ -115,7 +115,7 @@ export function StaffOpsPreview() {
                     rel="noopener noreferrer"
                     className="text-[var(--cs-accent)] underline underline-offset-2"
                   >
-                    Review in WACRM →
+                    Review in dashboard →
                   </a>
                 </WaBubble>
               </PhoneFrame>

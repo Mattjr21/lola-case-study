@@ -13,7 +13,7 @@ export const STORY_BEATS = {
     body: "The bet: no new shopper app. Build inside the thread families already use. Lola — the store mascot with a voice — routes each turn on the broadcast line: grounded FAQ from flyer + store tools, tap-first paths, and staff relay when the answer is not in the knowledge base.",
     bullets: [
       "Design: conversation rules, EN/ES copy, button flows, staff alert surfaces",
-      "Engineering (wacrm): Vercel webhook, Supabase states, grounding + safety gates",
+      "Build: Vercel webhook, Supabase states, grounding + safety gates",
     ],
   },
   develop: {

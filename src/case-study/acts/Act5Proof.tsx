@@ -32,13 +32,13 @@ export function Act5Proof() {
                 La Bodega — <LolaMark variant="white" />
               </p>
               <p className="cs-site-footer__tagline">
-                Conversational design · wacrm · grounded AI · EN/ES copy
+                Conversational design · staff dashboard · grounded AI · EN/ES copy
               </p>
               <dl className="cs-site-footer__meta">
                 <div>
                   <dt>Staff tool</dt>
                   <dd>
-                    <a href={WHATSAPP_LIVE.staffUrl}>wacrm-i9f2.vercel.app</a>
+                    <a href={WHATSAPP_LIVE.staffUrl}>Staff dashboard</a>
                   </dd>
                 </div>
                 <div>

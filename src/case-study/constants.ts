@@ -152,7 +152,7 @@ export const PROJECT = {
   status: "Live pilot",
   timeline: "May – Jun 2026",
   context: "Independent grocer · Calhoun, GA",
-  team: "Solo design & build · wacrm",
+  team: "Solo design & build",
 } as const;
 
 /** Unified headline spine — hero, TLDR, and skim blocks */
@@ -182,7 +182,7 @@ export const PROJECT_STATS = [
   {
     label: "Pilot status",
     value: "Live",
-    detail: "Production WhatsApp + wacrm staff dashboard",
+    detail: "Production WhatsApp + staff dashboard",
   },
   {
     label: "Languages",
@@ -234,14 +234,14 @@ export const FOLD1_OVERVIEW = {
   lead:
     "La Bodega is an independent Hispanic grocer in Calhoun, GA. Its weekly WhatsApp flyer reaches ~1,200 loyalty families, but replies quickly turn into a mix of English, Spanish, voice notes, SNAP questions, and pickup lists inside one staff inbox.",
   role:
-    "I designed Lola's EN/ES conversation flows, order handoff logic, and voice/text experience — then built WACRM, the staff dashboard where teams manage threads, quotes, reminders, and pickup orders. The pilot is live in production.",
+    "I designed Lola's EN/ES conversation flows, order handoff logic, and voice/text experience — then built the staff dashboard where teams manage threads, quotes, reminders, and pickup orders. The pilot is live in production.",
   facts: [
     { label: "Client", detail: "La Bodega Supermarket · Calhoun, GA" },
     { label: "Timeline", detail: "May – Jun 2026 · live pilot" },
     {
       label: "What I delivered",
       detail:
-        "Lola on WhatsApp — six flows, bilingual copy, voice + text. WACRM — staff inbox, quotes, and pickup orders. Both live in production.",
+        "Lola on WhatsApp — six flows, bilingual copy, voice + text. Staff dashboard — inbox, quotes, and pickup orders. Both live in production.",
     },
   ],
 } as const;
@@ -379,7 +379,7 @@ export const STORY = {
     "— mascot-led layer on the weekly deals thread for discover → ask → plan: pickup, list reminders, and staff help.",
   ownershipLines: [
     { hook: "I designed", text: "flows, EN/ES copy, and conversation guardrails." },
-    { hook: "I built", text: "wacrm — staff CRM for WhatsApp threads, quotes, and pickups." },
+    { hook: "I built", text: "the staff dashboard for WhatsApp threads, quotes, and pickups." },
   ] as const,
   /** @deprecated use problemLines */
   problem:
@@ -387,7 +387,7 @@ export const STORY = {
   problemFollow:
     `After each weekly deal blast to ${LOYALTY_MEMBER_COUNT} loyalty members, every reply hit one inbox — hours, SNAP, voice notes, what to buy — in Spanish and English. Staff could not reply to each thread by hand during rush.`,
   solutionIntro:
-    "a mascot-led layer on the weekly deals thread for discover, ask, and plan — pickup, shopping list reminders, and staff help. I designed Lola's flows and EN/ES copy, and built wacrm for staff to run threads, quotes, and pickups.",
+    "a mascot-led layer on the weekly deals thread for discover, ask, and plan — pickup, shopping list reminders, and staff help. I designed Lola's flows and EN/ES copy, and built the staff dashboard to run threads, quotes, and pickups.",
   capabilities: [
     {
       label: "Grounded Q&A",
@@ -439,7 +439,7 @@ export const HERO = {
     "hours today?",
     "SNAP accepted?",
   ] as const,
-  roleLine: "Design technologist · flows + copy + wacrm staff CRM",
+  roleLine: "Design technologist · flows + copy + staff dashboard",
 } as const;
 
 /** Documented gaps between portfolio demo and production code */
@@ -453,7 +453,7 @@ export const PRODUCTION_GAPS = [
   {
     topic: "Reply 2 delivery list",
     portfolio: "Paraphrased bilingual automation in Before Lola demo",
-    production: "Verify exact strings in wacrm CRM template export",
+    production: "Verify exact strings in staff CRM template export",
     status: "Verify against CRM",
   },
   {
@@ -510,7 +510,7 @@ export const I_SHIPPED_GROUPS = [
   },
   {
     label: "Product build",
-    items: ["wacrm staff dashboard — WhatsApp inbox, pickup orders, counter alerts"],
+    items: ["Staff dashboard — WhatsApp inbox, pickup orders, counter alerts"],
   },
 ] as const;
 
@@ -724,7 +724,7 @@ export const PRODUCTION_FACTS = [
   {
     kind: "staff" as const,
     label: "Staff CRM",
-    value: "wacrm on Vercel",
+    value: "Staff dashboard on Vercel",
     detail: "Inbox · Orders · Reminders · dashboard alerts on new lists",
     href: "https://wacrm-i9f2.vercel.app",
     linkLabel: "Staff login",
@@ -745,7 +745,7 @@ export const PRODUCTION_FACTS = [
 ] as const;
 
 export const OWNERSHIP_BOUNDARY =
-  "Design through ship — conversation UX, wacrm staff product, and Lola routing on WhatsApp." as const;
+  "Design through ship — conversation UX, staff dashboard, and Lola routing on WhatsApp." as const;
 
 export const EVIDENCE_LEAD = [
   {

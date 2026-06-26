@@ -2,36 +2,15 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { PORTFOLIO, PROGRESS_PHASES, type PhaseId } from "./constants";
 import { AccordionChevron } from "./transitions";
 import { LolaMark } from "./ui";
+import { useScrollSpy } from "./useScrollSpy";
+
+const CHAPTER_SECTION_IDS = ["prologue", ...PROGRESS_PHASES.map((p) => p.id)] as const;
 
 function useActivePhase() {
-  const [activePhase, setActivePhase] = useState<PhaseId | "prologue">("prologue");
+  const { activeId } = useScrollSpy(CHAPTER_SECTION_IDS);
 
-  useEffect(() => {
-    const prologue = document.getElementById("prologue");
-    const phaseEls = PROGRESS_PHASES.map((p) => document.getElementById(p.id)).filter(Boolean) as HTMLElement[];
-    const sections = prologue ? [prologue, ...phaseEls] : phaseEls;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (!visible?.target?.id) return;
-        const id = visible.target.id;
-        if (id === "prologue") {
-          setActivePhase("prologue");
-          return;
-        }
-        if (PROGRESS_PHASES.some((p) => p.id === id)) {
-          setActivePhase(id as PhaseId);
-        }
-      },
-      { rootMargin: "-14% 0px -52% 0px", threshold: [0, 0.1, 0.25, 0.4] },
-    );
-
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
-  }, []);
+  const activePhase: PhaseId | "prologue" =
+    activeId === "prologue" ? "prologue" : (activeId as PhaseId);
 
   const activeIdx =
     activePhase === "prologue" ? -1 : PROGRESS_PHASES.findIndex((p) => p.id === activePhase);
