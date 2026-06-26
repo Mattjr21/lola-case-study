@@ -1,0 +1,44 @@
+---
+description: Lola portfolio case study — PDF visuals, handoff arc, anti-patterns from failed rebuilds
+globs: "**/*"
+alwaysApply: false
+---
+
+# Lola case study — learn from past mistakes
+
+**Scope:** This repo (`lola-case-study`) only. Do not commit or deploy unless the user asks.
+
+## Source-of-truth order
+1. **`HANDOFF_STORY_ARC.md`** — narrative: each beat said **once** on main scroll; depth → Reference only
+2. **PDF export** (`Designing Lola · WhatsApp AI Assistant · Case Study.pdf`) — layout, density, visuals
+3. **`HANDOFF_BOOK.md` / live wacrm** — production truth (what actually shipped)
+4. Figma zip codegen — reference only; do not copy its IA or title
+
+## Do not repeat these failures
+- **Text-heavy rebuilds** — ownership tables, “What I shipped” essays, Proof chips, duplicate role lines
+- **Wrong broadcast** — numbered CRM menu is *Before* only; production *After* uses Lola intro + tap buttons (`BROADCAST_LOLA_INTRO`)
+- **Stacked FlowExplorer** — phone must not cover controls; **controls left, full 390px device phone right** (sticky)
+- **Staff ops toggle** — PDF shows **both channels always** (staff WA + dashboard modal), not collapse/toggle
+- **Reshuffling IA** — keep **ChapterNav** 4-phase timeline animation **unchanged**
+- **Inventing sections** — no SolutionStrip, ImpactOutcomes, testimonials, Reference on main path unless asked
+
+## Target layout (main path)
+```
+ChapterNav (unchanged)
+Prologue → credentials + production truth (no Proof chip, no “What I shipped” line)
+Define → horizontal service blueprint (6 cards), not ownership table
+Discover → problem evidence (light)
+Develop → FlowExplorer (production default) + StaffOps PDF layout
+Deliver → ScrollTimeline + footer only
+```
+
+## Visual defaults
+- WhatsApp mock: **390px device width**, chat scrolls inside frame
+- Define: **flow diagram** from `SERVICE_BLUEPRINT`, not prose tables
+- Production truth bento: must not clip long values (phone, URLs)
+
+## Before claiming done
+- Read `HANDOFF_STORY_ARC.md` skim test
+- Compare mentally to PDF — visuals over copy
+- `npm run build` in project root
+- Do not add parallel “fixes” the user did not request
