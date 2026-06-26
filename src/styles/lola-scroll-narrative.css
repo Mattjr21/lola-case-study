@@ -477,6 +477,33 @@ h2.lola-scroll-title {
   margin-bottom: 0;
 }
 
+.fold1-overview-facts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  max-width: 56rem;
+}
+
+@media (min-width: 640px) {
+  .fold1-overview-facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem 2rem;
+  }
+}
+
+.fold1-overview-fact {
+  margin: 0;
+}
+
+.fold1-overview-fact-value {
+  margin: 0.35rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--cs-ink-muted);
+}
+
 .fold1-solution-pillars--compact {
   margin-top: 1.5rem;
   gap: 1rem;

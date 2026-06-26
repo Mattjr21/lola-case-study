@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  FOLD1_META,
-  FOLD1_METRIC_CHIPS,
-  FOLD1_OVERVIEW,
-  FOLD1_RESPONSE_BULLETS,
-  FOLD1_SECTION_HEADLINE,
-} from "./constants";
+import { FOLD1_META, FOLD1_OVERVIEW } from "./constants";
 
 function FoldSubhead({ children, id }: { children: React.ReactNode; id?: string }) {
   return (
@@ -23,7 +17,7 @@ function FoldTitle({ children, id }: { children: React.ReactNode; id?: string })
   );
 }
 
-/** Below hero — metadata, overview, design hooks (evidence lives in Discover) */
+/** Below hero — metadata + project overview (evidence lives in Discover) */
 export function Fold1Credentials() {
   return (
     <div className="fold1-credentials">
@@ -50,31 +44,17 @@ export function Fold1Credentials() {
 
       <section className="fold1-case-block fold1-case-block--last" aria-labelledby="fold1-overview-label">
         <FoldSubhead id="fold1-overview-label">{FOLD1_OVERVIEW.eyebrow}</FoldSubhead>
-        <FoldTitle>
-          {FOLD1_SECTION_HEADLINE.map((line) => (
-            <span key={line} className="fold1-credentials-lead-line">
-              {line}
-            </span>
-          ))}
-        </FoldTitle>
+        <FoldTitle>{FOLD1_OVERVIEW.title}</FoldTitle>
         <p className="fold1-case-intro">{FOLD1_OVERVIEW.intro}</p>
 
-        <div className="fold1-solution-pillars fold1-solution-pillars--compact" aria-label="Design response">
-          {FOLD1_RESPONSE_BULLETS.map((item) => (
-            <article key={item.hook} className="fold1-solution-pillar">
-              <h3 className="fold1-solution-pillar-title">{item.hook}</h3>
-              <p className="fold1-solution-pillar-body">{item.text}</p>
-            </article>
+        <dl className="fold1-overview-facts" aria-label="Project at a glance">
+          {FOLD1_OVERVIEW.facts.map((fact) => (
+            <div key={fact.label} className="fold1-overview-fact">
+              <dt className="cs-meta-label">{fact.label}</dt>
+              <dd className="fold1-overview-fact-value">{fact.detail}</dd>
+            </div>
           ))}
-        </div>
-
-        <ul className="fold1-metric-chips" aria-label="Pilot scope">
-          {FOLD1_METRIC_CHIPS.map((label) => (
-            <li key={label} className="cs-chip fold1-metric-chip">
-              {label}
-            </li>
-          ))}
-        </ul>
+        </dl>
       </section>
     </div>
   );

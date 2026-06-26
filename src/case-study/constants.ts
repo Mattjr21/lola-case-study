@@ -150,7 +150,7 @@ export const SITE = {
 export const PROJECT = {
   tag: "CASE STUDY · LA BODEGA · LOLA · LIVE PILOT",
   status: "Live pilot",
-  timeline: "2024 – 2026",
+  timeline: "May – Jun 2026",
   context: "Independent grocer · Calhoun, GA",
   team: "Solo design & build · wacrm",
 } as const;
@@ -230,8 +230,18 @@ export const FOLD1_SECTION_SUBHEAD =
 
 export const FOLD1_OVERVIEW = {
   eyebrow: "Overview",
+  title: "A bilingual WhatsApp assistant for La Bodega's weekly shop",
   intro:
-    "Solo design technologist on a live pilot — Lola on the store's WhatsApp thread, plus wacrm, the staff dashboard for threads, quotes, and pickup orders.",
+    "La Bodega is an independent Hispanic grocer in Calhoun, GA. Each weekly deal blast reaches ~1,200 loyalty families on WhatsApp — and replies stack up as hours questions, SNAP checks, voice notes, and pickup lists in one staff inbox. I designed Lola's conversation flows and EN/ES copy, and built wacrm, the staff dashboard where counter teams manage threads, quotes, and orders. Both are live in production.",
+  facts: [
+    { label: "Client", detail: "La Bodega Supermarket · Calhoun, GA" },
+    { label: "Timeline", detail: "May – Jun 2026 · live pilot" },
+    {
+      label: "What I delivered",
+      detail:
+        "WhatsApp flows for questions, pickup orders, and reminders — plus the staff dashboard store teams use for quotes and fulfillment.",
+    },
+  ],
 } as const;
 
 /** Develop sub-sections — in-phase progress cue */
