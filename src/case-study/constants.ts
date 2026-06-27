@@ -810,12 +810,12 @@ export const WEEKLY_SHOP_LOOP = [
   { step: 5, label: "Pick up", detail: "Staff quote → YES → in store" },
 ] as const;
 
-/** Flow explorer — before / after framing */
+/** Flow explorer — before / after framing (labels live in UI) */
 export const FLOW_EXPLORER_BEFORE =
-  "Before Lola: the broadcast created replies, but staff had to manually read, translate, and sort them.";
+  "The broadcast got replies, but staff had to read, translate, and sort them by hand.";
 
 export const FLOW_EXPLORER_AFTER =
-  "After Lola: the same thread becomes a guided flow with buttons, language memory, and staff handoff when needed.";
+  "The same thread becomes a guided flow — tap buttons, language memory, and staff handoff when needed.";
 
 /** Scope cuts — signal → shipped for validation table */
 export const WHAT_WE_CUT = [
@@ -1299,7 +1299,7 @@ export const INBOX_SNIPPETS = [
 ] as const;
 
 export const FLOW_TABS: { id: FlowId; label: string; blurb: string; hashSlug: string }[] = [
-  { id: "broadcast", label: "Broadcast", blurb: "Weekly flyer blast — before numbered menus, after Lola tap buttons.", hashSlug: "broadcast" },
+  { id: "broadcast", label: "Broadcast", blurb: "The store's weekly WhatsApp flyer blast.", hashSlug: "broadcast" },
   { id: "greeting", label: "Greeting", blurb: "Customer says hi — Lola offers deals, hours, or pickup.", hashSlug: "greeting" },
   { id: "order", label: "Pickup order", blurb: "List items → staff quote → confirm → pickup time.", hashSlug: "pickup" },
   { id: "reminder", label: "Reminder", blurb: "Save a shopping list and day — Lola nudges when it's time.", hashSlug: "list-reminder" },

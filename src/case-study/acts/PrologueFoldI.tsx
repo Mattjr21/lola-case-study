@@ -10,7 +10,7 @@ export function PrologueFoldI() {
 
       <div className="border-b border-[var(--cs-border)] bg-[var(--cs-surface)]">
         <div className="cs-page cs-fold-section">
-          <FadeIn when="mount">
+          <FadeIn when="view">
             <Fold1Credentials />
           </FadeIn>
         </div>

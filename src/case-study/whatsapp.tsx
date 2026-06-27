@@ -5,13 +5,14 @@ import { WHATSAPP_MAX_REPLY_BUTTONS } from "./constants";
 const waFont = { fontFamily: "var(--cs-font)" } as const;
 const waMono = { fontFamily: "var(--cs-mono)" } as const;
 
-/** One mobile-sized frame — 390px device width in flow explorer when `device` is set. */
+/** One mobile-sized frame — ~360px cap, fluid inside padded sections when `device` is set. */
 export function PhoneFrame({
   children,
   contact = "Lola · La Bodega",
   inbox = false,
   device = false,
   lang,
+  className = "",
 }: {
   children: React.ReactNode;
   contact?: string;
@@ -21,20 +22,33 @@ export function PhoneFrame({
   device?: boolean;
   /** BCP 47 lang for demo thread copy (e.g. es) */
   lang?: string;
+  className?: string;
 }) {
   const isLolaContact = contact.startsWith("Lola");
   const avatarLetter = inbox ? "…" : isLolaContact ? "L" : contact.charAt(0).toUpperCase();
+  const avatarClass = isLolaContact && !inbox
+    ? "cs-wa-avatar cs-wa-avatar--lola"
+    : inbox
+      ? "cs-wa-avatar cs-wa-avatar--inbox"
+      : "cs-wa-avatar cs-wa-avatar--store";
 
   return (
-    <div className={`cs-wa-phone-wrap${device ? " cs-wa-phone-wrap--device" : ""}`}>
-      <div className={`cs-wa-phone${device ? " cs-wa-phone--device" : ""}`} aria-label="WhatsApp conversation mockup">
+    <div
+      className={`cs-wa-phone-wrap${device ? " cs-wa-phone-wrap--device" : ""} ${className}`.trim()}
+    >
+      <div
+        className={`cs-wa-phone${device ? " cs-wa-phone--device" : ""}`}
+        aria-label="WhatsApp conversation mockup"
+      >
         <div className="cs-wa-screen">
           <div className="cs-wa-header">
-          <div className="cs-wa-avatar">
+          <div className={avatarClass}>
             {isLolaContact && !inbox ? (
-              <span className="cs-lola cs-lola--phone text-base leading-none">L</span>
+              <span className="cs-lola cs-lola--avatar" aria-hidden>
+                L
+              </span>
             ) : (
-              <span className="text-white text-sm font-medium leading-none" style={waFont}>
+              <span className="cs-wa-avatar-letter" style={waFont}>
                 {avatarLetter}
               </span>
             )}
@@ -218,16 +232,40 @@ export function WaVoiceNote({ duration = "0:14" }: { duration?: string }) {
   );
 }
 
-export function AnimatedChat({ children }: { children: React.ReactNode }) {
+export function AnimatedChat({
+  children,
+  scrollKey,
+}: {
+  children: React.ReactNode;
+  scrollKey?: string | number;
+}) {
   const threadRef = React.useRef<HTMLDivElement>(null);
 
   React.useLayoutEffect(() => {
     const chat = threadRef.current?.closest(".cs-wa-chat") as HTMLElement | null;
     if (!chat) return;
-    requestAnimationFrame(() => {
+
+    const scrollToEnd = () => {
       chat.scrollTop = chat.scrollHeight;
+    };
+
+    scrollToEnd();
+    requestAnimationFrame(scrollToEnd);
+
+    const delayed = window.setTimeout(scrollToEnd, 150);
+
+    const imgs = chat.querySelectorAll("img");
+    const onImgLoad = () => scrollToEnd();
+    imgs.forEach((img) => {
+      if (!img.complete) img.addEventListener("load", onImgLoad, { once: true });
+      else scrollToEnd();
     });
-  }, [children]);
+
+    return () => {
+      window.clearTimeout(delayed);
+      imgs.forEach((img) => img.removeEventListener("load", onImgLoad));
+    };
+  }, [children, scrollKey]);
 
   return (
     <div ref={threadRef} className="cs-wa-chat-thread">

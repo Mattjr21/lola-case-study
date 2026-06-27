@@ -90,7 +90,7 @@ export function StaffOpsPreview() {
         <div className="cs-staff-ops-grid cs-staff-ops-grid--pdf cs-staff-ops-grid--spaced">
         <article aria-labelledby="staff-wa-heading" className="cs-staff-panel">
           <FadeIn>
-            <h4 id="staff-wa-heading" className="cs-staff-panel-label mb-4">
+            <h4 id="staff-wa-heading" className="cs-staff-panel-label">
               Staff WhatsApp alert
             </h4>
             <div className="cs-staff-phone-wrap">

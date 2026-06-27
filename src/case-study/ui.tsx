@@ -106,26 +106,32 @@ export function QuoteCard({
   );
 }
 
+const REVEAL_EASE = [0.22, 1, 0.36, 1] as const;
+/** Trigger when ~18% of block is visible — stable across section heights */
+const SCROLL_VIEWPORT = { once: true, amount: 0.18, margin: "0px 0px -6% 0px" } as const;
+
 export function FadeIn({
   children,
   className = "",
   delay = 0,
   when = "view",
+  distance = 10,
 }: {
   children: React.ReactNode;
   className?: string;
   delay?: number;
   /** "mount" = animate on load (hero). "view" = animate when scrolled into view. */
   when?: "mount" | "view";
+  distance?: number;
 }) {
   const reduce = useReducedMotion();
   if (reduce) return <div className={className}>{children}</div>;
-  const transition = { duration: 0.28, delay, ease: [0.22, 1, 0.36, 1] as const };
+  const transition = { duration: 0.32, delay, ease: REVEAL_EASE };
   if (when === "mount") {
     return (
       <motion.div
         className={className}
-        initial={{ opacity: 0, y: 6 }}
+        initial={{ opacity: 0, y: distance }}
         animate={{ opacity: 1, y: 0 }}
         transition={transition}
       >
@@ -136,12 +142,62 @@ export function FadeIn({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 6 }}
+      initial={{ opacity: 0, y: distance }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-24px" }}
+      viewport={SCROLL_VIEWPORT}
       transition={transition}
     >
       {children}
+    </motion.div>
+  );
+}
+
+/** Phase chapter header — eyebrow, title, lead stagger on scroll */
+export function PhaseHeaderReveal({
+  eyebrow,
+  titleId,
+  title,
+  lead,
+}: {
+  eyebrow: string;
+  titleId: string;
+  title: string;
+  lead: string;
+}) {
+  const reduce = useReducedMotion();
+  if (reduce) {
+    return (
+      <>
+        <p className="cs-fold-eyebrow">{eyebrow}</p>
+        <h2 id={titleId} className="cs-fold-title">
+          {title}
+        </h2>
+        <p className="cs-fold-lead">{lead}</p>
+      </>
+    );
+  }
+
+  const item = {
+    hidden: { opacity: 0, y: 14 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.42, ease: REVEAL_EASE } },
+  };
+
+  return (
+    <motion.div
+      initial="hidden"
+      whileInView="show"
+      viewport={{ ...SCROLL_VIEWPORT, amount: 0.22 }}
+      variants={{ hidden: {}, show: { transition: { staggerChildren: 0.07, delayChildren: 0.02 } } }}
+    >
+      <motion.p className="cs-fold-eyebrow" variants={item}>
+        {eyebrow}
+      </motion.p>
+      <motion.h2 id={titleId} className="cs-fold-title" variants={item}>
+        {title}
+      </motion.h2>
+      <motion.p className="cs-fold-lead" variants={item}>
+        {lead}
+      </motion.p>
     </motion.div>
   );
 }

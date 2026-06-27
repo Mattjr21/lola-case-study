@@ -1,7 +1,8 @@
 import React from "react";
 import type { PhaseId } from "./constants";
 import { PHASES } from "./constants";
-import { FadeIn } from "./ui";
+import { PhaseHeaderReveal } from "./ui";
+import { motion, useReducedMotion } from "motion/react";
 
 type PhaseShellProps = {
   id: PhaseId;
@@ -21,7 +22,10 @@ const TONE_CLASS = {
 
 export function PhaseShell({ id, children, tone = "default", compact = false, end = false }: PhaseShellProps) {
   const phase = PHASES.find((p) => p.id === id);
+  const reduce = useReducedMotion();
   if (!phase) return <>{children}</>;
+
+  const markerOpacity = compact ? 0.08 : 0.12;
 
   return (
     <section
@@ -29,17 +33,29 @@ export function PhaseShell({ id, children, tone = "default", compact = false, en
       className={`cs-fold scroll-mt-[var(--cs-nav-h)] ${TONE_CLASS[tone]}${compact ? " cs-fold--compact" : ""}${end ? " cs-fold--end" : ""}`}
       aria-labelledby={`phase-title-${id}`}
     >
-      <div className="cs-fold-marker" aria-hidden>
-        <span className="cs-fold-marker-num">{phase.num}</span>
-      </div>
+      {reduce ? (
+        <div className="cs-fold-marker" aria-hidden>
+          <span className="cs-fold-marker-num">{phase.num}</span>
+        </div>
+      ) : (
+        <motion.div
+          className="cs-fold-marker"
+          aria-hidden
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: markerOpacity, y: 0 }}
+          viewport={{ once: true, amount: 0.15, margin: "0px 0px -8% 0px" }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <span className="cs-fold-marker-num">{phase.num}</span>
+        </motion.div>
+      )}
       <header className="cs-fold-header cs-page">
-        <FadeIn when="mount">
-          <p className="cs-fold-eyebrow">{phase.eyebrow}</p>
-          <h2 id={`phase-title-${id}`} className="cs-fold-title">
-            {phase.title}
-          </h2>
-          <p className="cs-fold-lead">{phase.lead}</p>
-        </FadeIn>
+        <PhaseHeaderReveal
+          eyebrow={phase.eyebrow}
+          titleId={`phase-title-${id}`}
+          title={phase.title}
+          lead={phase.lead}
+        />
       </header>
       <div className="cs-fold-body">{children}</div>
     </section>

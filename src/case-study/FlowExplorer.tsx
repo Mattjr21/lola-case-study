@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "motion/react";
 import type { FlowId, Lang } from "./constants";
 import {
@@ -20,7 +20,6 @@ import {
   WaBroadcastHeader,
   WaBubble,
   WaButtons,
-  WaThreadNote,
   WaVoiceNote,
 } from "./whatsapp";
 
@@ -172,24 +171,19 @@ function buildBroadcastAfterSteps(lang: Lang, advance: () => void): Step[] {
   const contact = "Lola · La Bodega";
   return [
     {
-      key: "template",
-      label: "Same weekly template image",
-      contact,
-      node: (
-        <WaBubble from="staff" time="Fri 9:00" media>
-          <WaBroadcastHeader compact inChat />
-        </WaBubble>
-      ),
-    },
-    {
       key: "lola-intro",
-      label: "Lola intro + tap buttons (replaces numbered menu)",
+      label: "Template image + Lola tap buttons",
       contact,
       node: (
-        <WaBubble from="lola" time="Fri 9:01">
-          {nl(t.broadcast)}
-          <WaButtons options={t.broadcastBtns} onSelect={advance} />
-        </WaBubble>
+        <>
+          <WaBubble from="staff" time="Fri 9:00" media>
+            <WaBroadcastHeader compact inChat />
+          </WaBubble>
+          <WaBubble from="lola" time="Fri 9:01">
+            {nl(t.broadcast)}
+            <WaButtons options={t.broadcastBtns} onSelect={advance} />
+          </WaBubble>
+        </>
       ),
     },
     {
@@ -337,6 +331,16 @@ function buildSteps(flow: FlowId, lang: Lang, broadcastPhase: BroadcastPhase, ad
   }
 }
 
+const BROADCAST_ERA_LABEL = {
+  before: "Before · numbered CRM menu",
+  after: "After · Lola tap buttons",
+} as const;
+
+const BROADCAST_INITIAL_STEP: Record<BroadcastPhase, number> = {
+  before: 1,
+  after: 1,
+};
+
 const BROADCAST_PHASE_TABS = [
   { id: "before" as const, label: "Before Lola" },
   { id: "after" as const, label: "After Lola" },
@@ -349,7 +353,8 @@ export function FlowExplorer() {
   const [flow, setFlow] = useState<FlowId>("broadcast");
   const [lang, setLang] = useState<Lang>("en");
   const [broadcastPhase, setBroadcastPhase] = useState<BroadcastPhase>("after");
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(BROADCAST_INITIAL_STEP.after);
+  const phoneStageRef = useRef<HTMLDivElement>(null);
   const { section, segments, setHash } = useHashLocation();
 
   useEffect(() => {
@@ -360,9 +365,9 @@ export function FlowExplorer() {
     const nextFlow = FLOW_ID_FROM_SLUG[slug];
     if (nextFlow) {
       setFlow(nextFlow);
-      setStep(1);
+      setStep(nextFlow === "broadcast" ? BROADCAST_INITIAL_STEP[broadcastPhase] : 1);
     }
-  }, [section, segments]);
+  }, [section, segments, broadcastPhase]);
 
   const advance = () => setStep((s) => s + 1);
 
@@ -382,15 +387,57 @@ export function FlowExplorer() {
 
   const reset = (id: FlowId) => {
     setFlow(id);
-    setStep(1);
     setBroadcastPhase("after");
+    setStep(id === "broadcast" ? BROADCAST_INITIAL_STEP.after : 1);
     setHash("develop", "flows", FLOW_SLUG_FROM_ID[id]);
   };
 
   const setPhase = (phase: BroadcastPhase) => {
     setBroadcastPhase(phase);
-    setStep(1);
+    setStep(BROADCAST_INITIAL_STEP[phase]);
+    requestAnimationFrame(() => {
+      phoneStageRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
   };
+
+  const flowStartStep = () => (flow === "broadcast" ? BROADCAST_INITIAL_STEP[broadcastPhase] : 1);
+
+  const phonePreview = (
+    <TabPanel
+      id={FLOW_PANEL_ID}
+      labelledBy={`${FLOW_TAB_PREFIX}-tab-${flow}`}
+      className="cs-flow-explorer__phone"
+    >
+      <div
+        ref={phoneStageRef}
+        className={`cs-flow-phone-stage${flow === "broadcast" ? ` cs-flow-phone-stage--${broadcastPhase}` : ""}`}
+      >
+        {flow === "broadcast" ? (
+          <p className="cs-flow-era-badge" aria-live="polite">
+            {BROADCAST_ERA_LABEL[broadcastPhase]}
+          </p>
+        ) : null}
+        <motion.div
+          key={`${flow}-${lang}-${broadcastPhase}`}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <PhoneFrame
+            contact={phoneContact}
+            device
+            lang={lang === "es" ? "es" : undefined}
+          >
+            <AnimatedChat scrollKey={`${flow}-${broadcastPhase}-${step}-${lang}`}>
+              {visible.map((s) => (
+                <React.Fragment key={s.key}>{s.node}</React.Fragment>
+              ))}
+            </AnimatedChat>
+          </PhoneFrame>
+        </motion.div>
+      </div>
+    </TabPanel>
+  );
 
   const toolbar = (
     <SlidingTabs
@@ -402,6 +449,7 @@ export function FlowExplorer() {
       variant="pill"
       panelId={FLOW_PANEL_ID}
       tabIdPrefix={FLOW_TAB_PREFIX}
+      className="cs-flow-picker-tabs"
     />
   );
 
@@ -410,36 +458,64 @@ export function FlowExplorer() {
   return (
     <div className="cs-flow-explorer cs-flow-explorer--split">
       <div className="cs-flow-explorer__body">
-        <div className="cs-flow-explorer__controls">
+        <div className="cs-flow-explorer__pickers">
           <p className="cs-phase-cue">Pick a flow — watch the thread change.</p>
-          <div className="cs-flow-explorer__toolbar">{toolbar}</div>
+
+          <div className="cs-flow-explorer__control-group">
+            <p className="cs-control-label" id="flow-picker-label">
+              Conversation flow
+            </p>
+            <div className="cs-flow-explorer__toolbar" aria-labelledby="flow-picker-label">
+              {toolbar}
+            </div>
+          </div>
 
           {flow === "broadcast" ? (
-            <div className="cs-flow-explorer__era" role="group" aria-label="Broadcast era">
-              {BROADCAST_PHASE_TABS.map((tab) => (
-                <button
-                  key={tab.id}
-                  type="button"
-                  aria-pressed={broadcastPhase === tab.id}
-                  onClick={() => setPhase(tab.id)}
-                  className={`cs-lang-toggle ${broadcastPhase === tab.id ? "is-active" : ""}`}
-                >
-                  {tab.label}
-                </button>
-              ))}
+            <div className="cs-flow-explorer__control-group cs-flow-explorer__control-group--compare">
+              <p className="cs-control-label" id="broadcast-era-label">
+                Compare eras
+              </p>
+              <div
+                className="cs-segment cs-segment--comparison"
+                role="group"
+                aria-labelledby="broadcast-era-label"
+              >
+                {BROADCAST_PHASE_TABS.map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    data-era={tab.id}
+                    aria-pressed={broadcastPhase === tab.id}
+                    onClick={() => setPhase(tab.id)}
+                    className={broadcastPhase === tab.id ? "is-active" : ""}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
             </div>
           ) : null}
+        </div>
 
+        {phonePreview}
+
+        <div className="cs-flow-explorer__play">
           <p className="cs-flow-explorer__blurb">{flowBlurb}</p>
 
-          <div className="cs-flow-explorer__compare">
-            <p className="cs-flow-explorer__compare-line">
-              <strong>Before:</strong> {FLOW_EXPLORER_BEFORE}
-            </p>
-            <p className="cs-flow-explorer__compare-line">
-              <strong>After:</strong> {FLOW_EXPLORER_AFTER}
-            </p>
-          </div>
+          {flow === "broadcast" ? (
+            <div className="cs-flow-explorer__compare cs-flow-explorer__compare--era">
+              <p
+                className={`cs-flow-explorer__compare-line${broadcastPhase === "before" ? " is-active-era" : ""}`}
+              >
+                <strong>Before Lola</strong> — {FLOW_EXPLORER_BEFORE}
+              </p>
+              <p
+                className={`cs-flow-explorer__compare-line${broadcastPhase === "after" ? " is-active-era" : ""}`}
+              >
+                <strong>After Lola</strong> — {FLOW_EXPLORER_AFTER}
+              </p>
+            </div>
+          ) : null}
 
           <div className="cs-flow-explorer__transport">
             <button
@@ -451,7 +527,7 @@ export function FlowExplorer() {
             >
               {CTA.showNextTurn}
             </button>
-            <button type="button" onClick={() => setStep(1)} className="cs-btn-secondary">
+            <button type="button" onClick={() => setStep(flowStartStep())} className="cs-btn-secondary">
               Restart
             </button>
             <span className="cs-flow-explorer__step-count" aria-live="polite">
@@ -477,21 +553,26 @@ export function FlowExplorer() {
             </p>
           ) : null}
 
-          <div className="cs-flow-explorer__lang" role="group" aria-label="Language">
-            {(["en", "es"] as Lang[]).map((l) => (
-              <button
-                key={l}
-                type="button"
-                aria-pressed={lang === l}
-                onClick={() => {
-                  setLang(l);
-                  setStep(1);
-                }}
-                className={`cs-lang-toggle ${lang === l ? "is-active" : ""}`}
-              >
-                {l.toUpperCase()}
-              </button>
-            ))}
+          <div className="cs-flow-explorer__lang">
+            <p className="cs-control-label" id="flow-lang-label">
+              Demo language
+            </p>
+            <div className="cs-segment cs-segment--mini" role="group" aria-labelledby="flow-lang-label">
+              {(["en", "es"] as Lang[]).map((l) => (
+                <button
+                  key={l}
+                  type="button"
+                  aria-pressed={lang === l}
+                  onClick={() => {
+                    setLang(l);
+                    setStep(flowStartStep());
+                  }}
+                  className={lang === l ? "is-active" : ""}
+                >
+                  {l.toUpperCase()}
+                </button>
+              ))}
+            </div>
           </div>
 
           {atEnd ? (
@@ -510,25 +591,6 @@ export function FlowExplorer() {
             </div>
           ) : null}
         </div>
-
-        <TabPanel
-          id={FLOW_PANEL_ID}
-          labelledBy={`${FLOW_TAB_PREFIX}-tab-${flow}`}
-          className="cs-flow-explorer__phone"
-        >
-          <motion.div key={`${flow}-${lang}-${broadcastPhase}`}>
-            <PhoneFrame contact={phoneContact} device lang={lang === "es" ? "es" : undefined}>
-              <AnimatedChat>
-                {visible.map((s) => (
-                  <React.Fragment key={s.key}>{s.node}</React.Fragment>
-                ))}
-                {flow === "broadcast" && broadcastPhase === "after" && visible.length === 1 ? (
-                  <WaThreadNote>Tap {CTA.showNextTurn.toLowerCase()} — Lola replies with tap buttons.</WaThreadNote>
-                ) : null}
-              </AnimatedChat>
-            </PhoneFrame>
-          </motion.div>
-        </TabPanel>
       </div>
     </div>
   );
