@@ -17,7 +17,7 @@ export function WacrmDashboardBackdrop() {
       aria-hidden
       style={{ fontFamily: "var(--cs-font)" }}
     >
-      <div className="flex h-full min-h-[420px]">
+      <div className="flex h-full min-h-full">
         {/* Sidebar */}
         <aside className="w-[168px] flex-shrink-0 border-r border-[#e2e8f0] bg-white px-2 py-4 hidden sm:block">
           <div className="flex items-center gap-2 px-2 mb-5">
