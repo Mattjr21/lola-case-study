@@ -4,15 +4,16 @@ import { ServiceBlueprintFlow } from "../ServiceBlueprintFlow";
 import { PhaseShell } from "../PhaseShell";
 import { FadeIn } from "../ui";
 
-/** Define — service loop diagram + constraints */
+/** Define — service loop + constraints */
 export function PhaseDefine() {
   return (
     <PhaseShell id="define" tone="default">
       <div className="cs-page cs-fold-section">
-        <div className="cs-block-stack">
+        <div className="cs-block-stack cs-block-stack--tight">
           <div className="cs-phase-artifact cs-phase-artifact--pad">
             <ServiceBlueprintFlow />
           </div>
+
           <FadeIn>
             <div>
               <p className="cs-meta-label">Constraints</p>

@@ -1,44 +1,42 @@
-/** End-to-end narrative — one beat per Double Diamond phase (retail-plain, HANDOFF-aligned) */
+/** End-to-end narrative — Lola (guest) + Lola Connect (staff) as one product */
 
 export const STORY_BEATS = {
   discover: {
-    body: "Inbox threads and the weekly blast show what broke — compare before/after below, then step through interactive flows in Develop.",
+    body: "The weekly flyer worked. The inbox did not — every reply landed in one queue.",
     bullets: [
-      "Flyer blast + rigid 1/2/3 menu — shoppers replied free-form",
-      "EN / ES text and voice notes — no triage",
-      "Mobile-first families cooking or with kids — voice beats typing a list",
+      "Blast to ~1,200 families → free-form EN/ES text and voice",
+      "Hours, SNAP, deals, and pickup asks mixed in one thread",
+      "Staff answered by hand — late or missed in rush",
     ],
   },
   define: {
-    body: "The bet: no new shopper app. Build inside the thread families already use. Lola — the store mascot with a voice — routes each turn on the broadcast line: grounded FAQ from flyer + store tools, tap-first paths, and staff relay when the answer is not in the knowledge base.",
+    body: "Build inside the channel families already use. Two surfaces, one order.",
     bullets: [
-      "Design: conversation rules, EN/ES copy, button flows, staff alert surfaces",
-      "Build: Vercel webhook, Supabase states, grounding + safety gates",
+      "Guest: Lola on WhatsApp — ask, order, remind, staff help",
+      "Staff: Lola Connect — inbox, orders, alerts, shifts",
+      "No shopper app · staff keep control · pickup in store",
     ],
   },
   develop: {
-    body: "Every inbound message carries a mode — ask, order, remind, or waiting on staff — so replies match where the guest actually is. Two pickup paths share the same counter finish: place an order now, or save a list for a later nudge.",
+    body: "Guest flows on WhatsApp. Staff day in Lola Connect. Same pickup finish.",
     bullets: [
-      "asking — hours, deals, SNAP from tools",
-      "ordering — draft list → confirm → staff quote → YES → pickup",
-      "reminding — save list + time → Saturday nudge → Place order",
-      "waiting_staff — bot pauses; counter answers on-thread",
+      "Six guest journeys — broadcast through staff handoff",
+      "Inbox Ready bar · Orders board · Tickets · shift alerts",
+      "Grounded answers, tap-first actions, bilingual + voice",
     ],
   },
   deliver: {
-    body: "Live pilot (May–Jun 2026) forced guardrails under real rush-hour pressure — not wireframe polish.",
+    body: "Live pilot under real rush — buttons, clear CTAs, and staff ops that hold up.",
     bullets: [
-      "Quick-reply buttons replaced numbered text menus",
-      "Task labels (Place order) replaced vague “Hi Lola” taps",
-      "Flyer + FAQ only for prices — humans quote open lists",
-      "Voice lists repeat back for confirm before staff alert",
+      "Tap buttons replaced numbered menus",
+      "Place order replaced vague Hi Lola taps",
+      "Staff see lists before walk-in — WhatsApp, dashboard, lock screen",
     ],
   },
   vision: {
-    body: "WhatsApp is the training ground, not the end state. Pilot threads capture bilingual phrasing, edge cases, and store knowledge before any floor hardware.",
+    body: "WhatsApp trains the store brain before any floor hardware.",
     bullets: [
-      "Same conversational brain → future in-store kiosk",
-      "Walk-in lookup, aisle help, recipe list → text to phone",
+      "Same modes → future in-store kiosk",
       "Not in pilot: kiosk OS, queue UX, device payments",
     ],
   },
@@ -47,13 +45,13 @@ export const STORY_BEATS = {
 export const STORY_TRACKS = [
   {
     id: "order",
-    title: "Order track",
-    summary: "Text or voice → itemized draft → ✅ Confirm → staff quote → YES → pickup window.",
+    title: "Order now",
+    summary: "Place order → draft → staff quote → YES → order # → Ready → pickup.",
   },
   {
     id: "reminder",
-    title: "Reminder track",
-    summary: "“Remind me Saturday — milk, meat, eggs” → saved (not an order) → morning nudge → one tap to order.",
+    title: "Remind later",
+    summary: "Save list + time → nudge → Place order (not an automatic order).",
   },
 ] as const;
 

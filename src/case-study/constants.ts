@@ -132,7 +132,7 @@ export const BROADCAST_LEGACY = {
 export const PORTFOLIO = {
   author: "Danny",
   title: "Design technologist",
-  seeking: "Open to design technologist, product design, and conversational AI roles",
+  seeking: "Open to senior design technologist, product design, and conversational AI roles",
   linkedIn: import.meta.env.VITE_PORTFOLIO_LINKEDIN || "https://www.linkedin.com/in/dannvarg/",
   email: import.meta.env.VITE_PORTFOLIO_EMAIL || "dannyvr172@gmail.com",
   backUrl: import.meta.env.VITE_PORTFOLIO_BACK_URL || "https://dannyvr.framer.ai/",
@@ -167,27 +167,129 @@ export const LOYALTY_MEMBER_COUNT = "~1,200" as const;
 
 /** Hero body copy under H1 */
 export const HERO_SUBTITLE =
-  "A live WhatsApp AI assistant built into La Bodega’s weekly deals flow, helping customers ask questions, place pickup orders, and get reminders without downloading a new app.";
+  "Guests ask, order, and remind on WhatsApp. Staff close pickup in Lola Connect.";
 
 /** Compact proof pills — hero only */
-export const HERO_PROOF_PILLS = ["Live pilot", "Voice + text", "Pickup orders"] as const;
+export const HERO_PROOF_PILLS = ["Live pilot", "Guest + staff", "EN / ES"] as const;
 
-/** Above-the-fold stats — defensible pilot facts only (no fabricated KPIs) */
-export const PROJECT_STATS = [
+/** Staff dashboard screens — tour under staff alerts (matches Lola Connect IA) */
+export const STAFF_DASH_SCREENS = [
   {
-    label: "Loyalty reach",
-    value: LOYALTY_MEMBER_COUNT,
-    detail: "Families on the weekly deal blast list",
+    id: "inbox",
+    label: "Inbox",
+    detail: "Thread + Ready-for-pickup bar — Mark ready when bagged",
   },
   {
-    label: "Pilot status",
-    value: "Live",
-    detail: "Production WhatsApp + staff dashboard",
+    id: "orders",
+    label: "Orders",
+    detail: "New list → Quote sent → Confirmed → Ready",
+  },
+  {
+    id: "tickets",
+    label: "Tickets",
+    detail: "Escalations Lola couldn’t answer · Pickup soon dialog",
+  },
+  {
+    id: "home",
+    label: "Home",
+    detail: "Shift schedule — order alerts route to on-shift staff",
+  },
+] as const;
+
+/** Public product spine — five jobs, guest→staff loop (hiring skim) */
+export const PRODUCT_SYSTEM = {
+  eyebrow: "The product",
+  title: "One weekly shop loop — two surfaces",
+  lead: "Lola is the guest face. Lola Connect is the staff product that closes pickup. Same order across both.",
+  pillars: [
+    {
+      title: "Flyer becomes a conversation",
+      detail: "Weekly WhatsApp blast → guided thread, no new shopper app.",
+    },
+    {
+      title: "Bilingual + voice",
+      detail: "EN/ES templates and voice notes on the same path as text.",
+    },
+    {
+      title: "Pickup order",
+      detail: "List → staff quote → YES → order # → Ready → pickup.",
+    },
+    {
+      title: "Staff sees the list first",
+      detail: "WhatsApp, dashboard, and lock-screen alerts before walk-in.",
+    },
+    {
+      title: "Staff finishes in Lola Connect",
+      detail: "Inbox Ready bar · Orders board · Tickets · shift routing.",
+    },
+  ],
+} as const;
+
+/** Hiring-manager metrics — outcomes from live data; scope facts; honest gaps */
+export const SCOPE_METRICS = {
+  outcomesLabel: "Pilot outcomes",
+  outcomesNote: "Live data · Jun 2 – Jul 12 2026 · ~6 weeks",
+  outcomes: [
+    {
+      label: "First reply under 2 min",
+      value: "97.7%",
+      detail: "Median ~4 sec · n=353",
+    },
+    {
+      label: "Closed without staff",
+      value: "96.3%",
+      detail: "14 of 380 escalated",
+    },
+  ],
+  shippedLabel: "Product scope",
+  measuringLabel: "Still measuring",
+  shipped: [
+    {
+      label: "Loyalty reach",
+      value: LOYALTY_MEMBER_COUNT,
+      detail: "Weekly flyer list",
+    },
+    {
+      label: "Guest flows",
+      value: "6",
+      detail: "Broadcast → staff help",
+    },
+    {
+      label: "Staff surfaces",
+      value: "5",
+      detail: "Home · Inbox · Orders · Tickets · Reminders",
+    },
+    {
+      label: "Regression",
+      value: "988",
+      detail: "Passing Vitest · 103 files",
+    },
+  ],
+  measuring: [
+    {
+      label: "Pickup before walk-in",
+      detail: "Only 3 of 18 orders have pickup_at — too small to claim",
+      status: "Measuring",
+    },
+  ],
+} as const;
+
+/** Above-the-fold stats — pilot outcomes + bilingual */
+export const PROJECT_STATS = [
+  {
+    label: "First reply < 2 min",
+    value: "97.7%",
+    detail: "Median ~4 sec · live pilot",
+  },
+  {
+    label: "Closed without staff",
+    value: "96.3%",
+    detail: "On-thread · no escalation",
   },
   {
     label: "Languages",
     value: "EN / ES",
-    detail: "Templates, voice notes, one language per Lola reply",
+    detail: "Templates, voice, one language per reply",
   },
 ] as const;
 
@@ -209,7 +311,7 @@ export const DESIGN_GOAL_PILLARS = [
 
 /** Develop craft — how open-ended turns relate to routing + tools (main path, one beat) */
 export const DEVELOP_AI_LAYER =
-  "Open-ended turns hit a tool-grounded agent in production (gpt-4o-mini); taps, hashtags, and staff-wait states route locally first — facts only from store tools, not free-form generation." as const;
+  "Open-ended questions use store tools first — hours, deals, FAQ — not free-form invention. Taps and staff-wait states stay local." as const;
 
 /** Fold I — project metadata (Rachel Chen–style intro row) */
 export const FOLD1_META = {
@@ -230,18 +332,17 @@ export const FOLD1_SECTION_SUBHEAD =
 
 export const FOLD1_OVERVIEW = {
   eyebrow: "Overview",
-  title: "A bilingual WhatsApp assistant for La Bodega's weekly shop",
+  title: "A bilingual WhatsApp shopping system for La Bodega",
   lead:
-    "La Bodega is an independent Hispanic grocer in Calhoun, GA. Its weekly WhatsApp flyer reaches ~1,200 loyalty families, but replies quickly turn into a mix of English, Spanish, voice notes, SNAP questions, and pickup lists inside one staff inbox.",
+    "La Bodega’s weekly flyer reaches ~1,200 loyalty families — but replies pile into one inbox: EN/ES, voice notes, SNAP questions, and pickup lists.",
   role:
-    "I designed Lola's EN/ES conversation flows, order handoff logic, and voice/text experience — then built the staff dashboard where teams manage threads, quotes, reminders, and pickup orders. The pilot is live in production.",
+    "I designed Lola’s guest flows and built Lola Connect so one pickup loop runs end to end. Solo build; weekly check-ins with the CEO, ops, and marketing. Live now.",
   facts: [
     { label: "Client", detail: "La Bodega Supermarket · Calhoun, GA" },
-    { label: "Timeline", detail: "May – Jun 2026 · live pilot" },
+    { label: "Timeline", detail: "May – Jul 2026 · live pilot" },
     {
       label: "What I delivered",
-      detail:
-        "Lola on WhatsApp — six flows, bilingual copy, voice + text. Staff dashboard — inbox, quotes, and pickup orders. Both live in production.",
+      detail: "Six WhatsApp flows (EN/ES, voice + text) and Lola Connect — both live.",
     },
   ],
 } as const;
@@ -478,17 +579,17 @@ export const BUSINESS_BET = {
   objective:
     "Answer repeat questions on-thread and capture pickup intent on the weekly deals thread — without adding counter headcount or a shopper app.",
   successMetrics: [
-    { signal: "First reply", target: "Faster on-thread vs manual inbox" },
-    { signal: "FAQ load", target: "Fewer hours/SNAP threads to staff per blast" },
-    { signal: "Pickup", target: "Lists surfaced before walk-in" },
+    { signal: "First reply", target: "97.7% under 2 min" },
+    { signal: "FAQ load", target: "96.3% closed without staff" },
+    { signal: "Pickup", target: "Lead-time % still measuring" },
   ] as const,
   successSignals: [
-    "Faster first reply on-thread",
-    "Fewer hours/SNAP messages to staff per blast",
-    "Pickup lists surfaced before walk-in",
+    "97.7% of first replies under 2 minutes",
+    "96.3% of conversations closed without staff",
+    "Pickup lead-time still instrumenting",
   ] as const,
   success:
-    "Faster first reply on-thread, fewer hours/SNAP messages to staff per blast, and pickup lists surfaced before walk-in.",
+    "97.7% under 2 min first reply · 96.3% closed without staff · pickup lead-time still measuring.",
   headline: STORY.heroThesis,
 } as const;
 
@@ -636,7 +737,7 @@ export const WHATSAPP_LIVE = {
   staffUrl: "https://wacrm-i9f2.vercel.app",
 } as const;
 
-/** Double Diamond IA — prologue scroll + four phases */
+/** Double Diamond IA — prologue + four phases */
 export const PHASES = [
   {
     id: "prologue",
@@ -684,7 +785,7 @@ export const PHASES = [
     num: "4",
     eyebrow: "Deliver",
     title: "Proof & impact",
-    lead: "Pilot signals, guest voices, takeaways, and future scope.",
+    lead: "Outcomes, voices, takeaways, what’s next.",
     href: "#deliver",
     inProgress: true,
   },
@@ -733,8 +834,8 @@ export const PRODUCTION_FACTS = [
   {
     kind: "qa" as const,
     label: "Regression",
-    value: "427 Vitest tests",
-    detail: "58 files · routing, grounding, staff-wait, shop-orders",
+    value: "988 Vitest tests",
+    detail: "103 files · routing, grounding, staff-wait, shop-orders",
   },
   {
     kind: "scope" as const,
@@ -1012,11 +1113,11 @@ export const HANDOFF_RULES = [
   {
     trigger: "Allergies, refunds, complaints",
     lola: "Routes to management inbox — no confident bot answer",
-    staff: "Human owns thread; Lola paused",
+    staff: "Human owns the thread",
   },
   {
-    trigger: "Staff marks thread in CRM",
-    lola: "Paused until released — no duplicate GPT loops",
+    trigger: "Staff replies in the CRM inbox",
+    lola: "Stays quiet on that chat — no duplicate bot loops",
     staff: "Direct WhatsApp or inbox reply",
   },
 ] as const;
@@ -1063,7 +1164,7 @@ export const VALIDATION_LEDGER = [
     id: "gpt-hours",
     before: "Open GPT answers for hours/SNAP",
     signal: "Hallucination risk on retail facts",
-    after: "Tool-grounded FAQ + 427 regression tests",
+    after: "Tool-grounded FAQ + 988 regression tests",
     proof: "Vitest suites · grounding checks",
     href: "#reference/safety",
   },
@@ -1113,20 +1214,52 @@ export const TESTIMONIALS = [
 
 export const PILOT_IMPACT = [
   {
+    signal: "Replies land in seconds",
+    detail: "Most first replies under two minutes on the live flyer thread.",
+  },
+  {
+    signal: "Most questions stay on-thread",
+    detail: "Few conversations need a staff escalation ticket.",
+  },
+  {
     signal: "Broadcasts became conversations",
-    detail: "Customers continued the thread after receiving the weekly flyer.",
-  },
-  {
-    signal: "Common questions were automated",
-    detail: "Lola handled hours, buffet, SNAP/EBT, reminders, and weekly deal questions in English or Spanish.",
-  },
-  {
-    signal: "Pickup orders surfaced earlier",
-    detail: "Staff received pickup lists before customers walked in, reducing last-minute counter confusion.",
+    detail: "Guests kept asking, ordering, and reminding in the same channel.",
   },
   {
     signal: "Voice notes became usable",
-    detail: "Customer voice notes were transcribed and routed through the same flow as text.",
+    detail: "Spoken asks follow the same grounded path as text.",
+  },
+] as const;
+
+/** Lightweight ops proof — keep it scannable on the main page */
+export const OPS_PROOF = [
+  {
+    signal: "Lock-screen alerts",
+    detail: "Staff get a phone buzz when the dashboard is closed.",
+  },
+  {
+    signal: "Tested before ship",
+    detail: "988 automated checks on routing, language, tone, and safety.",
+  },
+  {
+    signal: "Alerts while the app is open",
+    detail: "Pop-up and sound when a new list lands during rush.",
+  },
+] as const;
+
+/** Top pilot pivots — title + one line each */
+export const PILOT_PIVOTS_TILES = [
+  {
+    title: "Tap buttons, not reply 1/2/3",
+    note: "Clear next steps; fewer messages lost in the inbox.",
+  },
+  {
+    title: "“Place order” instead of “Hi Lola”",
+    note: "Guests knew what would happen when they tapped.",
+  },
+  {
+    title: "Text first, voice when it helps",
+    note: "Faster replies with the same order logic.",
   },
 ] as const;
 
@@ -1153,8 +1286,9 @@ export const PILOT_TAKEAWAYS = [
 /** Honest next phase — pilot is live, not finished */
 export const FUTURE_SCOPE = [
   {
-    title: "Baselines & metrics",
-    detail: "Track reply rate, reminder follow-through, order completion, and POS-matched pickup revenue.",
+    title: "Pickup lead-time & POS match",
+    detail:
+      "Wire reliable pickup_at + POS-matched completion so “lists before walk-in” and revenue become claimable metrics.",
   },
   {
     title: "Language-tagged broadcasts",
@@ -1170,22 +1304,12 @@ export const FUTURE_SCOPE = [
   },
 ] as const;
 
-/** Hard metrics — pilot is early; directional until POS/inbox baselines are wired */
+/** Remaining instrumented gaps — outcomes already in SCOPE_METRICS.outcomes */
 export const PILOT_METRICS_NEXT = [
   {
-    label: "Time-to-first reply",
-    detail: "Lola on-thread vs manual inbox baseline (target: under 2 min).",
-    status: "baseline in progress",
-  },
-  {
-    label: "FAQ deflection",
-    detail: "% of hours/SNAP/buffet threads closed without staff touch per blast.",
-    status: "baseline in progress",
-  },
-  {
-    label: "Reminder → order",
-    detail: "List nudge → Place order tap or confirmed pickup list.",
-    status: "baseline in progress",
+    label: "Pickup lists before walk-in",
+    detail: "Lead time create → pickup_at — sample too small while pickup_at is sparsely set.",
+    status: "Measuring",
   },
 ] as const;
 
@@ -1541,7 +1665,7 @@ export const SAFETY_GUARDRAILS = [
 
 /** How we regression-tested conversation logic before pilot — design-relevant coverage */
 export const CONVERSATION_QA = {
-  lead: "427 Vitest cases across 58 files — conversation logic regression so copy and edge cases stay stable as the stack grew.",
+  lead: "988 passing Vitest cases · 103 files — routing, grounding, and staff-wait stay stable as the stack grows.",
   suites: [
     {
       label: "Routing & buttons",

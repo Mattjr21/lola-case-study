@@ -437,6 +437,132 @@ h2.lola-scroll-title {
   border-bottom: 1px solid var(--cs-border-subtle);
 }
 
+.fold1-meta-grid--compact {
+  margin: 0 0 1.5rem;
+  padding: 0 0 1.25rem;
+}
+
+.fold1-poster {
+  max-width: 44rem;
+}
+
+.fold1-poster__title {
+  margin: 0 0 0.75rem;
+  font-family: var(--cs-font-serif);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--cs-ink);
+}
+
+.fold1-poster__lead {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--cs-ink-muted);
+  max-width: 42ch;
+}
+
+.fold1-poster__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fold1-poster__more {
+  margin-top: 1.25rem;
+}
+
+.fold1-poster__more-trigger {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--cs-brand);
+  cursor: pointer;
+  list-style: none;
+}
+
+.fold1-poster__more-trigger::-webkit-details-marker {
+  display: none;
+}
+
+.fold1-poster__more-body {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--cs-border-subtle);
+}
+
+.fold1-poster__detail {
+  margin: 0 0 1.25rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--cs-ink-muted);
+  max-width: 48ch;
+}
+
+.cs-deliver-proof-band__voices {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--cs-border-subtle);
+}
+
+.cs-deliver-learnings__skim {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.65rem;
+  max-width: 36rem;
+}
+
+.cs-deliver-learnings__skim-item {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--cs-ink);
+}
+
+.cs-deliver-learnings__skim-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 999px;
+  background: var(--cs-brand);
+  transform: translateY(-50%);
+}
+
+.cs-deliver-learnings__toggle {
+  margin-top: 1rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--cs-brand);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.cs-deliver-learnings__toggle:hover {
+  color: var(--cs-accent-hover);
+}
+
+.cs-deliver-learnings__detail {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--cs-border-subtle);
+}
+
 @media (min-width: 768px) {
   .fold1-meta-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -722,6 +848,125 @@ h2.lola-scroll-title {
   font-size: 0.82rem;
   line-height: 1.5;
   color: var(--cs-ink-muted);
+}
+
+/* Deliver proof blocks — tighter scan, less repetition */
+.cs-proof-tiles {
+  width: 100%;
+}
+
+.cs-proof-card {
+  padding: 0.95rem;
+  border-radius: var(--cs-radius);
+  background: var(--cs-surface);
+  border: 1px solid var(--cs-border);
+  box-shadow: 0 1px 1px rgb(0 0 0 / 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cs-proof-card__title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: var(--cs-ink);
+  line-height: 1.25;
+}
+
+.cs-proof-card__dl {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.cs-proof-card__dl dt {
+  margin: 0;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cs-ink-muted);
+  font-weight: 700;
+}
+
+.cs-proof-card__dl dd {
+  margin: 0.15rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--cs-ink-muted);
+}
+
+.cs-proof-card__body {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--cs-ink-muted);
+}
+
+.cs-proof-card__status {
+  display: inline-flex;
+  align-items: center;
+  margin: auto 0 0;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--cs-border-subtle);
+  background: var(--cs-bg);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--cs-ink-muted);
+  width: fit-content;
+}
+
+/* Make proof blocks feel like one system on desktop */
+@media (min-width: 1024px) {
+  .cs-proof-tiles {
+    align-items: stretch;
+  }
+}
+
+.cs-proof-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 0.75rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--cs-radius);
+  border: 1px solid var(--cs-border);
+  background: var(--cs-surface);
+}
+
+.cs-proof-flow__step {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--cs-radius);
+  border: 1px solid var(--cs-border-subtle);
+  background: var(--cs-bg);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--cs-ink);
+  text-align: center;
+}
+
+.cs-proof-flow__arrow {
+  color: var(--cs-muted);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .cs-proof-flow {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+  }
+
+  .cs-proof-flow__step {
+    flex: 1 1 0;
+    min-width: 0;
+  }
 }
 
 .cs-conversation-rule {
@@ -1251,4 +1496,124 @@ h2.lola-scroll-title {
 .lola-scroll-exit-cta-secondary:focus-visible {
   outline: 2px solid var(--cs-brand);
   outline-offset: 2px;
+}
+
+/* Discover beat bullets */
+.cs-discover-beat-list {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.cs-discover-beat-list li {
+  position: relative;
+  padding-left: 0.9rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--cs-ink-muted);
+}
+
+.cs-discover-beat-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.3rem;
+  height: 0.3rem;
+  border-radius: 999px;
+  background: var(--cs-brand);
+}
+
+/* Define — guest vs staff product surfaces */
+.cs-product-surfaces__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+@media (min-width: 768px) {
+  .cs-product-surfaces__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+
+.cs-product-surfaces__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--cs-radius);
+  border: 1px solid var(--cs-border);
+  background: var(--cs-surface);
+}
+
+.cs-product-surfaces__eyebrow {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--cs-ink-muted);
+}
+
+.cs-product-surfaces__title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--cs-ink);
+}
+
+.cs-product-surfaces__body {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--cs-ink-muted);
+}
+
+.cs-product-surfaces__jobs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cs-product-surfaces__jobs li {
+  padding: 0.25rem 0.55rem;
+  border-radius: var(--cs-radius);
+  border: 1px solid var(--cs-border-subtle);
+  background: var(--cs-bg);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--cs-ink-muted);
+}
+
+.cs-product-surfaces__link {
+  margin-top: auto;
+  padding-top: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--cs-brand);
+  text-decoration: none;
+}
+
+.cs-product-surfaces__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.cs-product-surfaces__live {
+  margin: 1rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--cs-ink-muted);
+}
+
+.cs-product-surfaces__live a {
+  color: var(--cs-brand);
+  font-weight: 600;
 }

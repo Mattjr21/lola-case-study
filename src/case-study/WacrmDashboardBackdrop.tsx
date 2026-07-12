@@ -3,12 +3,12 @@ import { PILOT_SHOPPER_FULL } from "./constants";
 
 /** CSS-only miniature of wacrm Pickup orders — blurred behind the alert modal. */
 export function WacrmDashboardBackdrop() {
-  const nav = ["Dashboard", "Inbox", "Pickup orders", "Reminders", "Contacts", "Broadcasts"];
+  const nav = ["Home", "Inbox", "Orders", "Tickets", "Reminders"];
   const rows = [
     { name: "Ana Ruiz", ref: "LB-20250622-0038", items: "rice, beans, cilantro", status: "Ready", badge: "success" },
-    { name: PILOT_SHOPPER_FULL, ref: "LB-20250622-0042", items: "chicken, tortillas, eggs…", status: "List received", badge: "primary", highlight: true },
-    { name: "James T.", ref: "LB-20250622-0035", items: "ground beef, onions", status: "Quoted", badge: "ghost" },
-    { name: "Carmen L.", ref: "LB-20250621-0091", items: "plantains, oil, soda", status: "Completed", badge: "ghost" },
+    { name: PILOT_SHOPPER_FULL, ref: "LB-20250622-0042", items: "chicken, tortillas, eggs…", status: "Quote sent", badge: "primary", highlight: true },
+    { name: "James T.", ref: "LB-20250622-0035", items: "ground beef, onions", status: "New list", badge: "ghost" },
+    { name: "Carmen L.", ref: "LB-20250621-0091", items: "plantains, oil, soda", status: "Picked up", badge: "ghost" },
   ];
 
   return (
@@ -22,13 +22,13 @@ export function WacrmDashboardBackdrop() {
         <aside className="w-[168px] flex-shrink-0 border-r border-[#e2e8f0] bg-white px-2 py-4 hidden sm:block">
           <div className="flex items-center gap-2 px-2 mb-5">
             <div className="w-7 h-7 rounded-lg bg-[#290545] flex items-center justify-center text-white text-[11px] font-bold">
-              LB
+              L
             </div>
-            <span className="text-[12px] font-semibold text-[#0f172a]">La Bodega</span>
+            <span className="text-[12px] font-semibold text-[#0f172a]">Lola Connect</span>
           </div>
           <nav className="space-y-0.5">
             {nav.map((label) => {
-              const active = label === "Pickup orders";
+              const active = label === "Orders";
               return (
                 <div
                   key={label}
@@ -52,7 +52,7 @@ export function WacrmDashboardBackdrop() {
                 <div className="w-8 h-8 rounded-lg bg-[#ede5f5] flex items-center justify-center text-[#290545] text-sm">
                   🛍
                 </div>
-                <h1 className="text-[15px] font-bold text-[#0f172a]">Pickup orders</h1>
+                <p className="text-[15px] font-bold text-[#0f172a]">Orders</p>
               </div>
               <p className="text-[10px] text-[#64748b] leading-snug max-w-[280px]">
                 Today — 3 pending · 12 completed · 1 cancelled

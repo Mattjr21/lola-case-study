@@ -24,7 +24,7 @@ const LANES = [
     role: "Staff",
     color: "var(--cs-accent-soft)",
     steps: [
-      { label: "Inbox", note: "Hard threads pause Lola" },
+      { label: "Inbox", note: "Hard threads go to staff" },
       { label: "Relay", note: "Answer ping → Lola relays" },
       { label: "Pickup", note: "Quote · buzz · ready check" },
     ],

@@ -22,7 +22,7 @@ export function ReferenceGate() {
           <p className="cs-meta-label mb-2">Eng &amp; handoff depth</p>
           <h2 className="cs-h3 mb-3">Reference appendix</h2>
           <p className="text-[14px] text-[var(--cs-ink-muted)] mb-5 max-w-[36rem]">
-            Routing, service blueprint, research tables, and eng handoff — for design leads and engineers.
+            Routing, safety, and eng handoff — for reviewers who want the full system picture.
           </p>
           {!open ? (
             <Panel className="cs-panel--pad mb-4">

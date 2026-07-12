@@ -8,9 +8,9 @@ export function ImpactOutcomes() {
     <FadeIn delay={0.04}>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {PILOT_IMPACT.map((row) => (
-          <article key={row.signal} className="cs-signal-card">
-            <p className="cs-signal-card-title">{row.signal}</p>
-            <p className="cs-signal-card-detail">{row.detail}</p>
+          <article key={row.signal} className="cs-proof-card">
+            <p className="cs-proof-card__title">{row.signal}</p>
+            <p className="cs-proof-card__body">{row.detail}</p>
           </article>
         ))}
       </div>

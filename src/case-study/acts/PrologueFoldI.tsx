@@ -1,5 +1,6 @@
 import React from "react";
 import { Fold1Credentials } from "../Fold1Credentials";
+import { ProductSystem } from "../ProductSystem";
 import { StoreScrollStage } from "../StoreScrollStage";
 import { FadeIn } from "../ui";
 
@@ -13,6 +14,9 @@ export function PrologueFoldI() {
           <FadeIn when="view">
             <Fold1Credentials />
           </FadeIn>
+          <div className="mt-8 pt-8 border-t border-[var(--cs-border-subtle)]">
+            <ProductSystem />
+          </div>
         </div>
       </div>
     </div>

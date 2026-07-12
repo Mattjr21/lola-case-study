@@ -43,7 +43,7 @@ export function HeroProofPills() {
   );
 }
 
-/** Hero CTAs — case study proof first, live pilot second */
+/** Hero CTAs — primary case-study path; WhatsApp as quiet secondary */
 export function HeroCtas() {
   return (
     <div className="cs-hero-banner-ctas">
@@ -54,7 +54,7 @@ export function HeroCtas() {
         href={WHATSAPP_LIVE.waMe}
         target="_blank"
         rel="noopener noreferrer"
-        className="cs-btn-secondary"
+        className="cs-hero-text-link"
       >
         {CTA.messageWhatsApp}
       </a>
@@ -65,7 +65,7 @@ export function HeroCtas() {
 /** Defensible pilot stats — no fabricated KPIs */
 export function HeroStats() {
   return (
-    <ul className="cs-stat-row mt-5" aria-label="Project at a glance">
+    <ul className="cs-stat-row mt-5" aria-label="Pilot outcomes">
       {PROJECT_STATS.map((stat) => (
         <li key={stat.label} className="cs-stat-chip">
           <span className="cs-stat-chip-value">{stat.value}</span>
