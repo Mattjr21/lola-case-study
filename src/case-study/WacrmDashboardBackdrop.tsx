@@ -57,6 +57,9 @@ export function WacrmDashboardBackdrop() {
               <p className="text-[10px] text-[#64748b] leading-snug max-w-[280px]">
                 Today — 3 pending · 12 completed · 1 cancelled
               </p>
+              <p className="text-[9px] text-[#94a3b8] leading-snug max-w-[280px] mt-0.5">
+                Illustrative sample — not live pilot volume
+              </p>
             </div>
             <div className="rounded-md border border-[#e2e8f0] bg-white px-2.5 py-1.5 text-[10px] text-[#475569]">
               Refresh

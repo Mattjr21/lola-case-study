@@ -7,6 +7,11 @@ export const LOLA_MOTION = {
   },
   clips: {
     intro: { src: "/motion/Lola-00-Intro.mp4", title: "Intro", caption: "Meet Lola on the weekly flyer thread." },
+    hook: {
+      src: "/motion/Lola-00a-Hook.mp4",
+      title: "Hook",
+      caption: "The weekly ask, before the loop opens.",
+    },
     home: {
       src: "/motion/Lola-01-Home.mp4",
       title: "Home · shifts",

@@ -54,7 +54,17 @@ export function Fold1Credentials() {
           {FOLD1_OVERVIEW.facts.map((fact) => (
             <div key={fact.label} className="fold1-overview-fact">
               <dt className="cs-meta-label">{fact.label}</dt>
-              <dd className="fold1-overview-fact-value">{fact.detail}</dd>
+              <dd className="fold1-overview-fact-value">
+                {typeof fact.detail === "string" ? (
+                  fact.detail
+                ) : (
+                  <ul className="fold1-overview-deliverables">
+                    {fact.detail.map((item) => (
+                      <li key={item.slice(0, 48)}>{item}</li>
+                    ))}
+                  </ul>
+                )}
+              </dd>
             </div>
           ))}
         </dl>

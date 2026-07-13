@@ -1,5 +1,5 @@
 import React from "react";
-import { PILOT_SHOPPER_FULL, WHATSAPP_LIVE } from "./constants";
+import { PILOT_SHOPPER_FULL } from "./constants";
 
 export const STAFF_PICKUP_ITEMS = "2 lb chicken breast, tortillas, dozen eggs, milk";
 export const STAFF_PICKUP_TIME = "Friday 5:00 PM pickup";
@@ -24,14 +24,8 @@ export function StaffPickupAlertContent({ channel }: StaffPickupAlertContentProp
       <p className="cs-staff-pickup-alert__pickup">{STAFF_PICKUP_TIME}</p>
       {channel === "wa" ? (
         <p className="cs-staff-pickup-alert__action">
-          <a
-            href={WHATSAPP_LIVE.staffUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cs-staff-pickup-alert__link"
-          >
-            Review in dashboard →
-          </a>
+          {/* Illustrative mockup chrome — not a page CTA (login wall) */}
+          <span className="cs-staff-pickup-alert__link">Review in dashboard →</span>
         </p>
       ) : null}
     </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
+import { FeatureVideo } from "./FeatureVideo";
 import { KEY_FLOW_CLIPS } from "./motionAssets";
 import { FadeIn } from "./ui";
 
@@ -31,34 +32,37 @@ function FlowsStaticList() {
             <h4 className="cs-flows-sticky__headline">{clip.headline}</h4>
             <p className="cs-flows-sticky__body">{clip.body}</p>
           </div>
-          <div className="cs-flows-sticky__frame">
-            <video src={clip.src} muted playsInline preload="metadata" controls aria-label={clip.title} />
-          </div>
+          <FeatureVideo src={clip.src} variant="flow" title={clip.title} hideCaption autoPlay />
         </li>
       ))}
     </ol>
   );
 }
 
-/** Sticky stage: left copy + device fan (clean gaps, one active clip) */
+/**
+ * Sticky key flows — all three beat headlines stay visible (UX copy),
+ * scroll thirds lock text + video; devices fan with real gaps (no pile).
+ */
 export function KeyFlowsMotion() {
   const reduce = useReducedMotion();
   const narrow = useNarrow();
   const trackRef = useRef<HTMLDivElement>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const lastActive = useRef(-1);
   const [progress, setProgress] = useState(0);
-  const [active, setActive] = useState(0);
+  const [soundOn, setSoundOn] = useState(false);
+  const [playing, setPlaying] = useState(false);
 
   const usePin = !reduce && !narrow;
-  /** Fan opens in first ~18% of the pin, then holds while steps advance */
-  const spread = clamp01(progress / 0.18);
   const stepCount = KEY_FLOW_CLIPS.length;
-  const step = Math.min(stepCount - 1, Math.floor(progress * stepCount * 0.999));
-  const clip = KEY_FLOW_CLIPS[active];
 
-  useEffect(() => {
-    setActive(step);
-  }, [step]);
+  // Equal thirds — hold each beat cleanly
+  const rawStep = progress * stepCount;
+  const active = Math.min(stepCount - 1, Math.max(0, Math.floor(rawStep)));
+  const stepFloat = Math.min(stepCount - 0.001, rawStep);
+  const stepLocal = clamp01(rawStep - active);
+  // Fan opens through beat 1, then stays open
+  const spread = clamp01(progress / (1 / stepCount));
 
   useEffect(() => {
     if (!usePin) return;
@@ -88,23 +92,76 @@ export function KeyFlowsMotion() {
     };
   }, [usePin]);
 
+  // Step change → play matching clip; sound toggle only remutes, does not rewind
   useEffect(() => {
     if (!usePin) return;
+
     videoRefs.current.forEach((el, i) => {
-      if (!el) return;
-      el.muted = true;
-      if (i === active) {
-        void el.play().catch(() => {});
-      } else {
-        el.pause();
-        try {
-          el.currentTime = Math.min(el.currentTime, 0.05);
-        } catch {
-          /* ignore seek errors on unloaded media */
-        }
-      }
+      if (!el || i === active) return;
+      el.pause();
     });
-  }, [active, usePin]);
+
+    const el = videoRefs.current[active];
+    if (!el) return;
+
+    const stepped = lastActive.current !== active;
+    lastActive.current = active;
+
+    if (stepped) {
+      try {
+        el.currentTime = 0;
+      } catch {
+        /* ignore */
+      }
+    }
+
+    el.muted = !soundOn;
+    el.volume = 1;
+
+    void el
+      .play()
+      .then(() => setPlaying(true))
+      .catch(() => {
+        el.muted = true;
+        void el
+          .play()
+          .then(() => setPlaying(true))
+          .catch(() => setPlaying(false));
+      });
+  }, [active, usePin, soundOn]);
+
+  function scrollToStep(i: number) {
+    const track = trackRef.current;
+    if (!track) return;
+    const range = Math.max(1, track.offsetHeight - window.innerHeight);
+    const top = window.scrollY + track.getBoundingClientRect().top;
+    window.scrollTo({
+      top: top + (range * (i + 0.5)) / stepCount,
+      behavior: "smooth",
+    });
+  }
+
+  function enableSound() {
+    setSoundOn(true);
+    const el = videoRefs.current[active];
+    if (!el) return;
+    el.muted = false;
+    el.volume = 1;
+    void el.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+  }
+
+  function togglePlayback() {
+    const el = videoRefs.current[active];
+    if (!el) return;
+    if (el.paused) {
+      el.muted = !soundOn;
+      el.volume = 1;
+      void el.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+    } else {
+      el.pause();
+      setPlaying(false);
+    }
+  }
 
   return (
     <section className="cs-flows-sticky" aria-labelledby="key-flows-heading">
@@ -116,7 +173,7 @@ export function KeyFlowsMotion() {
           </h3>
           <p className="cs-body">
             {usePin
-              ? "Scroll — one device opens into guest, orders, and staff."
+              ? "Scroll — text and devices stay in sync. Tap once for sound."
               : "Guest thread → orders → staff alert."}
           </p>
         </header>
@@ -129,39 +186,79 @@ export function KeyFlowsMotion() {
           <div className="cs-flows-sticky__pin">
             <div className="cs-flows-sticky__layout">
               <div className="cs-flows-sticky__rail">
-                <div className="cs-flows-sticky__copy" key={clip.src}>
-                  <p className="cs-flows-sticky__kicker">
-                    {String(active + 1).padStart(2, "0")} · {clip.kicker}
-                  </p>
-                  <h4 className="cs-flows-sticky__headline">{clip.headline}</h4>
-                  <p className="cs-flows-sticky__body">{clip.body}</p>
-                </div>
-
-                <ol className="cs-flows-sticky__dots" aria-label="Flow progress">
-                  {KEY_FLOW_CLIPS.map((c, i) => (
-                    <li key={c.src}>
+                <div className="cs-flows-sticky__steps" role="list" aria-label="Key flow steps">
+                  {KEY_FLOW_CLIPS.map((c, i) => {
+                    const dist = Math.abs(stepFloat - i);
+                    const focus = clamp01(1 - dist);
+                    const on = i === active;
+                    return (
                       <button
+                        key={c.src}
                         type="button"
-                        className={`cs-flows-sticky__dot${i === active ? " is-active" : ""}${i < active ? " is-done" : ""}`}
-                        aria-current={i === active ? "step" : undefined}
-                        aria-label={`${c.kicker}: ${c.headline}`}
-                        onClick={() => {
-                          const track = trackRef.current;
-                          if (!track) return;
-                          const range = Math.max(1, track.offsetHeight - window.innerHeight);
-                          const top = window.scrollY + track.getBoundingClientRect().top;
-                          window.scrollTo({
-                            top: top + (range * (i + 0.4)) / stepCount,
-                            behavior: "smooth",
-                          });
+                        role="listitem"
+                        className={`cs-flows-sticky__step${on ? " is-active" : ""}`}
+                        aria-current={on ? "step" : undefined}
+                        aria-label={`Beat ${i + 1}: ${c.kicker} — ${c.headline}`}
+                        onClick={() => scrollToStep(i)}
+                        style={{
+                          opacity: 0.34 + focus * 0.66,
+                          transform: `translateY(${(1 - focus) * 0.25}rem)`,
                         }}
                       >
-                        <span className="cs-flows-sticky__dot-num">{String(i + 1).padStart(2, "0")}</span>
-                        <span className="cs-flows-sticky__dot-label">{c.kicker}</span>
+                        <p className="cs-flows-sticky__kicker">
+                          {String(i + 1).padStart(2, "0")} · {c.kicker}
+                        </p>
+                        <h4 className="cs-flows-sticky__headline">{c.headline}</h4>
+                        <p
+                          className={`cs-flows-sticky__body${on ? " is-visible" : ""}`}
+                          style={{
+                            opacity: on ? 1 : 0,
+                            maxHeight: on ? "7rem" : 0,
+                            marginTop: on ? undefined : 0,
+                          }}
+                        >
+                          {c.body}
+                        </p>
                       </button>
-                    </li>
-                  ))}
-                </ol>
+                    );
+                  })}
+                </div>
+
+                <div className="cs-flows-sticky__controls">
+                  <ol className="cs-flows-sticky__dots" aria-label="Flow progress">
+                    {KEY_FLOW_CLIPS.map((c, i) => (
+                      <li key={c.src}>
+                        <button
+                          type="button"
+                          className={`cs-flows-sticky__dot${i === active ? " is-active" : ""}${i < active ? " is-done" : ""}`}
+                          aria-current={i === active ? "step" : undefined}
+                          aria-label={`Jump to ${c.kicker}`}
+                          onClick={() => scrollToStep(i)}
+                        >
+                          <span className="cs-flows-sticky__dot-track" aria-hidden>
+                            <span
+                              className="cs-flows-sticky__dot-fill"
+                              style={{
+                                transform: `scaleX(${i < active ? 1 : i === active ? Math.max(0.12, stepLocal) : 0})`,
+                              }}
+                            />
+                          </span>
+                          <span className="cs-flows-sticky__dot-num">{String(i + 1).padStart(2, "0")}</span>
+                          <span className="cs-flows-sticky__dot-label">{c.kicker}</span>
+                        </button>
+                      </li>
+                    ))}
+                  </ol>
+
+                  <button
+                    type="button"
+                    className={`cs-flows-sticky__sound${soundOn ? " is-on" : ""}`}
+                    onClick={() => (soundOn ? togglePlayback() : enableSound())}
+                    aria-pressed={soundOn && playing}
+                  >
+                    {!soundOn ? "Enable sound" : playing ? "Pause" : "Play"}
+                  </button>
+                </div>
               </div>
 
               <div
@@ -177,7 +274,7 @@ export function KeyFlowsMotion() {
                         key={c.src}
                         className={`cs-flows-sticky__phone${on ? " is-active" : ""}`}
                         data-slot={i}
-                        aria-hidden={!on}
+                        aria-current={on ? "step" : undefined}
                       >
                         <div className="cs-flows-sticky__frame">
                           <video
@@ -185,12 +282,20 @@ export function KeyFlowsMotion() {
                               videoRefs.current[i] = el;
                             }}
                             src={c.src}
-                            muted
+                            muted={!soundOn}
                             loop
                             playsInline
-                            preload={on || spread > 0.4 ? "auto" : "metadata"}
+                            preload={on || spread > 0.5 ? "auto" : "metadata"}
                             aria-label={c.title}
                           />
+                          {!on ? (
+                            <button
+                              type="button"
+                              className="cs-flows-sticky__phone-hit"
+                              aria-label={`Jump to ${c.kicker}: ${c.headline}`}
+                              onClick={() => scrollToStep(i)}
+                            />
+                          ) : null}
                         </div>
                         <figcaption className="cs-flows-sticky__cap">{c.kicker}</figcaption>
                       </figure>

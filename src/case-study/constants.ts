@@ -140,9 +140,9 @@ export const PORTFOLIO = {
 
 /** Public deploy URL — set VITE_SITE_URL for OG previews (no trailing slash) */
 export const SITE = {
-  title: "Designing Lola · WhatsApp AI Assistant · Case Study",
+  title: "Designing Lola: A Bilingual WhatsApp Assistant for La Bodega",
   description:
-    "Lola — bilingual WhatsApp assistant for La Bodega's weekly shop. Grounded answers and pickup lists on the thread families already use.",
+    "A bilingual WhatsApp assistant that closed 96.3% of guest conversations without staff — designed and built solo for La Bodega.",
   url: (import.meta.env.VITE_SITE_URL ?? "").replace(/\/$/, ""),
   ogImagePath: "/og-image.svg",
 } as const;
@@ -150,16 +150,16 @@ export const SITE = {
 export const PROJECT = {
   tag: "CASE STUDY · LA BODEGA · LOLA · LIVE PILOT",
   status: "Live pilot",
-  timeline: "May – Jun 2026",
+  timeline: "May – July 2026",
   context: "Independent grocer · Calhoun, GA",
-  team: "Solo design & build",
+  team: "Solo Design & Build",
 } as const;
 
 /** Unified headline spine — hero, TLDR, and skim blocks */
 export const HEADLINE_SPINE = {
-  primary: "A bilingual WhatsApp assistant for the weekly shop",
+  primary: "A Bilingual WhatsApp Assistant for La Bodega",
   supporting:
-    "Live in La Bodega’s weekly deals flow — questions, pickup orders, and reminders without a new app.",
+    "A bilingual WhatsApp assistant that closed 96.3% of guest conversations without staff. I designed the flows and built Lola Connect solo.",
 } as const;
 
 /** ~1,200 on weekly deal blast list — scale makes manual reply impossible at rush */
@@ -167,10 +167,14 @@ export const LOYALTY_MEMBER_COUNT = "~1,200" as const;
 
 /** Hero body copy under H1 */
 export const HERO_SUBTITLE =
-  "Guests ask, order, and remind on WhatsApp. Staff close pickup in Lola Connect.";
+  "A bilingual WhatsApp assistant that closed 96.3% of guest conversations without staff. I designed the flows and built Lola Connect solo.";
 
-/** Compact proof pills — hero only */
-export const HERO_PROOF_PILLS = ["Live pilot", "Guest + staff", "EN / ES"] as const;
+/** Compact proof pills — hero key results (six weeks in) */
+export const HERO_PROOF_PILLS = [
+  "96.3% resolution · closed without staff",
+  "97.7% first replies under 2 min",
+  "~4 sec average first reply",
+] as const;
 
 /** Staff dashboard screens — tour under staff alerts (matches Lola Connect IA) */
 export const STAFF_DASH_SCREENS = [
@@ -198,49 +202,36 @@ export const STAFF_DASH_SCREENS = [
 
 /** Public product spine — five jobs, guest→staff loop (hiring skim) */
 export const PRODUCT_SYSTEM = {
-  eyebrow: "The product",
-  title: "One weekly shop loop — two surfaces",
-  lead: "Lola is the guest face. Lola Connect is the staff product that closes pickup. Same order across both.",
+  eyebrow: "Scope",
+  title: "One loop, not a new app",
+  lead: "Hard constraints going in: no shopper app, same flyer thread, staff keeps control, pickup-ready output. Lola is the guest face; Lola Connect closes the list.",
   pillars: [
     {
-      title: "Flyer becomes a conversation",
-      detail: "Weekly WhatsApp blast → guided thread, no new shopper app.",
+      title: "Same thread families already use",
+      detail: "No new channel to teach — reply handling on the weekly blast.",
     },
     {
-      title: "Bilingual + voice",
-      detail: "EN/ES templates and voice notes on the same path as text.",
+      title: "Staff knowledge before imagination",
+      detail: "Approved hours, deals, and FAQ — never invented prices or policy.",
     },
     {
-      title: "Pickup order",
-      detail: "List → staff quote → YES → order # → Ready → pickup.",
+      title: "Six flows, one thread",
+      detail: "Broadcast, pickup, reminders, coach, and staff handoff — EN/ES, text or voice.",
     },
     {
-      title: "Staff sees the list first",
-      detail: "WhatsApp, dashboard, and lock-screen alerts before walk-in.",
+      title: "Buttons before commands",
+      detail: "Tap targets for defined actions — not #order keywords to memorize.",
     },
     {
       title: "Staff finishes in Lola Connect",
-      detail: "Inbox Ready bar · Orders board · Tickets · shift routing.",
+      detail: "Inbox · Orders · Tickets · WhatsApp + dashboard alerts before walk-in.",
     },
   ],
 } as const;
 
-/** Hiring-manager metrics — outcomes from live data; scope facts; honest gaps */
+/** Hiring-manager metrics — scope facts + honest gaps (outcomes live on Pilot Outcomes cards) */
 export const SCOPE_METRICS = {
-  outcomesLabel: "Pilot outcomes",
-  outcomesNote: "Live data · Jun 2 – Jul 12 2026 · ~6 weeks",
-  outcomes: [
-    {
-      label: "First reply under 2 min",
-      value: "97.7%",
-      detail: "Median ~4 sec · n=353",
-    },
-    {
-      label: "Closed without staff",
-      value: "96.3%",
-      detail: "14 of 380 escalated",
-    },
-  ],
+  outcomesWindow: "Live data · Jun 2 – Jul 12 2026 · ~6 weeks",
   shippedLabel: "Product scope",
   measuringLabel: "Still measuring",
   shipped: [
@@ -268,7 +259,14 @@ export const SCOPE_METRICS = {
   measuring: [
     {
       label: "Pickup before walk-in",
-      detail: "Only 3 of 18 orders have pickup_at — too small to claim",
+      detail:
+        "One real order completed in the study window — the rest were my own test runs. Too early to report a lead time.",
+      status: "Measuring",
+    },
+    {
+      label: "Escalation resolution",
+      detail:
+        "Ticket sample includes internal test traffic (at least 9 of a 14-ticket sample were mine). Re-pulling with test traffic filtered before reporting a solve/expire rate.",
       status: "Measuring",
     },
   ],
@@ -279,7 +277,7 @@ export const PROJECT_STATS = [
   {
     label: "First reply < 2 min",
     value: "97.7%",
-    detail: "Median ~4 sec · live pilot",
+    detail: "Lola bot · median ~4 sec · n=353",
   },
   {
     label: "Closed without staff",
@@ -296,53 +294,61 @@ export const PROJECT_STATS = [
 /** Design goal — three outcomes the flows optimize for */
 export const DESIGN_GOAL_PILLARS = [
   {
-    title: "Grounded answers",
-    detail: "Hours, deals, SNAP, and buffet from this week's flyer — not invented prices.",
+    title: "Staff knowledge before imagination",
+    detail: "Hours, deals, SNAP, and policy from approved facts — never invented prices.",
   },
   {
-    title: "Tap-first pickup",
-    detail: "List items → staff quote → guest confirms → pickup in store, same thread.",
+    title: "Buttons before commands",
+    detail: "Defined actions are tap targets — list → quote → confirm → pickup on-thread.",
   },
   {
-    title: "Staff relay",
-    detail: "Hard asks, complaints, and quotes escalate to humans — Lola steps back.",
+    title: "Clean handoff when unsure",
+    detail: "14 of 380 conversations escalated to staff — the rest closed without a human loop.",
   },
 ] as const;
 
 /** Develop craft — how open-ended turns relate to routing + tools (main path, one beat) */
 export const DEVELOP_AI_LAYER =
-  "Open-ended questions use store tools first — hours, deals, FAQ — not free-form invention. Taps and staff-wait states stay local." as const;
+  "Customer acts first — Lola never initiates outside the flyer broadcast. Open asks use store tools first; staff handoff when knowledge runs out." as const;
 
 /** Fold I — project metadata (Rachel Chen–style intro row) */
 export const FOLD1_META = {
-  role: "Design technologist",
+  role: "Design Technologist",
   team: PROJECT.team,
-  skills: ["Conversation design", "Service design", "WhatsApp UX", "EN/ES copy"] as const,
+  skills: [
+    "Conversational UX & Architecture",
+    "Service & Operations Design",
+    "Full-Stack Development",
+    "Bilingual Localization (EN/ES)",
+  ] as const,
 } as const;
 
 /** Fold I — section headline (two lines) */
 export const FOLD1_SECTION_HEADLINE = [
-  "The broadcast worked.",
-  "The inbox couldn't keep up.",
+  "The problem was the inbox,",
+  "not the store.",
 ] as const;
 
 /** Fold I — subheading under section headline */
 export const FOLD1_SECTION_SUBHEAD =
-  "Weekly deal texts created demand, but replies came back as bilingual text, voice notes, and pickup-order requests inside one busy storefront inbox.";
+  "~1,200 loyalty families reply to the weekly flyer — in English and Spanish, by text and voice note — and every message landed in one queue for staff to read, translate, and act on by hand.";
 
 export const FOLD1_OVERVIEW = {
   eyebrow: "Overview",
-  title: "A bilingual WhatsApp shopping system for La Bodega",
+  title: "Designing Lola for a Neighborhood Grocery",
   lead:
-    "La Bodega’s weekly flyer reaches ~1,200 loyalty families — but replies pile into one inbox: EN/ES, voice notes, SNAP questions, and pickup lists.",
+    "La Bodega’s weekly deals blast worked. The responses didn’t. Inquiries regarding hours, SNAP benefits, voice notes, and complex pickup lists flooded a single inbox during rush hours.",
   role:
-    "I designed Lola’s guest flows and built Lola Connect so one pickup loop runs end to end. Solo build; weekly check-ins with the CEO, ops, and marketing. Live now.",
+    "To solve this, I analyzed 180 live flyer threads (310 customer messages) to map the friction points before designing a single flow. I then designed the conversational guest flows and single-handedly built Lola Connect.",
   facts: [
     { label: "Client", detail: "La Bodega Supermarket · Calhoun, GA" },
-    { label: "Timeline", detail: "May – Jul 2026 · live pilot" },
+    { label: "Timeline", detail: "May – July 2026 (6-Week Live Pilot)" },
     {
-      label: "What I delivered",
-      detail: "Six WhatsApp flows (EN/ES, voice + text) and Lola Connect — both live.",
+      label: "Deliverables",
+      detail: [
+        "6 Conversational Flows: Fully localized (EN/ES) interactions supporting both voice and text inputs.",
+        "Lola Connect Backend: Custom live middleware handling automation routing, data logging, and live staff handoffs.",
+      ],
     },
   ],
 } as const;
@@ -355,17 +361,17 @@ export const DEVELOP_STEPS = [
 ] as const;
 
 export const DISCOVER_BRIDGE =
-  "This is the inbox Lola had to absorb — real threads from the weekly deal blast.";
+  "Six weeks reading real threads — not a survey, the actual inbox. That’s where the product shape came from.";
 
 export const FOLD1_OPPORTUNITY_SECTION = {
-  eyebrow: "Opportunity",
-  headline: "Weekly marketing could become an ordering channel",
-  body: "If Lola can answer flyer questions instantly and turn messy replies into structured pickup requests, the weekly broadcast becomes more than marketing — it becomes a way to order from a local grocery store without downloading anything new.",
+  eyebrow: "Research insight",
+  headline: "People want the flyer thread to talk back",
+  body: "They ask in whichever language is comfortable. Many won’t type at all — they send a voice note because it’s faster while cooking. Staff didn’t need a bot that pretends to know everything; they needed one that knows what it’s approved to know, and hands off cleanly when it doesn’t.",
 } as const;
 
 export const FOLD1_SOLUTION_SECTION = {
-  eyebrow: "Solution",
-  headline: "A bilingual WhatsApp assistant on the thread families already use",
+  eyebrow: "Design principle",
+  headline: "Staff knowledge before imagination",
 } as const;
 
 /** @deprecated use FOLD1_SECTION_HEADLINE */
@@ -375,31 +381,31 @@ export const FOLD1_CREDENTIALS_LEAD = FOLD1_SECTION_HEADLINE.join(" ");
 export const FOLD1_PROBLEM_BULLETS = [
   {
     hook: `${LOYALTY_MEMBER_COUNT} loyalty members`,
-    text: "received the weekly flyer, creating a sudden spike in customer replies.",
+    text: "got the weekly flyer — then replied with hours, SNAP, deals, and pickup lists nobody designed for.",
   },
   {
     hook: "Replies arrived",
-    text: "as a mix of English, Spanish, and raw WhatsApp voice notes.",
+    text: "as English, Spanish, and voice notes — staff mentally translating while running checkout.",
   },
   {
-    hook: "During rush hours,",
-    text: "staff could not manually sort questions, translate messages, and keep checkout moving.",
+    hook: "During rush,",
+    text: "one inbox couldn’t sort urgent from casual, quote orders, and keep the floor moving.",
   },
 ] as const;
 
 /** Fold I — design response (right card) */
 export const FOLD1_RESPONSE_BULLETS = [
   {
-    hook: "Voice + Language Triage",
-    text: "Lola converts voice notes into text and detects whether the shopper prefers English or Spanish.",
+    hook: "Flyer thread, not a new app",
+    text: "Meet families where they already shop — reply handling on the broadcast they open every week.",
   },
   {
-    hook: "Flyer-Grounded Answers",
-    text: "Lola answers from the current weekly deals, store FAQ, hours, and staff-approved knowledge.",
+    hook: "Bilingual by architecture",
+    text: "Language from the first message, held through templates, alerts, and voice replies — not a translation pass.",
   },
   {
-    hook: "Structured Pickup Loop",
-    text: "When a shopper starts an order, Lola keeps them in a simple flow: list → staff quote → confirm → pickup.",
+    hook: "Same path for text and voice",
+    text: "Voice notes transcribe, then hit the same grounded logic as typed asks.",
   },
 ] as const;
 
@@ -408,9 +414,9 @@ export const FOLD1_APPROACH_BULLETS = FOLD1_RESPONSE_BULLETS;
 
 /** Fold I — product bet (full-width card) */
 export const FOLD1_PRODUCT_BET = {
-  main: "Customers should not need a new app to order from their local grocery store.",
+  main: "Design the weekly shop as a service — not a chatbot.",
   supporting:
-    "If Lola can answer flyer questions instantly and turn messy replies into structured pickup requests, the weekly broadcast becomes more than marketing — it becomes an ordering channel.",
+    "Flyer prep, broadcast, shopper thread, quote and confirm, counter alert, pickup. Two surfaces, one loop.",
 } as const;
 
 /** @deprecated use FOLD1_PRODUCT_BET */
@@ -425,7 +431,7 @@ export const FOLD1_METRIC_CHIPS = [
 
 /** Fold I — design question (label carries HMW; body does not repeat it) */
 export const FOLD1_HMW =
-  "Give families instant, grounded answers on the thread they already use — and a pickup path when they're ready, no new app.";
+  "Give families instant, grounded answers on the thread they already use — and a pickup path when they’re ready, with staff knowledge before imagination.";
 
 /** @deprecated use FOLD1_PROBLEM_BULLETS */
 export const FOLD1_PROBLEM = FOLD1_PROBLEM_BULLETS.map((b) => `${b.hook} ${b.text}`).join(" ");
@@ -441,7 +447,7 @@ export const DEFINE_THESIS = HEADLINE_SPINE.primary;
 
 /** AI trust — caveat near decision points (ai-trust-builders) */
 export const LOLA_GROUNDED_CAVEAT =
-  "Prices and hours from staff knowledge — never invented.";
+  "Staff knowledge before imagination — prices, hours, and policy from approved facts, never invented.";
 
 export const DEFINE_SCOPE = [
   "No shopper app",
@@ -461,26 +467,26 @@ export const CTA = {
 export const STORY = {
   headlineBefore: "Designing ",
   headlineAfter: ":",
-  headlineSubline: "a bilingual WhatsApp assistant",
+  headlineSubline: "A Bilingual WhatsApp Assistant for La Bodega",
   headline: "",
   headlineSub: HERO_SUBTITLE,
   heroThesis: HEADLINE_SPINE.supporting,
   problemLines: [
     {
-      hook: "Weekly blast scale",
-      text: `After every deal blast to ${LOYALTY_MEMBER_COUNT} loyalty members, one inbox caught hours, SNAP, voice notes, and what-to-buy asks in Spanish and English.`,
+      hook: "The inbox, not the store",
+      text: `After every flyer blast to ${LOYALTY_MEMBER_COUNT} loyalty members, one queue caught hours, SNAP, voice notes, and pickup lists — in Spanish and English.`,
     },
     {
-      hook: "Manual reply",
-      text: "Staff could not answer each thread by hand during rush — many waited hours or never got a reply.",
+      hook: "Manual reply broke at rush",
+      text: "Staff read, translated, and quoted by hand. The other 3.7% didn’t loop — they routed to a human.",
     },
   ] as const,
-  solutionHook: "Lola",
+  solutionHook: "One loop",
   solutionBody:
-    "— mascot-led layer on the weekly deals thread for discover → ask → plan: pickup, list reminders, and staff help.",
+    "— guest thread on WhatsApp, staff close in Lola Connect. Six flows, bilingual, tap-first, same path for text and voice.",
   ownershipLines: [
-    { hook: "I designed", text: "flows, EN/ES copy, and conversation guardrails." },
-    { hook: "I built", text: "the staff dashboard for WhatsApp threads, quotes, and pickups." },
+    { hook: "I designed", text: "guest flows, EN/ES copy, and when Lola hands off." },
+    { hook: "I built", text: "Lola Connect — inbox, orders, tickets, and counter alerts." },
   ] as const,
   /** @deprecated use problemLines */
   problem:
@@ -491,16 +497,16 @@ export const STORY = {
     "a mascot-led layer on the weekly deals thread for discover, ask, and plan — pickup, shopping list reminders, and staff help. I designed Lola's flows and EN/ES copy, and built the staff dashboard to run threads, quotes, and pickups.",
   capabilities: [
     {
-      label: "Grounded Q&A",
-      ships: "Flyer + hours only — no invented prices.",
+      label: "Buttons before commands",
+      ships: "Tap targets on the blast — not #order keywords to memorize.",
     },
     {
-      label: "Tap-first flows",
-      ships: "Tap buttons on the weekly blast (was numbered menu + text-wall reply)",
+      label: "Bilingual architecture",
+      ships: "Language from first message, held through templates and alerts.",
     },
     {
-      label: "Staff help relay",
-      ships: "Can't answer → ping staff → relay in-thread",
+      label: "Staff knowledge before imagination",
+      ships: "Approved facts only — handoff when knowledge runs out.",
     },
   ] as const,
   hmw: FOLD1_HMW,
@@ -623,10 +629,11 @@ export const I_DID_NOT_SHIP = [
 ] as const;
 
 export const PROJECT_META = {
-  role: "Design technologist",
+  role: "Design Technologist",
   timeline: PROJECT.timeline,
   context: PROJECT.context,
-  skills: "Conversation design · service design · WhatsApp · EN/ES copy",
+  skills:
+    "Conversational UX & Architecture · Service & Operations Design · Full-Stack Development · Bilingual Localization (EN/ES)",
 } as const;
 
 export const PROBLEM_POINTS = [
@@ -825,10 +832,10 @@ export const PRODUCTION_FACTS = [
   {
     kind: "staff" as const,
     label: "Staff CRM",
-    value: "Staff dashboard on Vercel",
-    detail: "Inbox · Orders · Reminders · dashboard alerts on new lists",
+    value: "Lola Connect ↗",
+    detail: "Staff login required — full walkthrough is in the Develop section above",
     href: "https://wacrm-i9f2.vercel.app",
-    linkLabel: "Staff login",
+    linkLabel: "Staff login required",
     external: true,
   },
   {
@@ -848,6 +855,35 @@ export const PRODUCTION_FACTS = [
 export const OWNERSHIP_BOUNDARY =
   "Design through ship — conversation UX, staff dashboard, and Lola routing on WhatsApp." as const;
 
+/** Supabase aggregate pull · 2026-07-12 · wacrm service role · counts only */
+export const RESEARCH_PULL = {
+  inboxWindow: "May 1 – Jun 15 2026",
+  threads: 180,
+  customerMessages: 310,
+  languageKnown: { en: 28, es: 98, unknown: 54 },
+  languageLead: "Spanish led among threads with a saved preference (98 ES · 28 EN)",
+  staffHelp30d: {
+    answered: 14,
+    expired: 9,
+    expireRatePct: 39,
+    avgAnswerMinutes: 8.2,
+  },
+  botFirstReplyStudy: {
+    under2MinPct: 95.3,
+    medianSec: 3.1,
+    n: 233,
+  },
+  publishedBotFirstReply: {
+    under2MinPct: 97.7,
+    medianSec: 4,
+    n: 353,
+    note: "Lola bot latency — not staff",
+  },
+  pickupAt: { withField: 3, totalOrders: 18, stillMeasuring: true },
+  activity30d: { threads: 283, customerMessages: 1472 },
+  broadcast30d: { spanishPct: 95, replyRatePct: 9.1 },
+} as const;
+
 export const EVIDENCE_LEAD = [
   {
     hook: "Designed for",
@@ -855,7 +891,7 @@ export const EVIDENCE_LEAD = [
   },
   {
     hook: "Learned from",
-    text: "~6 weeks inbox review · 40+ threads · 2 counter shadow sessions",
+    text: `${RESEARCH_PULL.threads} threads · ${RESEARCH_PULL.customerMessages} messages · 2 counter shadow sessions`,
   },
 ] as const;
 
@@ -870,17 +906,32 @@ export const MY_ROLE = [...I_SHIPPED] as const;
 
 export const HOW_WE_LEARNED = [
   {
-    title: "Inbox review",
-    detail: "Same hours, SNAP, buffet, and specials questions every week — patterns, not one-offs.",
+    title: `${RESEARCH_PULL.threads} threads · ${RESEARCH_PULL.customerMessages} messages`,
+    detail: `${RESEARCH_PULL.inboxWindow} — live flyer inbox, not a survey sample. Patterns coded by hand into the six flows.`,
   },
   {
-    title: "Broadcast reply behavior",
-    detail: "Customers answered on flyer threads; the gap was timely answers on that thread, not a new channel.",
+    title: "Bilingual is architecture",
+    detail: RESEARCH_PULL.languageLead + ". One language per reply — not mid-thread translation.",
   },
   {
-    title: "Counter & rush hours",
-    detail: "Staff miss threads on the floor — needed phone buzz + dashboard popup, not another app.",
+    title: "Handoff still has a gap",
+    detail:
+      "Staff tickets exist when Lola can’t answer — solve/expire rates stay in Still Measuring until test traffic is filtered from the ticket sample.",
   },
+] as const;
+
+/** Methods tab body — site-panel voice, numbers from RESEARCH_PULL */
+export const METHODS_PANEL_COPY = [
+  `${RESEARCH_PULL.threads} threads · ${RESEARCH_PULL.customerMessages} customer messages. Six weeks live (${RESEARCH_PULL.inboxWindow}), then Lola Connect’s own logs.`,
+  `I coded the inbox by pattern — hours, SNAP, pickup lists, loyalty, hot counter — into the six flows. ${RESEARCH_PULL.languageLead}.`,
+  "Every escalation gets a status, not just a resolution — but the ticket sample still mixes real guest asks with internal test traffic. Solve/expire rates stay unpublished until that filter is clean.",
+  `Bot speed vs human speed: Lola first replies hit ${RESEARCH_PULL.publishedBotFirstReply.under2MinPct}% under 2 min (median ~${RESEARCH_PULL.publishedBotFirstReply.medianSec}s · n=${RESEARCH_PULL.publishedBotFirstReply.n}). Staff replies on escalations are minutes, not seconds — keep those metrics separate.`,
+] as const;
+
+export const JOURNEY_PANEL_COPY = [
+  "Broadcast → ask → order → wait → pickup — one loop, six friction points.",
+  "Guests didn’t want a new app. They wanted the flyer thread to talk back — in whichever language, text or voice, without a command to memorize.",
+  "The gap that’s still open: when a guest needs a human, the handoff must close. Escalation solve/expire rates stay in Still Measuring until test traffic is filtered.",
 ] as const;
 
 export const WHAT_WE_TRIED_FIRST = [
@@ -913,10 +964,10 @@ export const WEEKLY_SHOP_LOOP = [
 
 /** Flow explorer — before / after framing (labels live in UI) */
 export const FLOW_EXPLORER_BEFORE =
-  "The broadcast got replies, but staff had to read, translate, and sort them by hand.";
+  "Replies hit one inbox — staff read, translated, sorted, and quoted by hand.";
 
 export const FLOW_EXPLORER_AFTER =
-  "The same thread becomes a guided flow — tap buttons, language memory, and staff handoff when needed.";
+  "Same thread becomes six guided flows — tap buttons, bilingual memory, voice on the same path, staff handoff when needed.";
 
 /** Scope cuts — signal → shipped for validation table */
 export const WHAT_WE_CUT = [
@@ -966,8 +1017,7 @@ export const TRADE_OFFS = [
 ] as const;
 
 /** How evidence was gathered — rigor footer for Methods tab */
-export const RESEARCH_METHODS_RIGOR =
-  "~6 weeks inbox review · 40+ volante reply threads · 2 counter shadow sessions · La Bodega, Calhoun GA";
+export const RESEARCH_METHODS_RIGOR = `${RESEARCH_PULL.threads} threads · ${RESEARCH_PULL.customerMessages} messages (${RESEARCH_PULL.inboxWindow}) · 2 counter shadow sessions · escalation solve/expire still measuring (test traffic in ticket sample) · La Bodega, Calhoun GA`;
 
 /** Inbox pattern → design decision → where it ships in the case study / product */
 export const RESEARCH_TO_DECISION = [
@@ -1207,29 +1257,37 @@ export const TESTIMONIALS = [
   {
     who: "Regular shopper, paraphrased",
     quote:
-      "I just wanted to know if the chicken sale was still on. I didn't want to call while I was cooking.",
+      "I used the voice note because I didn't want to call the store while I was cooking dinner.",
     role: "Customer",
   },
 ] as const;
 
 export const PILOT_IMPACT = [
   {
-    signal: "Replies land in seconds",
-    detail: "Most first replies under two minutes on the live flyer thread.",
+    signal: "97.7% first reply < 2 min",
+    detail: "Lola bot · median ~4 sec · n=353 on the live flyer thread.",
   },
   {
-    signal: "Most questions stay on-thread",
-    detail: "Few conversations need a staff escalation ticket.",
+    signal: "96.3% closed without staff",
+    detail: "14 of 380 conversations escalated — the rest didn’t loop in chat.",
   },
   {
-    signal: "Broadcasts became conversations",
-    detail: "Guests kept asking, ordering, and reminding in the same channel.",
+    signal: "988 Vitest tests",
+    detail: "Routing, language, tone, and safety — ship changes without babysitting deploys.",
   },
   {
-    signal: "Voice notes became usable",
-    detail: "Spoken asks follow the same grounded path as text.",
+    signal: "Voice on the same path",
+    detail: "Spoken asks transcribe, then hit the same grounded logic as text.",
   },
 ] as const;
+
+/** Peak-end close — honest open work + shopper quote (staff quote stays in PilotVoices) */
+export const CLOSING_BEAT = {
+  eyebrow: "Where this stands",
+  body: "Six weeks, 380 real conversations, 96.3% closed without staff. Escalation solve/expire rates stay in Still Measuring until test traffic is filtered from the ticket sample — same honesty bar as pickup lead time.",
+  quote: TESTIMONIALS[1].quote,
+  attribution: TESTIMONIALS[1].who,
+} as const;
 
 /** Lightweight ops proof — keep it scannable on the main page */
 export const OPS_PROOF = [
@@ -1304,11 +1362,11 @@ export const FUTURE_SCOPE = [
   },
 ] as const;
 
-/** Remaining instrumented gaps — outcomes already in SCOPE_METRICS.outcomes */
+/** Remaining instrumented gaps — outcomes already in Pilot Outcomes cards */
 export const PILOT_METRICS_NEXT = [
   {
     label: "Pickup lists before walk-in",
-    detail: "Lead time create → pickup_at — sample too small while pickup_at is sparsely set.",
+    detail: "One real order completed in the study window — the rest were test runs. Too early to report lead time.",
     status: "Measuring",
   },
 ] as const;
@@ -1340,25 +1398,59 @@ export type JourneyStep = {
 
 export const CUSTOMER_JOURNEY: { before: JourneyStep[]; after: JourneyStep[] } = {
   before: [
-    { label: "Broadcast", detail: "Hero image + numbered menu (1/2 or 1/2/3) — reply dumps bilingual specials wall, no tap buttons", tone: "default" },
-    { label: "Discover", detail: "Families read deals in WhatsApp", tone: "default" },
-    { label: "Ask", detail: "Hours, SNAP, specials, what to buy", tone: "default" },
-    { label: "Wait", detail: "Reply sits in inbox — staff answer by hand, often late", tone: "bottleneck" },
-    { label: "Drop off", detail: "No pickup on the channel — customer calls or gives up", tone: "bottleneck" },
-  ],
-  after: [
-    { label: "Broadcast", detail: "Same flyer + Lola intro and tap buttons (order, hours, specials)", tone: "default" },
-    { label: "Discover", detail: "Same thread — no new app", tone: "default" },
-    { label: "Ask", detail: "Lola answers from store knowledge — EN or ES", tone: "gain" },
+    {
+      label: "Broadcast",
+      detail:
+        "Weekly flyer hits the loyalty list — replies pile into one unsorted inbox (EN/ES mixed).",
+      tone: "default",
+    },
+    {
+      label: "Ask",
+      detail: "Hours, SNAP, loyalty points, hot counter — text or voice, no shared script.",
+      tone: "default",
+    },
     {
       label: "Order",
-      detail:
-        "Tap Place order → draft list → staff quote → YES/Confirm → order #. Staff alerted on draft; confirm sound on YES.",
+      detail: "Informal pickup lists typed by hand — no quote/confirm loop on-thread.",
+      tone: "default",
+    },
+    {
+      label: "Wait",
+      detail: "Staff first response measured in minutes to hours — guest often goes quiet.",
+      tone: "bottleneck",
+    },
+    {
+      label: "Drop off",
+      detail: "No pickup path on the channel — call the store or walk in cold.",
+      tone: "bottleneck",
+    },
+  ],
+  after: [
+    {
+      label: "Broadcast",
+      detail: "Same flyer thread + Lola intro and tap buttons — no new app.",
+      tone: "default",
+    },
+    {
+      label: "Ask",
+      detail: `Store-tool answers in EN or ES. Bot first reply ${RESEARCH_PULL.publishedBotFirstReply.under2MinPct}% under 2 min (median ~${RESEARCH_PULL.publishedBotFirstReply.medianSec}s) — Lola speed, not staff.`,
       tone: "gain",
     },
     {
-      label: "Remind",
-      detail: "List + day/time saved → timed nudge → Place order tap (#order fallback for voice)",
+      label: "Order",
+      detail: "Confirm-or-edit loop: draft list → staff quote → YES → order #. Counter alert on confirm.",
+      tone: "gain",
+    },
+    {
+      label: "Handoff",
+      detail:
+        "When knowledge runs out → staff ticket. Solve/expire rates stay in Still Measuring until test traffic is filtered from the ticket sample.",
+      tone: "bottleneck",
+    },
+    {
+      label: "Pickup",
+      detail:
+        "Staff alert before walk-in. Pickup lead-time still measuring — one real order in the study window; the rest were test runs.",
       tone: "gain",
     },
   ],
@@ -1468,20 +1560,20 @@ export const BUTTON_MOMENTS = [
   { moment: "Coach", context: "Customer sends ?", buttons: ["📦 Pickup order", "🔔 List reminder", "Cancel"] },
 ];
 
-/** Main-path product decisions — title, bold decision, one sentence */
+/** Main-path product decisions — technical mechanisms (philosophy lives on Craft rules) */
 export const FEATURED_PRODUCT_DECISIONS = [
   {
     tag: "Architecture",
-    decision: "Tools before imagination",
-    body: "Open-ended questions use store tools first (hours, FAQ, deals); the agent never invents prices or stock.",
-  },
-  {
-    tag: "WhatsApp",
-    decision: "Buttons over commands",
-    body: "Tap buttons make ordering easier than remembering keywords.",
+    decision: "Store tools on open asks",
+    body: "Hours, FAQ, and deals resolve through store tools first — the agent never invents prices or stock.",
   },
   {
     tag: "Operations",
+    decision: "Staff quote the list",
+    body: "Shopping lists get a human quote and confirm — Lola does not price an order on her own.",
+  },
+  {
+    tag: "Alerts",
     decision: "Two-tier staff alerts",
     body: "WhatsApp alerts catch attention; dashboard alerts support fulfillment.",
   },
@@ -1526,13 +1618,13 @@ export const DECISIONS = [
     tag: "Product",
   },
   {
-    title: "Tools before imagination",
+    title: "Store tools on open asks",
     body: "Open-ended turns hit an agent that must call store tools — hours, FAQ, deals — before it speaks. Low confidence never ships as fact.",
     tag: "Architecture",
   },
   {
-    title: "Buttons over commands",
-    body: "🛒 Place order beats memorizing #order. One stacked teal style — hashtags stay as fallback for voice and power users.",
+    title: "Staff quote the list",
+    body: "🛒 Place order beats memorizing #order. Lists get a human quote — Lola does not invent order totals.",
     tag: "WhatsApp",
   },
   {
@@ -1753,12 +1845,8 @@ export const LOLA_VOICE_SAMPLES = [
   },
 ] as const;
 
-/** Conversation design rules — four decision cards */
+/** Conversation design rules — three cards (voice path lives in Voice Lane) */
 export const CONVERSATION_RULES = [
-  {
-    title: "Same brain for text + voice",
-    body: "Customers can type, tap, or send voice notes. Voice is transcribed first, then routed through the same logic as text.",
-  },
   {
     title: "Bilingual by thread",
     body: "Lola detects English or Spanish and keeps the reply language consistent within the thread.",

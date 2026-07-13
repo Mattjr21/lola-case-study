@@ -3,7 +3,6 @@ import {
   PILOT_SHOPPER_FULL,
   STAFF_DASH_SCREENS,
   STAFF_OPS_PROCESS,
-  WHATSAPP_LIVE,
 } from "./constants";
 import { FeatureVideo } from "./FeatureVideo";
 import { LOLA_MOTION } from "./motionAssets";
@@ -145,6 +144,9 @@ function DeskOrdersMain() {
           </p>
           <p className="cs-staff-desk__page-meta">
             Today — Fri Jun 22 · <span>3 pending · 12 completed · 1 cancelled</span>
+          </p>
+          <p className="cs-staff-desk__sample-note" role="note">
+            Illustrative sample — pilot order volume is still ramping (see Still Measuring).
           </p>
         </div>
         <span className="cs-staff-desk__refresh">Refresh</span>
@@ -370,7 +372,14 @@ function StaffAppTour() {
 
   return (
     <div className="cs-staff-app-tour">
-      <p className="cs-meta-label mb-2">Inside the staff dashboard</p>
+      <header className="cs-staff-app-tour__intro">
+        <p className="cs-meta-label mb-2">Inside the staff dashboard</p>
+        <p className="cs-staff-app-tour__lead">
+          This is the real Lola Connect interface, not a mock — Inbox, Orders, Tickets, Home. It runs behind staff
+          login because it holds real customer names and order data; what&apos;s shown across these four tabs is the
+          complete picture.
+        </p>
+      </header>
 
       <SlidingTabs
         tabs={STAFF_DASH_SCREENS.map((s) => ({ id: s.id, label: s.label }))}
@@ -393,6 +402,7 @@ function StaffAppTour() {
               variant="inline"
               title={clip.title}
               hideCaption
+              autoPlay
             />
           </div>
           <div className="cs-staff-app-tour__desk-wrap">
@@ -413,18 +423,10 @@ export function StaffOpsPreview() {
         <FadeIn>
           <header className="cs-section-intro max-w-[52ch]">
             <p className="cs-meta-label">Staff product · Lola Connect</p>
-            <h3 className="cs-h3 max-w-[28ch]">Not another chat bubble — ops that close pickup</h3>
+            <h3 className="cs-h3 max-w-[28ch]">The other half of the loop — ops that close pickup</h3>
             <p className="cs-body">
-              Confirmed lists land in{" "}
-              <a
-                href={WHATSAPP_LIVE.staffUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[var(--cs-brand)] hover:underline underline-offset-2"
-              >
-                Lola Connect
-              </a>
-              — Inbox, Orders, Tickets, shift alerts.
+              I built Lola Connect so confirmed lists land before walk-in — Inbox, Orders, Tickets, shift alerts. The
+              full walkthrough is below; the live app stays behind staff login.
             </p>
           </header>
           <StaffProcessFlow />

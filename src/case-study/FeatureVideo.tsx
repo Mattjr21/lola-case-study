@@ -6,92 +6,88 @@ type FeatureVideoProps = {
   caption?: string;
   variant?: "hero" | "flow" | "inline";
   className?: string;
-  /** Muted autoplay when scrolled into view (default). Off when withAudio. */
-  autoPlayInView?: boolean;
-  /** Enable soundtrack — user must press Play (browser autoplay policy). */
-  withAudio?: boolean;
   /** Hide figcaption when title/caption already sit above the clip */
   hideCaption?: boolean;
+  /** Autoplay when in view (muted until user taps Enable sound) */
+  autoPlay?: boolean;
 };
 
-function prefersReducedMotion() {
-  if (typeof window === "undefined") return false;
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
-
-/** Product clip — muted loop by default; withAudio requires a Play tap for sound */
+/** Product clip with soundtrack — Play / Enable sound unlocks audio (browser autoplay policy) */
 export function FeatureVideo({
   src,
   title,
   caption,
   variant = "flow",
   className = "",
-  autoPlayInView = true,
-  withAudio = false,
   hideCaption = false,
+  autoPlay = false,
 }: FeatureVideoProps) {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
-  const [reduced, setReduced] = useState(false);
-
-  const canAutoplay = autoPlayInView && !withAudio;
-
-  useEffect(() => {
-    setReduced(prefersReducedMotion());
-  }, []);
+  const [soundOn, setSoundOn] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    el.muted = !withAudio;
-    if (withAudio) el.volume = 1;
-  }, [withAudio, src]);
+    el.muted = autoPlay ? !soundOn : false;
+    el.volume = 1;
+  }, [src, autoPlay, soundOn]);
 
+  // Pause when the clip leaves the viewport; autoplay when it enters
   useEffect(() => {
     const el = ref.current;
-    if (!el || !canAutoplay || reduced) return;
+    if (!el) return;
 
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.28) {
-          void el.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
-        } else {
-          el.pause();
-          setPlaying(false);
+        if (!entry.isIntersecting) {
+          if (!el.paused) {
+            el.pause();
+            setPlaying(false);
+          }
+          return;
         }
+        if (!autoPlay) return;
+
+        el.muted = !soundOn;
+        el.volume = 1;
+        void el
+          .play()
+          .then(() => setPlaying(true))
+          .catch(() => {
+            // Unmuted autoplay blocked — fall back to muted
+            el.muted = true;
+            void el
+              .play()
+              .then(() => setPlaying(true))
+              .catch(() => setPlaying(false));
+          });
       },
-      { threshold: [0, 0.28, 0.55] },
+      { threshold: 0.35 },
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [canAutoplay, src, reduced]);
-
-  // Pause audio clips when they leave the viewport
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || !withAudio) return;
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting && !el.paused) {
-          el.pause();
-          setPlaying(false);
-        }
-      },
-      { threshold: 0.15 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [withAudio, src]);
+  }, [src, autoPlay, soundOn]);
 
   function togglePlayback() {
     const el = ref.current;
     if (!el) return;
+
+    // Autoplay mode: first tap unlocks sound while playing; then pause/play
+    if (autoPlay && playing && !soundOn) {
+      setSoundOn(true);
+      el.muted = false;
+      el.volume = 1;
+      void el.play().catch(() => {
+        /* keep muted if still blocked */
+      });
+      return;
+    }
+
     if (el.paused) {
-      if (withAudio) {
-        el.muted = false;
-        el.volume = 1;
-      }
+      if (autoPlay) setSoundOn(true);
+      el.muted = false;
+      el.volume = 1;
       void el
         .play()
         .then(() => setPlaying(true))
@@ -103,37 +99,40 @@ export function FeatureVideo({
   }
 
   const label = title ?? caption ?? "Product demo";
-  const toggleLabel = withAudio
-    ? playing
-      ? `Pause ${label}`
-      : `Play ${label} with sound`
-    : playing
-      ? `Pause ${label}`
-      : `Play ${label}`;
+  const buttonText =
+    autoPlay && playing && !soundOn
+      ? "Enable sound"
+      : playing
+        ? "Pause"
+        : "Play · sound on";
+  const toggleLabel =
+    autoPlay && playing && !soundOn
+      ? `Enable sound for ${label}`
+      : playing
+        ? `Pause ${label}`
+        : `Play ${label} with sound`;
 
   return (
-    <figure
-      className={`cs-feature-video cs-feature-video--${variant}${withAudio ? " cs-feature-video--audio" : ""} ${className}`.trim()}
-    >
+    <figure className={`cs-feature-video cs-feature-video--${variant} cs-feature-video--audio ${className}`.trim()}>
       <div className="cs-feature-video__frame">
         <video
           ref={ref}
           className="cs-feature-video__media"
           src={src}
-          muted={!withAudio}
-          loop={!withAudio}
+          muted={autoPlay ? !soundOn : false}
+          loop
           playsInline
-          preload="metadata"
+          preload={autoPlay ? "auto" : "metadata"}
           aria-label={label}
         />
         <button
           type="button"
-          className={`cs-feature-video__toggle${withAudio && !playing ? " is-sound" : ""}`}
+          className={`cs-feature-video__toggle${!playing || (autoPlay && !soundOn) ? " is-sound" : ""}`}
           onClick={togglePlayback}
-          aria-pressed={playing}
+          aria-pressed={playing && (!autoPlay || soundOn)}
           aria-label={toggleLabel}
         >
-          {withAudio ? (playing ? "Pause" : "Play · sound on") : playing ? "Pause" : "Play"}
+          {buttonText}
         </button>
       </div>
       {!hideCaption && (title || caption) ? (

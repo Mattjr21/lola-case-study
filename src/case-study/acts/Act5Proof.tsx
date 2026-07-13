@@ -1,11 +1,12 @@
 import React from "react";
 import { CTA, PORTFOLIO, WHATSAPP_LIVE } from "../constants";
-import { LolaMark } from "../ui";
+import { ClosingBeat } from "../ClosingBeat";
 import { DeliverLearnings } from "../DeliverLearnings";
 import { ImpactOutcomes } from "../ImpactOutcomes";
 import { PilotVoices } from "../PilotVoices";
 import { ReferenceGate } from "../ReferenceGate";
 import { ScopeMetrics } from "../ScopeMetrics";
+import { LolaMark } from "../ui";
 
 export function Act5Proof() {
   return (
@@ -31,6 +32,8 @@ export function Act5Proof() {
         <DeliverLearnings />
       </div>
 
+      <ClosingBeat />
+
       <ReferenceGate />
 
       <footer className="cs-site-footer">
@@ -47,7 +50,13 @@ export function Act5Proof() {
                 <div>
                   <dt>Staff tool</dt>
                   <dd>
-                    <a href={WHATSAPP_LIVE.staffUrl}>Staff dashboard</a>
+                    <a href={WHATSAPP_LIVE.staffUrl} target="_blank" rel="noopener noreferrer">
+                      Lola Connect ↗
+                    </a>
+                    <span className="cs-site-footer__hint">
+                      {" "}
+                      · staff login required — full walkthrough is in Develop above
+                    </span>
                   </dd>
                 </div>
                 <div>

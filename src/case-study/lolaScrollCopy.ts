@@ -41,9 +41,9 @@ export const LOLA_SCROLL_ACTS = [
     id: "problem",
     range: [0.22, 0.5] as const,
     kicker: "The gap",
-    title: "Outreach worked. Replies didn't.",
-    subtitle: "Weekly flyer blasts overwhelmed a single staff queue.",
-    body: "Hours, SNAP, voice notes, pickup inquiries — manual processing created backlogs during weekend rush hours.",
+    title: "The problem was the inbox",
+    subtitle: "After every flyer blast, one queue caught everything.",
+    body: "Hours, SNAP, voice notes, pickup lists — in English and Spanish. Staff answered by hand until rush broke the loop.",
   },
   {
     id: "lola",
@@ -51,7 +51,7 @@ export const LOLA_SCROLL_ACTS = [
     kicker: "The assistant",
     title: "Meet Lola",
     subtitle: HEADLINE_SPINE.primary,
-    body: `${HEADLINE_SPINE.supporting} Tap-first paths, flyer-grounded answers, staff relay when it needs a human.`,
+    body: `${HEADLINE_SPINE.supporting} Tap-first paths and staff handoff when knowledge runs out.`,
   },
   {
     id: "service",

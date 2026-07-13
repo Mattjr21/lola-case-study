@@ -59,10 +59,11 @@ export function HearLola() {
       <FadeIn>
         <header className="cs-section-intro max-w-[52ch]">
           <p className="cs-meta-label">Voice lane</p>
-          <h3 className="cs-h3">Voice notes made the assistant usable</h3>
+          <h3 className="cs-h3">Voice hits the same grounded path as text</h3>
           <p className="cs-body max-w-[52ch]">
-            Many shoppers naturally send WhatsApp voice notes. Lola transcribes them, answers in the right language, and
-            can reply with text or voice when useful.
+            {/* Slot: swap back to an adoption line once a later-pilot voice % is pulled (study window: 1 of 310). */}
+            Customers can speak instead of type — Lola transcribes, then answers from the same staff-approved knowledge,
+            in the right language.
           </p>
         </header>
       </FadeIn>

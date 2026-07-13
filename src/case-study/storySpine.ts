@@ -2,31 +2,31 @@
 
 export const STORY_BEATS = {
   discover: {
-    body: "The weekly flyer worked. The inbox did not — every reply landed in one queue.",
+    body: "Six weeks in real threads — the inbox after every flyer blast, not a survey.",
     bullets: [
       "Blast to ~1,200 families → free-form EN/ES text and voice",
-      "Hours, SNAP, deals, and pickup asks mixed in one thread",
-      "Staff answered by hand — late or missed in rush",
+      "Hours, SNAP, deals, and pickup asks mixed in one queue",
+      "Staff read, translated, and quoted by hand — late in rush",
     ],
   },
   define: {
-    body: "Build inside the channel families already use. Two surfaces, one order.",
+    body: "One loop on the thread families already use. Two surfaces, one pickup finish.",
     bullets: [
       "Guest: Lola on WhatsApp — ask, order, remind, staff help",
       "Staff: Lola Connect — inbox, orders, alerts, shifts",
-      "No shopper app · staff keep control · pickup in store",
+      "No shopper app · staff keeps control · pickup in store",
     ],
   },
   develop: {
-    body: "Guest flows on WhatsApp. Staff day in Lola Connect. Same pickup finish.",
+    body: "Six guest flows on WhatsApp. Staff day in Lola Connect. Text and voice on one loop.",
     bullets: [
-      "Six guest journeys — broadcast through staff handoff",
+      "Broadcast through staff handoff — buttons before commands",
       "Inbox Ready bar · Orders board · Tickets · shift alerts",
-      "Grounded answers, tap-first actions, bilingual + voice",
+      "Staff knowledge before imagination · bilingual memory",
     ],
   },
   deliver: {
-    body: "Live pilot under real rush — buttons, clear CTAs, and staff ops that hold up.",
+    body: "Live pilot under real rush — 97.7% first reply <2 min, 96.3% closed without staff.",
     bullets: [
       "Tap buttons replaced numbered menus",
       "Place order replaced vague Hi Lola taps",

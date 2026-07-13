@@ -18,9 +18,9 @@ export function ConversationCraft() {
         <div className="cs-block-stack cs-block-stack--tight">
           <FadeIn>
             <header className="cs-section-intro cs-section-intro--tight max-w-[52ch]">
-              <h3 className="cs-h3">Grounded, tap-first conversations</h3>
+              <h3 className="cs-h3">How guest conversations stay on-rails</h3>
               <p className="cs-body">
-                Store facts only, language memory, buttons before commands, staff handoff when knowledge is missing.{" "}
+                Three craft rules below — then hear Lola, then the product decisions that made them stick.{" "}
                 {DEVELOP_AI_LAYER}
               </p>
             </header>
@@ -33,14 +33,14 @@ export function ConversationCraft() {
                 variant="inline"
                 title={LOLA_MOTION.clips.voiceGreeting.title}
                 caption={LOLA_MOTION.clips.voiceGreeting.caption}
-                withAudio
-                autoPlayInView={false}
+                autoPlay
               />
               <FeatureVideo
                 src={LOLA_MOTION.clips.voiceNotes.src}
                 variant="inline"
                 title={LOLA_MOTION.clips.voiceNotes.title}
                 caption={LOLA_MOTION.clips.voiceNotes.caption}
+                autoPlay
               />
             </div>
           </FadeIn>

@@ -2,25 +2,11 @@ import React from "react";
 import { SCOPE_METRICS } from "./constants";
 import { FadeIn } from "./ui";
 
-/** Hiring-manager metrics — pilot outcomes first, then scope, then honest gaps */
+/** Hiring-manager metrics — product scope + honest gaps (outcomes live above on Pilot Outcomes) */
 export function ScopeMetrics() {
   return (
     <FadeIn delay={0.05}>
       <div className="cs-scope-metrics">
-        <div>
-          <p className="cs-meta-label mb-1">{SCOPE_METRICS.outcomesLabel}</p>
-          <p className="cs-scope-metrics__note">{SCOPE_METRICS.outcomesNote}</p>
-          <ul className="cs-scope-metrics__grid cs-scope-metrics__grid--outcomes" aria-label="Pilot outcomes">
-            {SCOPE_METRICS.outcomes.map((row) => (
-              <li key={row.label} className="cs-scope-metrics__card cs-scope-metrics__card--outcome">
-                <p className="cs-scope-metrics__value">{row.value}</p>
-                <p className="cs-scope-metrics__label">{row.label}</p>
-                <p className="cs-scope-metrics__detail">{row.detail}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-
         <div className="cs-scope-metrics__lower">
           <div>
             <p className="cs-meta-label mb-3">{SCOPE_METRICS.shippedLabel}</p>

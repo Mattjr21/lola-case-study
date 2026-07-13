@@ -178,6 +178,9 @@ export function LolaConnectOrdersMock({ className = "" }: { className?: string }
         <div className="min-w-0">
           <p className="cs-lc-phone__page-title">Orders</p>
           <p className="cs-lc-phone__page-meta">Today — 3 pending · 12 completed</p>
+          <p className="cs-lc-phone__sample-note" role="note">
+            Illustrative sample — see Still Measuring
+          </p>
         </div>
         <span className="cs-lc-phone__ghost-btn">Refresh</span>
       </header>

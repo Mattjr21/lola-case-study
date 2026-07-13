@@ -49,8 +49,12 @@ export function ProductSurfaces() {
         <p className="cs-product-surfaces__live">
           Live staff app:{" "}
           <a href={WHATSAPP_LIVE.staffUrl} target="_blank" rel="noopener noreferrer">
-            Lola Connect
+            Lola Connect ↗
           </a>
+          <span className="cs-product-surfaces__live-note">
+            {" "}
+            (staff login required — full walkthrough is in Develop)
+          </span>
         </p>
       </div>
     </FadeIn>

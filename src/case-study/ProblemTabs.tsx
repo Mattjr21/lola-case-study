@@ -5,6 +5,8 @@ import {
   EVIDENCE_EXHIBIT_TABS,
   HOW_WE_LEARNED,
   INBOX_SNIPPETS,
+  JOURNEY_PANEL_COPY,
+  METHODS_PANEL_COPY,
   RESEARCH_METHODS_RIGOR,
   type EvidenceExhibitTabId,
 } from "./constants";
@@ -92,6 +94,13 @@ function InboxTab({
 function MethodsTab() {
   return (
     <div>
+      <div className="space-y-3 mb-4">
+        {METHODS_PANEL_COPY.map((line) => (
+          <p key={line.slice(0, 48)} className="text-[14px] text-[var(--cs-ink)] leading-snug">
+            {line}
+          </p>
+        ))}
+      </div>
       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
         {METHODS.map((item) => (
           <li key={item.title} className="cs-panel px-4 py-3">
@@ -171,7 +180,18 @@ export function ProblemTabs() {
             exit={reduce ? undefined : { opacity: 0, y: -4 }}
             transition={{ duration: 0.18 }}
           >
-            {tab === "journey" && <CustomerJourneyFlow embedded />}
+            {tab === "journey" && (
+              <>
+                <div className="space-y-2 mb-4">
+                  {JOURNEY_PANEL_COPY.map((line) => (
+                    <p key={line.slice(0, 40)} className="text-[13px] text-[var(--cs-ink-muted)] leading-snug">
+                      {line}
+                    </p>
+                  ))}
+                </div>
+                <CustomerJourneyFlow embedded />
+              </>
+            )}
             {tab === "inbox" && <InboxTab snippetId={snippetId} onSnippetChange={selectSnippet} />}
             {tab === "methods" && <MethodsTab />}
           </motion.div>
