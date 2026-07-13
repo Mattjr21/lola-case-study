@@ -32,11 +32,51 @@
         content="Product &amp; conversational design — bilingual WhatsApp companion for an independent Hispanic grocer."
       />
       <meta name="twitter:image" content="__SITE_URL__/og-image.svg" />
-      <style>html, body { min-height: 100%; margin: 0; } #root { min-height: 100%; }</style>
+      <style>
+        html, body { min-height: 100%; margin: 0; }
+        #root { min-height: 100%; }
+        .cs-boot {
+          margin: 0;
+          padding: 2.5rem 1.25rem;
+          font-family: system-ui, sans-serif;
+          color: #1a1a1a;
+          background: #f4f1ec;
+          min-height: 100vh;
+          box-sizing: border-box;
+        }
+        .cs-boot h1 {
+          margin: 0 0 0.5rem;
+          font-size: 1.35rem;
+          font-weight: 650;
+          letter-spacing: -0.02em;
+        }
+        .cs-boot p {
+          margin: 0;
+          max-width: 36rem;
+          font-size: 0.95rem;
+          line-height: 1.5;
+          color: #4a4a4a;
+        }
+      </style>
     </head>
 
     <body>
-      <div id="root"></div>
+      <div id="root">
+        <!-- First paint before JS — replaced on mount (CSR SPA) -->
+        <div class="cs-boot">
+          <h1>Designing Lola · La Bodega</h1>
+          <p>
+            A bilingual WhatsApp assistant case study — loading the interactive page…
+          </p>
+          <noscript>
+            <p>
+              JavaScript is required to view this case study. Open
+              <a href="https://github.com/Mattjr21/lola-case-study">the repository</a>
+              for source and docs.
+            </p>
+          </noscript>
+        </div>
+      </div>
       <script type="module" src="/src/main.tsx"></script>
     </body>
   </html>
