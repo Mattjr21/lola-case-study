@@ -135,7 +135,7 @@ export const PORTFOLIO = {
   seeking: "Open to senior design technologist, product design, and conversational AI roles",
   linkedIn: import.meta.env.VITE_PORTFOLIO_LINKEDIN || "https://www.linkedin.com/in/dannvarg/",
   email: import.meta.env.VITE_PORTFOLIO_EMAIL || "dannyvr172@gmail.com",
-  backUrl: import.meta.env.VITE_PORTFOLIO_BACK_URL || "https://dannyvr.framer.ai/",
+  backUrl: import.meta.env.VITE_PORTFOLIO_BACK_URL || "http://localhost:5173",
 } as const;
 
 /** Public deploy URL — set VITE_SITE_URL for OG previews (no trailing slash) */
