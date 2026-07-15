@@ -18,46 +18,25 @@ function useActivePhase() {
   return { activePhase, activeIdx };
 }
 
-function PhaseStepper({
-  activePhase,
-  activeIdx,
-}: {
-  activePhase: PhaseId | "prologue";
-  activeIdx: number;
-}) {
-  const stepCount = PROGRESS_PHASES.length;
-  const onPrologue = activePhase === "prologue";
-  const fillPct = onPrologue ? 0 : ((activeIdx + 1) / stepCount) * 100;
-  const dotLeft = onPrologue ? 0 : ((activeIdx + 0.5) / stepCount) * 100;
+function usePageScrollPct() {
+  const [pct, setPct] = useState(0);
 
-  return (
-    <div className="cs-phase-stepper">
-      <div className="cs-phase-stepper__steps" aria-label="Process phases">
-        {PROGRESS_PHASES.map((phase, i) => {
-          const isActive = activePhase === phase.id;
-          const isPast = !onPrologue && activeIdx > i;
-          return (
-            <a
-              key={phase.id}
-              href={`#${phase.id}`}
-              title={phase.lead}
-              aria-current={isActive ? "step" : undefined}
-              className={`cs-phase-stepper__step${isActive ? " is-active" : ""}${isPast ? " is-past" : ""}${onPrologue ? " is-idle" : ""}`}
-            >
-              <span className="cs-phase-stepper__num">{phase.num}</span>
-              <span className="cs-phase-stepper__label">{phase.label}</span>
-            </a>
-          );
-        })}
-      </div>
-      <div className="cs-phase-stepper__progress" aria-hidden="true">
-        <div className="cs-phase-stepper__track">
-          <div className="cs-phase-stepper__fill" style={{ width: `${fillPct}%` }} />
-          {!onPrologue ? <span className="cs-phase-stepper__dot" style={{ left: `${dotLeft}%` }} /> : null}
-        </div>
-      </div>
-    </div>
-  );
+  useEffect(() => {
+    const update = () => {
+      const el = document.documentElement;
+      const max = el.scrollHeight - window.innerHeight;
+      setPct(max > 0 ? Math.min(100, Math.max(0, (window.scrollY / max) * 100)) : 0);
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  return pct;
 }
 
 function MobilePhasePicker({
@@ -74,7 +53,6 @@ function MobilePhasePicker({
   const current = onPrologue ? null : PROGRESS_PHASES[activeIdx];
   const stepCount = PROGRESS_PHASES.length;
   const fillPct = onPrologue ? 0 : ((activeIdx + 1) / stepCount) * 100;
-  const dotLeft = onPrologue ? 0 : ((activeIdx + 0.5) / stepCount) * 100;
 
   const close = useCallback(() => {
     setOpen(false);
@@ -141,42 +119,119 @@ function MobilePhasePicker({
       <div className="cs-phase-stepper__progress cs-phase-stepper__progress--mobile" aria-hidden="true">
         <div className="cs-phase-stepper__track">
           <div className="cs-phase-stepper__fill" style={{ width: `${fillPct}%` }} />
-          {!onPrologue ? <span className="cs-phase-stepper__dot" style={{ left: `${dotLeft}%` }} /> : null}
         </div>
       </div>
     </div>
   );
 }
 
-export function ChapterNav() {
-  const { activePhase, activeIdx } = useActivePhase();
+function PhaseRail({
+  activePhase,
+  activeIdx,
+  scrollPct,
+}: {
+  activePhase: PhaseId | "prologue";
+  activeIdx: number;
+  scrollPct: number;
+}) {
+  const onPrologue = activePhase === "prologue";
 
   return (
-    <nav className="cs-top-nav" aria-label="Case study">
-      <div className="cs-page cs-top-nav__inner">
-        {PORTFOLIO.backUrl ? (
-          <a href={PORTFOLIO.backUrl} className="cs-top-nav__back" aria-label="Back to work">
-            <span className="cs-top-nav__back-long">← Back to work</span>
-            <span className="cs-top-nav__back-short">← Work</span>
-          </a>
-        ) : null}
-
-        <a href="#prologue" className="cs-top-nav__project">
-          <span className="cs-top-nav__project-name">La Bodega</span>
-          <span className="cs-top-nav__project-sep" aria-hidden>
-            ·
-          </span>
-          <LolaMark variant="nav" />
-        </a>
-
-        <div className="cs-top-nav__stepper cs-top-nav__stepper--desktop">
-          <PhaseStepper activePhase={activePhase} activeIdx={activeIdx} />
-        </div>
-
-        <div className="cs-top-nav__stepper cs-top-nav__stepper--mobile">
-          <MobilePhasePicker activePhase={activePhase} activeIdx={activeIdx} />
+    <aside className="cs-phase-rail" aria-label="Case study timeline">
+      <div className="cs-phase-rail__progress" aria-hidden="true">
+        <div className="cs-phase-rail__track">
+          <div className="cs-phase-rail__fill" style={{ height: `${scrollPct}%` }} />
         </div>
       </div>
-    </nav>
+
+      <ol className="cs-phase-rail__steps">
+        <li>
+          <a
+            href="#prologue"
+            className={`cs-phase-rail__step${onPrologue ? " is-active" : ""}${!onPrologue ? " is-past" : ""}`}
+            aria-current={onPrologue ? "step" : undefined}
+            title="Intro"
+          >
+            <span className="cs-phase-rail__dot" aria-hidden="true" />
+            <span className="cs-phase-rail__meta">
+              <span className="cs-phase-rail__num">00</span>
+              <span className="cs-phase-rail__label">Intro</span>
+            </span>
+          </a>
+        </li>
+        {PROGRESS_PHASES.map((phase, i) => {
+          const isActive = activePhase === phase.id;
+          const isPast = !onPrologue && activeIdx > i;
+          return (
+            <li key={phase.id}>
+              <a
+                href={`#${phase.id}`}
+                title={phase.lead}
+                aria-current={isActive ? "step" : undefined}
+                className={`cs-phase-rail__step${isActive ? " is-active" : ""}${isPast ? " is-past" : ""}${onPrologue ? " is-idle" : ""}`}
+              >
+                <span className="cs-phase-rail__dot" aria-hidden="true" />
+                <span className="cs-phase-rail__meta">
+                  <span className="cs-phase-rail__num">{phase.num}</span>
+                  <span className="cs-phase-rail__label">{phase.label}</span>
+                </span>
+              </a>
+            </li>
+          );
+        })}
+      </ol>
+    </aside>
+  );
+}
+
+export function ChapterNav() {
+  const { activePhase, activeIdx } = useActivePhase();
+  const scrollPct = usePageScrollPct();
+
+  return (
+    <>
+      <nav className="cs-top-nav" aria-label="Case study">
+        <div className="cs-page cs-top-nav__inner">
+          {PORTFOLIO.backUrl ? (
+            <a href={PORTFOLIO.backUrl} className="cs-top-nav__back" aria-label="Back to work">
+              <span className="cs-top-nav__back-long">← Back to work</span>
+              <span className="cs-top-nav__back-short">← Work</span>
+            </a>
+          ) : null}
+
+          <a href="#prologue" className="cs-top-nav__project">
+            <span className="cs-top-nav__project-name">La Bodega</span>
+            <span className="cs-top-nav__project-sep" aria-hidden>
+              ·
+            </span>
+            <LolaMark variant="nav" />
+          </a>
+
+          <div className="cs-top-nav__links" aria-label="Contact">
+            {PORTFOLIO.linkedIn ? (
+              <a
+                href={PORTFOLIO.linkedIn}
+                target="_blank"
+                rel="noreferrer"
+                className="cs-top-nav__link"
+              >
+                LinkedIn
+              </a>
+            ) : null}
+            {PORTFOLIO.email ? (
+              <a href={`mailto:${PORTFOLIO.email}`} className="cs-top-nav__link">
+                Email
+              </a>
+            ) : null}
+          </div>
+
+          <div className="cs-top-nav__stepper cs-top-nav__stepper--mobile">
+            <MobilePhasePicker activePhase={activePhase} activeIdx={activeIdx} />
+          </div>
+        </div>
+      </nav>
+
+      <PhaseRail activePhase={activePhase} activeIdx={activeIdx} scrollPct={scrollPct} />
+    </>
   );
 }
