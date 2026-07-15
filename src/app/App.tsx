@@ -6,6 +6,7 @@ import { PhaseDevelop } from "../case-study/acts/PhaseDevelop";
 import { PhaseDeliver } from "../case-study/acts/PhaseDeliver";
 import { MobilePhasePickerBar, PhaseRail } from "../case-study/ChapterNav";
 import { PortfolioContact, PortfolioFooter, PortfolioNav } from "../case-study/PortfolioChrome";
+import { SiteRadio } from "../case-study/SiteRadio";
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
         <PhaseDeliver />
         <PortfolioContact />
       </main>
+      <SiteRadio />
       <PortfolioFooter />
     </div>
   );

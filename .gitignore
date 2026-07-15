@@ -5,3 +5,6 @@ dist/
 .DS_Store
 Thumbs.db
 *.log
+
+public/audio/*.mp3
+public/audio/*.m4a

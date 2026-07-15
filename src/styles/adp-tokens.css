@@ -2737,6 +2737,83 @@ h2:focus-visible,
   color: #111212;
 }
 
+/* Persistent radio — same as portfolio SiteRadio */
+.site-radio {
+  position: fixed;
+  right: max(0.85rem, env(safe-area-inset-right));
+  bottom: max(0.85rem, env(safe-area-inset-bottom));
+  z-index: 60;
+  pointer-events: none;
+}
+
+.site-radio__btn {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.75rem;
+  padding: 0.4rem 0.85rem 0.4rem 0.65rem;
+  border: 1px solid var(--folio-line, #d5dde5);
+  border-radius: 999px;
+  background: color-mix(in srgb, #fff 92%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(17, 18, 18, 0.08);
+  color: #111212;
+  font: inherit;
+  cursor: pointer;
+}
+
+.site-radio__btn.is-playing {
+  border-color: color-mix(in srgb, #4f7cff 55%, #111);
+  background: #fff;
+}
+
+.site-radio__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+}
+
+.site-radio__btn.is-playing .site-radio__icon {
+  background: #4f7cff;
+}
+
+.site-radio__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.05rem;
+  line-height: 1.1;
+}
+
+.site-radio__eyebrow {
+  font-family: var(--cs-mono, "DM Mono", monospace);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #747272;
+}
+
+.site-radio__label {
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.site-radio__bars {
+  width: 0.85rem;
+  height: 0.85rem;
+  background:
+    linear-gradient(currentColor, currentColor) 0 100% / 2px 40% no-repeat,
+    linear-gradient(currentColor, currentColor) 4px 100% / 2px 80% no-repeat,
+    linear-gradient(currentColor, currentColor) 8px 100% / 2px 55% no-repeat;
+  color: #4f7cff;
+}
+
 /* Folio contact — mirrors danny-me CaseStudyContact */
 .folio-contact {
   margin-top: 0;
