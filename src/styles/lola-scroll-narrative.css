@@ -2,7 +2,7 @@
 
 .lola-scroll {
   position: relative;
-  height: 280vh;
+  height: 160vh;
   width: 100%;
 }
 
@@ -18,13 +18,13 @@
   overflow: hidden;
   z-index: 20;
   pointer-events: none;
-  --lola-scrim: #eeedec;
+  --lola-scrim: #f4f6f8;
 }
 
 .lola-scroll-bg {
   position: absolute;
   inset: 0;
-  background: #eeedec;
+  background: #f4f6f8;
 }
 
 /* Scroll progress — self-monitoring (persuasive-ux / wayfinders) */

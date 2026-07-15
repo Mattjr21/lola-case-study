@@ -33,7 +33,7 @@ export function WacrmDashboardBackdrop() {
                 <div
                   key={label}
                   className={`flex items-center gap-2 rounded-md px-2.5 py-2 text-[11px] ${
-                    active ? "bg-[#ede5f5] text-[#290545] font-semibold" : "text-[#64748b]"
+                    active ? "bg-[#ececec] text-[#111212] font-semibold" : "text-[#64748b]"
                   }`}
                 >
                   <span className={`w-1.5 h-1.5 rounded-full ${active ? "bg-[#290545]" : "bg-[#cbd5e1]"}`} />
@@ -49,7 +49,7 @@ export function WacrmDashboardBackdrop() {
           <div className="flex items-start justify-between gap-3 mb-4">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <div className="w-8 h-8 rounded-lg bg-[#ede5f5] flex items-center justify-center text-[#290545] text-sm">
+                <div className="w-8 h-8 rounded-lg bg-[#ececec] flex items-center justify-center text-[#111212] text-sm">
                   🛍
                 </div>
                 <p className="text-[15px] font-bold text-[#0f172a]">Orders</p>
@@ -84,7 +84,7 @@ export function WacrmDashboardBackdrop() {
                 <span
                   key={c}
                   className={`rounded-full px-2.5 py-1 text-[9px] font-medium ${
-                    i === 0 ? "bg-[#ede5f5] text-[#290545] ring-1 ring-[#290545]/30" : "bg-[#f8fafc] text-[#64748b]"
+                    i === 0 ? "bg-[#ececec] text-[#111212] ring-1 ring-[#111212]/25" : "bg-[#f8fafc] text-[#64748b]"
                   }`}
                 >
                   {c}
@@ -93,7 +93,7 @@ export function WacrmDashboardBackdrop() {
             </div>
           </div>
 
-          <div className="rounded-md border border-[#290545]/20 bg-[#ede5f5]/60 px-3 py-2 text-[10px] text-[#334155] mb-3">
+          <div className="rounded-md border border-[#111212]/15 bg-[#f1f5f9] px-3 py-2 text-[10px] text-[#334155] mb-3">
             3 orders need a quote or next step today.
           </div>
 

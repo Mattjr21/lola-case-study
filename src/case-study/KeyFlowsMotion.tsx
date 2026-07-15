@@ -73,7 +73,11 @@ export function KeyFlowsMotion() {
     const update = () => {
       raf = 0;
       const rect = track.getBoundingClientRect();
-      const range = Math.max(1, track.offsetHeight - window.innerHeight);
+      const nav = (document.querySelector(".site-nav") ||
+        document.querySelector(".folio-nav")) as HTMLElement | null;
+      const navH = nav?.offsetHeight ?? 74;
+      const pinH = Math.max(1, window.innerHeight - navH);
+      const range = Math.max(1, track.offsetHeight - pinH);
       setProgress(clamp01(-rect.top / range));
     };
 
@@ -133,7 +137,11 @@ export function KeyFlowsMotion() {
   function scrollToStep(i: number) {
     const track = trackRef.current;
     if (!track) return;
-    const range = Math.max(1, track.offsetHeight - window.innerHeight);
+    const nav = (document.querySelector(".site-nav") ||
+        document.querySelector(".folio-nav")) as HTMLElement | null;
+    const navH = nav?.offsetHeight ?? 74;
+    const pinH = Math.max(1, window.innerHeight - navH);
+    const range = Math.max(1, track.offsetHeight - pinH);
     const top = window.scrollY + track.getBoundingClientRect().top;
     window.scrollTo({
       top: top + (range * (i + 0.5)) / stepCount,

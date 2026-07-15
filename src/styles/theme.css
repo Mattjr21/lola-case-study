@@ -2,35 +2,35 @@
 
 :root {
   --font-size: 16px;
-  --background: #fafbfd;
-  --foreground: #1a1a1a;
+  --background: #ffffff;
+  --foreground: #0d0d0d;
   --card: #ffffff;
-  --card-foreground: #1a1a1a;
+  --card-foreground: #0d0d0d;
   --popover: #ffffff;
-  --popover-foreground: #1a1a1a;
-  --primary: #290545;
+  --popover-foreground: #0d0d0d;
+  --primary: #111212;
   --primary-foreground: #ffffff;
-  --secondary: #f4f2f7;
-  --secondary-foreground: #1a1a1a;
-  --muted: #f4f2f7;
-  --muted-foreground: #4a4e52;
-  --accent: #ede8f2;
-  --accent-foreground: #290545;
+  --secondary: #f4f6f8;
+  --secondary-foreground: #0d0d0d;
+  --muted: #f4f6f8;
+  --muted-foreground: #747272;
+  --accent: #ececec;
+  --accent-foreground: #111212;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
-  --border: #e2e2e6;
+  --border: #e4e9ee;
   --input: transparent;
-  --input-background: #fafbfd;
+  --input-background: #ffffff;
   --switch-background: #cbced4;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: #290545;
+  --ring: #4f7cff;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.25rem;
+  --radius: 0.45rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: #030213;
@@ -127,11 +127,6 @@
   body {
     @apply bg-background text-foreground;
   }
-
-  /**
-  * Default typography styles for HTML elements (h1-h4, p, label, button, input).
-  * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
-  */
 
   html {
     font-size: var(--font-size);

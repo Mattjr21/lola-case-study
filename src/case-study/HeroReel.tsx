@@ -7,7 +7,13 @@ export function HeroReel() {
   const { reel } = LOLA_MOTION;
   return (
     <div className="cs-hero-reel" aria-label={reel.caption}>
-      <FeatureVideo src={reel.src} variant="hero" title={reel.title} caption={reel.caption} />
+      <FeatureVideo
+        src={reel.src}
+        variant="hero"
+        title={reel.title}
+        caption={reel.caption}
+        autoPlay
+      />
     </div>
   );
 }

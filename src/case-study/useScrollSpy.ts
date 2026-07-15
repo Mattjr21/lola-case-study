@@ -2,9 +2,14 @@ import { useEffect, useState } from "react";
 
 /** Nav height + reading line below sticky header */
 function defaultScrollOffset() {
-  const nav = document.querySelector(".cs-top-nav");
-  const navH = nav?.getBoundingClientRect().height ?? 116;
-  return navH + Math.round(window.innerHeight * 0.15);
+  const folio = document.querySelector(".site-nav") || document.querySelector(".folio-nav");
+  const mobileBar = document.querySelector(".cs-phase-mobile-bar");
+  const navH = folio?.getBoundingClientRect().height ?? 74;
+  const barH =
+    mobileBar && getComputedStyle(mobileBar).display !== "none"
+      ? mobileBar.getBoundingClientRect().height
+      : 0;
+  return navH + barH + Math.round(window.innerHeight * 0.12);
 }
 
 /**

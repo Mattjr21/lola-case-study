@@ -63,11 +63,29 @@ export function FeatureVideo({
               .catch(() => setPlaying(false));
           });
       },
-      { threshold: 0.35 },
+      { threshold: 0.15 },
     );
     io.observe(el);
     return () => io.disconnect();
   }, [src, autoPlay, soundOn]);
+
+  // Kick muted autoplay as soon as the hero mounts (IO can miss first paint)
+  useEffect(() => {
+    if (!autoPlay) return;
+    const el = ref.current;
+    if (!el) return;
+    el.muted = !soundOn;
+    void el
+      .play()
+      .then(() => setPlaying(true))
+      .catch(() => {
+        el.muted = true;
+        void el
+          .play()
+          .then(() => setPlaying(true))
+          .catch(() => setPlaying(false));
+      });
+  }, [autoPlay, src]);
 
   function togglePlayback() {
     const el = ref.current;
@@ -120,6 +138,7 @@ export function FeatureVideo({
           className="cs-feature-video__media"
           src={src}
           muted={autoPlay ? !soundOn : false}
+          autoPlay={autoPlay}
           loop
           playsInline
           preload={autoPlay ? "auto" : "metadata"}

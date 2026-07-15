@@ -4,7 +4,8 @@ import { PhaseDefine } from "../case-study/acts/PhaseDefine";
 import { PhaseDiscover } from "../case-study/acts/PhaseDiscover";
 import { PhaseDevelop } from "../case-study/acts/PhaseDevelop";
 import { PhaseDeliver } from "../case-study/acts/PhaseDeliver";
-import { ChapterNav } from "../case-study/ChapterNav";
+import { MobilePhasePickerBar, PhaseRail } from "../case-study/ChapterNav";
+import { PortfolioFooter, PortfolioNav } from "../case-study/PortfolioChrome";
 
 export default function App() {
   return (
@@ -17,7 +18,9 @@ export default function App() {
           Skip to phases
         </a>
       </div>
-      <ChapterNav />
+      <PortfolioNav />
+      <MobilePhasePickerBar />
+      <PhaseRail />
       <main id="main-content">
         <PrologueHook />
         <PhaseDiscover />
@@ -25,6 +28,7 @@ export default function App() {
         <PhaseDevelop />
         <PhaseDeliver />
       </main>
+      <PortfolioFooter />
     </div>
   );
 }
