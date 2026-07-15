@@ -169,6 +169,42 @@ export function PortfolioNav() {
   );
 }
 
+/** Folio contact strip — mirrors danny-me CaseStudyContact */
+export function PortfolioContact() {
+  return (
+    <section className="folio-contact" id="contact" aria-labelledby="folio-contact-heading">
+      <div className="folio-contact__inner">
+        <div className="folio-contact__left">
+          <p className="folio-contact__eyebrow">Get in touch</p>
+          <h2 id="folio-contact-heading" className="folio-contact__title">
+            Let&apos;s build
+            <br />
+            something real.
+          </h2>
+          <p className="folio-contact__body">
+            Open to contract work, full-time roles, and hard design problems. I read every note.
+          </p>
+        </div>
+        <div className="folio-contact__right">
+          <a className="folio-contact__cta" href={`mailto:${PORTFOLIO.email}`}>
+            <span className="folio-contact__cta-label">Send a note</span>
+            <span className="folio-contact__cta-sub">{PORTFOLIO.email}</span>
+          </a>
+          <div className="folio-contact__links">
+            <a href={PORTFOLIO.linkedIn} target="_blank" rel="noopener noreferrer">
+              LinkedIn ↗
+            </a>
+            <a href={`${HOME}/play`}>Playground ↗</a>
+            <a href={RESUME} target="_blank" rel="noopener noreferrer">
+              Resume ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /** Exact danny-me site footer */
 export function PortfolioFooter() {
   return (

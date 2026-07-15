@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 /** Nav height + reading line below sticky header */
 function defaultScrollOffset() {
@@ -9,36 +9,57 @@ function defaultScrollOffset() {
     mobileBar && getComputedStyle(mobileBar).display !== "none"
       ? mobileBar.getBoundingClientRect().height
       : 0;
-  return navH + barH + Math.round(window.innerHeight * 0.12);
+  return navH + barH + Math.round(window.innerHeight * 0.08);
 }
 
 /**
- * Document-order scroll spy — active = last section whose top crossed the offset line.
- * Stable when scrolling through long phases (unlike ratio-only IntersectionObserver batches).
+ * Document-order scroll spy with continuous fill between section tops.
+ * Active = last section whose top crossed the offset line.
+ * Fill keeps advancing through long sticky tracks inside a phase.
  */
 export function useScrollSpy(sectionIds: readonly string[], offsetPx?: number) {
-  const [activeId, setActiveId] = useState(sectionIds[0] ?? "");
+  const idsKey = sectionIds.join("|");
+  const ids = useMemo(() => (idsKey ? idsKey.split("|") : []), [idsKey]);
+
+  const [activeId, setActiveId] = useState(ids[0] ?? "");
+  const [fillPct, setFillPct] = useState(0);
 
   useEffect(() => {
-    const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
-    if (!sections.length) return;
+    if (!ids.length) return;
 
     let ticking = false;
 
     const update = () => {
       ticking = false;
-      const offset = offsetPx ?? defaultScrollOffset();
-      let next = sections[0].id;
+      const sections = ids
+        .map((id) => document.getElementById(id))
+        .filter(Boolean) as HTMLElement[];
+      if (!sections.length) return;
 
-      for (const section of sections) {
-        if (section.getBoundingClientRect().top <= offset) {
-          next = section.id;
+      const offset = offsetPx ?? defaultScrollOffset();
+      let activeIndex = 0;
+
+      for (let i = 0; i < sections.length; i += 1) {
+        if (sections[i].getBoundingClientRect().top <= offset) {
+          activeIndex = i;
         } else {
           break;
         }
       }
 
+      const next = sections[activeIndex].id;
       setActiveId((prev) => (prev === next ? prev : next));
+
+      const n = sections.length;
+      const currentTop = sections[activeIndex].getBoundingClientRect().top;
+      const nextTop =
+        activeIndex < n - 1
+          ? sections[activeIndex + 1].getBoundingClientRect().top
+          : currentTop + Math.max(sections[activeIndex].offsetHeight, 1);
+      const span = Math.max(nextTop - currentTop, 1);
+      const intra = Math.min(1, Math.max(0, (offset - currentTop) / span));
+      const pct = n <= 1 ? 100 : ((activeIndex + intra) / (n - 1)) * 100;
+      setFillPct(Math.min(100, Math.max(0, pct)));
     };
 
     const onScrollOrResize = () => {
@@ -54,9 +75,9 @@ export function useScrollSpy(sectionIds: readonly string[], offsetPx?: number) {
       window.removeEventListener("scroll", onScrollOrResize);
       window.removeEventListener("resize", onScrollOrResize);
     };
-  }, [sectionIds, offsetPx]);
+  }, [ids, offsetPx]);
 
-  const activeIdx = sectionIds.indexOf(activeId);
+  const activeIdx = ids.indexOf(activeId);
 
-  return { activeId, activeIdx };
+  return { activeId, activeIdx, fillPct };
 }

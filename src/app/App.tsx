@@ -5,7 +5,7 @@ import { PhaseDiscover } from "../case-study/acts/PhaseDiscover";
 import { PhaseDevelop } from "../case-study/acts/PhaseDevelop";
 import { PhaseDeliver } from "../case-study/acts/PhaseDeliver";
 import { MobilePhasePickerBar, PhaseRail } from "../case-study/ChapterNav";
-import { PortfolioFooter, PortfolioNav } from "../case-study/PortfolioChrome";
+import { PortfolioContact, PortfolioFooter, PortfolioNav } from "../case-study/PortfolioChrome";
 
 export default function App() {
   return (
@@ -27,6 +27,7 @@ export default function App() {
         <PhaseDefine />
         <PhaseDevelop />
         <PhaseDeliver />
+        <PortfolioContact />
       </main>
       <PortfolioFooter />
     </div>

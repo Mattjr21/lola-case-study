@@ -7,7 +7,7 @@ import { useScrollSpy } from "./useScrollSpy";
 const CHAPTER_SECTION_IDS = ["prologue", ...PROGRESS_PHASES.map((p) => p.id)] as const;
 
 function useActivePhase() {
-  const { activeId } = useScrollSpy(CHAPTER_SECTION_IDS);
+  const { activeId, fillPct } = useScrollSpy(CHAPTER_SECTION_IDS);
 
   const activePhase: PhaseId | "prologue" =
     activeId === "prologue" ? "prologue" : (activeId as PhaseId);
@@ -15,17 +15,13 @@ function useActivePhase() {
   const activeIdx =
     activePhase === "prologue" ? -1 : PROGRESS_PHASES.findIndex((p) => p.id === activePhase);
 
-  return { activePhase, activeIdx };
+  return { activePhase, activeIdx, fillPct };
 }
 
 /** Compact fixed left timeline — sized to content, not full viewport */
 export function PhaseRail() {
-  const { activePhase, activeIdx } = useActivePhase();
+  const { activePhase, activeIdx, fillPct } = useActivePhase();
   const onPrologue = activePhase === "prologue";
-  const stepCount = PROGRESS_PHASES.length + 1; // intro + phases
-  const fillPct = onPrologue
-    ? 100 / stepCount / 2
-    : ((activeIdx + 1.5) / stepCount) * 100;
 
   return (
     <aside className="cs-phase-rail" aria-label="Case study timeline">
@@ -83,14 +79,13 @@ export function PhaseRail() {
 
 /** Mobile-only phase picker under the portfolio nav */
 export function MobilePhasePickerBar() {
-  const { activePhase, activeIdx } = useActivePhase();
+  const { activePhase, activeIdx, fillPct } = useActivePhase();
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const onPrologue = activePhase === "prologue";
   const current = onPrologue ? null : PROGRESS_PHASES[activeIdx];
   const stepCount = PROGRESS_PHASES.length;
-  const fillPct = onPrologue ? 0 : ((activeIdx + 1) / stepCount) * 100;
 
   const close = useCallback(() => {
     setOpen(false);
