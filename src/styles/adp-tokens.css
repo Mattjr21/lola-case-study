@@ -19,10 +19,11 @@
   --cs-touch-min: 2.75rem;
   --cs-nav-h: 4.625rem;
   --cs-radius: 0.45rem;
-  --cs-font: "DM Sans", "Funnel Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Tight stack: DM Sans body · Tiempos chapters · Chubby/Season nav · Pixelify Lola · DM Mono UI */
+  --cs-font: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --cs-font-lola: "Pixelify Sans", "DM Sans", system-ui, sans-serif;
-  --cs-font-serif: "Tiempos Text", "Tiempos Headline", Georgia, "Times New Roman", serif;
-  --cs-font-display: "Chubby And Groovy", var(--cs-font-serif), Georgia, serif;
+  --cs-font-serif: "Tiempos Text", Georgia, "Times New Roman", serif;
+  --cs-font-display: "Chubby And Groovy", "Season Mix TRIAL", sans-serif;
   --cs-mono: "DM Mono", ui-monospace, monospace;
   --cs-page-gutter: clamp(1.25rem, 4vw, 2.5rem);
   --cs-page-narrow: 720px;
@@ -95,8 +96,9 @@ html {
 
 body {
   margin: 0;
+  font-family: var(--cs-font);
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.44;
   font-weight: 500;
 }
 
@@ -2524,32 +2526,43 @@ h2:focus-visible,
   text-decoration: none;
 }
 
+/* CTAs — exact danny-me homepage (black Contact, not Lola violet) */
 .nav-cta--linkedin {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0;
+  padding: 0.2rem 0.35rem !important;
+  border: none;
+  border-radius: 0;
+  background: transparent;
   font-family: var(--folio-mono);
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   font-weight: 800;
   letter-spacing: 0.04em;
+  line-height: 1;
   color: #0077b5;
-  padding: 0.25rem 0.4rem;
-  border: none;
-  background: none;
-  transition: opacity 0.15s;
+  transition: background 0.2s, color 0.2s;
 }
 
-.nav-cta--linkedin:hover {
-  opacity: 0.7;
+.nav-cta--linkedin:hover,
+.nav-cta--linkedin:focus-visible {
+  background: #0077b5;
+  color: #fff;
+  opacity: 1;
 }
 
 .nav-cta--resume {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   width: auto !important;
   height: auto !important;
   border-radius: 0 !important;
   font-family: var(--folio-mono);
-  font-size: 0.7rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -2560,7 +2573,11 @@ h2:focus-visible,
   transition: opacity 0.15s;
 }
 
-.nav-cta--resume:hover {
+.nav-cta--resume:hover,
+.nav-cta--resume:focus-visible {
+  background: none;
+  border: none;
+  color: var(--folio-ink);
   opacity: 0.65;
 }
 
@@ -2569,21 +2586,23 @@ h2:focus-visible,
   align-items: center;
   width: auto !important;
   height: auto !important;
-  border: 1.5px solid var(--cs-accent);
+  border: 1.5px solid var(--folio-ink);
   border-radius: 0.45rem !important;
   padding: 0.4rem 0.85rem !important;
   font-family: var(--folio-mono);
-  font-size: 0.7rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   background: #fff;
-  color: var(--cs-accent);
-  transition: background 0.2s, color 0.2s;
+  color: var(--folio-ink);
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
-.nav-cta--contact:hover {
-  background: var(--cs-accent);
+.nav-cta--contact:hover,
+.nav-cta--contact:focus-visible {
+  background: var(--folio-ink);
+  border-color: var(--folio-ink);
   color: #fff;
 }
 
@@ -2707,6 +2726,7 @@ h2:focus-visible,
   }
 }
 
+/* Footer — exact danny-me .site-footer */
 .site-footer {
   border-top: 1px solid var(--folio-line);
   margin-top: auto;
@@ -2723,7 +2743,9 @@ h2:focus-visible,
   justify-content: space-between;
   align-items: center;
   color: #747272;
-  font-size: 0.9rem;
+  font-family: var(--cs-font);
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 
 .site-footer__links {
@@ -2894,7 +2916,7 @@ h2:focus-visible,
 }
 
 .folio-contact__title {
-  font-family: "Chubby And Groovy", var(--cs-display, Georgia, serif);
+  font-family: var(--cs-font-display);
   font-size: clamp(2.2rem, 5.2vw, 3.6rem);
   font-weight: 400;
   letter-spacing: 0.02em;
@@ -2908,7 +2930,9 @@ h2:focus-visible,
   max-width: 34rem;
   margin: 0;
   color: #4a5560;
+  font-family: var(--cs-font);
   font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  font-weight: 400;
   line-height: 1.45;
 }
 

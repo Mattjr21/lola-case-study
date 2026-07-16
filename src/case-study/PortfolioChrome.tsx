@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { PORTFOLIO } from "./constants";
 
 const HOME = PORTFOLIO.backUrl.replace(/\/$/, "") || "https://danny-me-rho.vercel.app";
-const RESUME = `${HOME}/resume/danny-varghese-resume.pdf`;
+/** Same file as danny-me SITE.resume */
+const RESUME = `${HOME}/resume/Danny_Varghese_Senior_Product_Designer.pdf`;
 
 const links = [
   { href: `${HOME}/`, label: "Home", icon: "home" as const },
