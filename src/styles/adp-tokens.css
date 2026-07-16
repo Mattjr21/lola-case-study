@@ -2392,17 +2392,16 @@ h2:focus-visible,
   }
 }
 
-/* Portfolio chrome — exact danny-me .site-nav / .site-footer */
+/* Portfolio chrome — match live danny-me landing nav (cascade: tabs = DM Sans uppercase) */
 :root {
   --folio-line: #d5dde5;
   --folio-ink: #12151a;
   --folio-max: 72rem;
   --folio-gutter: clamp(1.25rem, 4vw, 2.5rem);
   --folio-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --folio-mono: "DM Mono", ui-monospace, monospace;
-  /* Match danny-me --font-brand / --text-body-lg exactly */
+  /* danny-me --font-mono resolves to DM Sans on landing */
+  --folio-nav-ui: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --folio-brand-font: "Chubby And Groovy", "Season Mix TRIAL", sans-serif;
-  --folio-nav-size: 1.125rem;
 }
 
 .site-nav a {
@@ -2450,7 +2449,7 @@ h2:focus-visible,
 .nav-brand__text--full {
   font-family: var(--folio-brand-font);
   font-weight: 400;
-  font-size: var(--folio-nav-size);
+  font-size: 1.125rem;
   color: #111212;
   letter-spacing: 0;
   -webkit-font-smoothing: antialiased;
@@ -2475,23 +2474,25 @@ h2:focus-visible,
   gap: 0.35rem;
   padding: 0.25rem;
   border: 1px solid var(--folio-line);
-  border-radius: 0.55rem;
+  border-radius: 0.45rem;
   background: #fff;
   list-style: none;
   margin: 0;
 }
 
+/* Match live landing: .nav-links a wins → DM Sans, 14px, uppercase */
+.nav-links--folio .nav-tab,
 .nav-tab {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.4rem 0.75rem;
-  border-radius: 0.4rem;
-  font-family: var(--folio-brand-font);
-  font-size: var(--folio-nav-size);
+  padding: 0.55rem 0.7rem;
+  border-radius: 0.45rem;
+  font-family: var(--folio-nav-ui);
+  font-size: 0.875rem;
   font-weight: 400;
-  letter-spacing: 0.01em;
-  text-transform: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: #555;
   transition: background 0.2s var(--folio-ease), color 0.2s var(--folio-ease);
   text-decoration: none;
@@ -2526,7 +2527,6 @@ h2:focus-visible,
   text-decoration: none;
 }
 
-/* CTAs — exact danny-me homepage (black Contact, not Lola violet) */
 .nav-cta--linkedin {
   display: inline-flex;
   align-items: center;
@@ -2538,7 +2538,7 @@ h2:focus-visible,
   border: none;
   border-radius: 0;
   background: transparent;
-  font-family: var(--folio-mono);
+  font-family: var(--folio-nav-ui);
   font-size: 0.875rem;
   font-weight: 800;
   letter-spacing: 0.04em;
@@ -2561,7 +2561,7 @@ h2:focus-visible,
   width: auto !important;
   height: auto !important;
   border-radius: 0 !important;
-  font-family: var(--folio-mono);
+  font-family: var(--folio-nav-ui);
   font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -2589,7 +2589,7 @@ h2:focus-visible,
   border: 1.5px solid var(--folio-ink);
   border-radius: 0.45rem !important;
   padding: 0.4rem 0.85rem !important;
-  font-family: var(--folio-mono);
+  font-family: var(--folio-nav-ui);
   font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -2670,12 +2670,13 @@ h2:focus-visible,
   align-items: center;
   gap: 0.6rem;
   padding: 0.75rem 1.25rem;
-  font-family: var(--folio-brand-font);
-  font-size: var(--folio-nav-size);
+  font-family: var(--folio-nav-ui);
+  font-size: 0.875rem;
   font-weight: 400;
   color: #111212;
   text-decoration: none;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .nav-mobile-link:hover,
