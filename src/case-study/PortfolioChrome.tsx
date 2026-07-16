@@ -1,9 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { PORTFOLIO } from "./constants";
 
+/** Absolute URLs — same destinations as danny-me Nav/Footer */
 const HOME = PORTFOLIO.backUrl.replace(/\/$/, "") || "https://danny-me-rho.vercel.app";
-/** Same file as danny-me SITE.resume */
-const RESUME = `${HOME}/resume/Danny_Varghese_Senior_Product_Designer.pdf`;
+const SITE = {
+  name: "Danny Varghese",
+  email: PORTFOLIO.email,
+  linkedIn: PORTFOLIO.linkedIn,
+  resume: `${HOME}/resume/Danny_Varghese_Senior_Product_Designer.pdf`,
+};
 
 const links = [
   { href: `${HOME}/`, label: "Home", icon: "home" as const },
@@ -45,7 +50,7 @@ function NavIcon({ type }: { type: (typeof links)[number]["icon"] }) {
   );
 }
 
-/** Exact danny-me site nav — absolute links back to the portfolio */
+/** Exact danny-me Nav markup (absolute links instead of React Router) */
 export function PortfolioNav() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLElement>(null);
@@ -67,7 +72,7 @@ export function PortfolioNav() {
     <header className="site-nav site-nav--folio" ref={menuRef}>
       <div className="site-nav__inner">
         <a href={`${HOME}/`} className="nav-brand" aria-label="Danny home" onClick={close}>
-          <span className="nav-brand__text nav-brand__text--full">Danny Varghese</span>
+          <span className="nav-brand__text nav-brand__text--full">{SITE.name}</span>
         </a>
 
         <nav aria-label="Primary" className={menuOpen ? "nav-open" : undefined}>
@@ -90,17 +95,17 @@ export function PortfolioNav() {
         <div className="nav-actions">
           <a
             className="nav-cta nav-cta--linkedin"
-            href={PORTFOLIO.linkedIn}
+            href={SITE.linkedIn}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn profile"
           >
             in
           </a>
-          <a className="nav-cta nav-cta--resume" href={RESUME} target="_blank" rel="noopener noreferrer">
+          <a className="nav-cta nav-cta--resume" href={SITE.resume} target="_blank" rel="noopener noreferrer">
             Resume
           </a>
-          <a className="nav-cta nav-cta--contact" href={`mailto:${PORTFOLIO.email}`}>
+          <a className="nav-cta nav-cta--contact" href={`mailto:${SITE.email}`}>
             Contact
           </a>
           <button
@@ -139,7 +144,7 @@ export function PortfolioNav() {
           <li>
             <a
               className="nav-mobile-link"
-              href={RESUME}
+              href={SITE.resume}
               target="_blank"
               rel="noopener noreferrer"
               onClick={close}
@@ -150,7 +155,7 @@ export function PortfolioNav() {
           <li>
             <a
               className="nav-mobile-link"
-              href={PORTFOLIO.linkedIn}
+              href={SITE.linkedIn}
               target="_blank"
               rel="noopener noreferrer"
               onClick={close}
@@ -187,16 +192,16 @@ export function PortfolioContact() {
           </p>
         </div>
         <div className="folio-contact__right">
-          <a className="folio-contact__cta" href={`mailto:${PORTFOLIO.email}`}>
+          <a className="folio-contact__cta" href={`mailto:${SITE.email}`}>
             <span className="folio-contact__cta-label">Send a note</span>
-            <span className="folio-contact__cta-sub">{PORTFOLIO.email}</span>
+            <span className="folio-contact__cta-sub">{SITE.email}</span>
           </a>
           <div className="folio-contact__links">
-            <a href={PORTFOLIO.linkedIn} target="_blank" rel="noopener noreferrer">
+            <a href={SITE.linkedIn} target="_blank" rel="noopener noreferrer">
               LinkedIn ↗
             </a>
             <a href={`${HOME}/play`}>Playground ↗</a>
-            <a href={RESUME} target="_blank" rel="noopener noreferrer">
+            <a href={SITE.resume} target="_blank" rel="noopener noreferrer">
               Resume ↗
             </a>
           </div>
@@ -206,18 +211,20 @@ export function PortfolioContact() {
   );
 }
 
-/** Exact danny-me site footer */
+/** Exact danny-me Footer */
 export function PortfolioFooter() {
   return (
     <footer className="site-footer">
       <div className="site-footer__inner">
-        <p>© {new Date().getFullYear()} Danny Varghese</p>
+        <p>
+          © {new Date().getFullYear()} {SITE.name}
+        </p>
         <div className="site-footer__links">
-          <a href={`mailto:${PORTFOLIO.email}`}>Email</a>
-          <a href={PORTFOLIO.linkedIn} target="_blank" rel="noreferrer">
+          <a href={`mailto:${SITE.email}`}>Email</a>
+          <a href={SITE.linkedIn} target="_blank" rel="noreferrer">
             LinkedIn
           </a>
-          <a href={RESUME} target="_blank" rel="noreferrer">
+          <a href={SITE.resume} target="_blank" rel="noreferrer">
             Resume
           </a>
         </div>

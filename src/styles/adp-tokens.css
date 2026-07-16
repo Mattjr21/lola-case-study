@@ -1,4 +1,4 @@
-/* Typography + tokens — folio-aligned (danny-me) with Lola brand accent */
+﻿/* Typography + tokens â€” folio-aligned (danny-me) with Lola brand accent */
 :root {
   --cs-bg: #ffffff;
   --cs-surface: #ffffff;
@@ -19,7 +19,7 @@
   --cs-touch-min: 2.75rem;
   --cs-nav-h: 4.625rem;
   --cs-radius: 0.45rem;
-  /* Tight stack: DM Sans body · Tiempos chapters · Chubby/Season nav · Pixelify Lola · DM Mono UI */
+  /* Tight stack: DM Sans body Â· Tiempos chapters Â· Chubby/Season nav Â· Pixelify Lola Â· DM Mono UI */
   --cs-font: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --cs-font-lola: "Pixelify Sans", "DM Sans", system-ui, sans-serif;
   --cs-font-serif: "Tiempos Text", Georgia, "Times New Roman", serif;
@@ -48,11 +48,11 @@
   --cs-space-8: 2rem;
   --cs-space-10: 2.5rem;
   --cs-space-12: 3rem;
-  /* Tighter pacing — less scroll fatigue */
+  /* Tighter pacing â€” less scroll fatigue */
   --cs-section-gap: var(--cs-space-8);
   --cs-subsection-gap: var(--cs-space-5);
   --cs-eyebrow-gap: var(--cs-space-2);
-  /* Elevation — neutral, not purple-tinted */
+  /* Elevation â€” neutral, not purple-tinted */
   --cs-elevation-1: 0 1px 2px rgba(18, 21, 26, 0.04);
   --cs-elevation-2: 0 8px 24px rgba(18, 21, 26, 0.06);
   /* Footer on brand */
@@ -114,7 +114,7 @@ body {
   padding-inline: var(--cs-page-gutter);
 }
 
-/* —— Section rhythm (single source for vertical spacing) —— */
+/* â€”â€” Section rhythm (single source for vertical spacing) â€”â€” */
 .cs-section {
   padding-block: var(--cs-section-y);
   scroll-margin-top: var(--cs-nav-h);
@@ -174,7 +174,7 @@ body {
   margin-bottom: 1.25rem;
 }
 
-/* Primary artifact — hairline framed block */
+/* Primary artifact â€” hairline framed block */
 .cs-phase-artifact {
   background: var(--cs-surface);
   border: 1px solid var(--cs-border-subtle);
@@ -377,7 +377,7 @@ body {
   color: var(--cs-muted);
 }
 
-/* Unified overline — folio mono kickers */
+/* Unified overline â€” folio mono kickers */
 .cs-overline,
 .cs-eyebrow,
 .cs-project-tag {
@@ -567,7 +567,7 @@ body {
   border-radius: var(--cs-radius);
 }
 
-/* Lola — Pixelify Sans for the name only */
+/* Lola â€” Pixelify Sans for the name only */
 .cs-lola {
   font-family: var(--cs-font-lola);
   font-weight: 500;
@@ -603,7 +603,7 @@ body {
   font-weight: 500;
 }
 
-/* ADP join-us__title--letter pattern — hero display letters */
+/* ADP join-us__title--letter pattern â€” hero display letters */
 .cs-hero-letters {
   display: inline-flex;
   flex-wrap: wrap;
@@ -1342,7 +1342,7 @@ body {
   outline-offset: 2px;
 }
 
-/* Sliding tab pill — transitions.dev-style indicator */
+/* Sliding tab pill â€” transitions.dev-style indicator */
 .cs-sliding-tabs {
   display: flex;
   gap: 0.25rem;
@@ -1684,7 +1684,7 @@ h2:focus-visible,
   }
 }
 
-/* Service loop — mobile timeline, desktop horizontal strip */
+/* Service loop â€” mobile timeline, desktop horizontal strip */
 .cs-service-loop {
   list-style: none;
   margin: 0;
@@ -2194,7 +2194,7 @@ h2:focus-visible,
   margin-top: 0.15rem;
 }
 
-/* Fixed left phase timeline — compact, content-sized */
+/* Fixed left phase timeline â€” compact, content-sized */
 .cs-phase-rail {
   display: none;
 }
@@ -2289,7 +2289,7 @@ h2:focus-visible,
     width: 100%;
     border-radius: 999px;
     background: color-mix(in srgb, var(--cs-brand) 70%, var(--cs-border));
-    /* No transition — keeps fill locked to scroll through sticky tracks */
+    /* No transition â€” keeps fill locked to scroll through sticky tracks */
   }
 
   .cs-phase-rail__steps {
@@ -2392,378 +2392,7 @@ h2:focus-visible,
   }
 }
 
-/* Portfolio chrome — match live danny-me landing nav (cascade: tabs = DM Sans uppercase) */
-:root {
-  --folio-line: #d5dde5;
-  --folio-ink: #12151a;
-  --folio-max: 72rem;
-  --folio-gutter: clamp(1.25rem, 4vw, 2.5rem);
-  --folio-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  /* danny-me --font-mono resolves to DM Sans on landing */
-  --folio-nav-ui: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --folio-brand-font: "Chubby And Groovy", "Season Mix TRIAL", sans-serif;
-}
-
-.site-nav a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.site-nav button {
-  font: inherit;
-}
-
-.site-nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  backdrop-filter: blur(14px);
-  background: #ffffff;
-  border-bottom: 1px solid var(--folio-line);
-}
-
-.site-nav--folio {
-  border-bottom: 1px solid var(--folio-line);
-  background: #ffffff;
-}
-
-.site-nav__inner {
-  max-width: var(--folio-max);
-  margin: 0 auto;
-  padding: 0.9rem var(--folio-gutter);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  flex-wrap: nowrap;
-}
-
-.nav-brand {
-  font-weight: 500;
-  font-size: 0.95rem;
-  letter-spacing: -0.01em;
-  color: #111212;
-  text-decoration: none;
-}
-
-.nav-brand__text--full {
-  font-family: var(--folio-brand-font);
-  font-weight: 400;
-  font-size: 1.125rem;
-  color: #111212;
-  letter-spacing: 0;
-  -webkit-font-smoothing: antialiased;
-}
-
-.site-nav--folio .nav-brand span {
-  color: inherit;
-}
-
-.nav-links {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  gap: 0.15rem;
-}
-
-.nav-links--folio {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  padding: 0.25rem;
-  border: 1px solid var(--folio-line);
-  border-radius: 0.45rem;
-  background: #fff;
-  list-style: none;
-  margin: 0;
-}
-
-/* Match live landing: .nav-links a wins → DM Sans, 14px, uppercase */
-.nav-links--folio .nav-tab,
-.nav-tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.55rem 0.7rem;
-  border-radius: 0.45rem;
-  font-family: var(--folio-nav-ui);
-  font-size: 0.875rem;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #555;
-  transition: background 0.2s var(--folio-ease), color 0.2s var(--folio-ease);
-  text-decoration: none;
-  -webkit-font-smoothing: antialiased;
-}
-
-.nav-tab:hover,
-.nav-tab:focus-visible {
-  color: #111212;
-  background: #ececec;
-  outline: 2px solid #111212;
-  outline-offset: 2px;
-}
-
-.nav-tab.active,
-.nav-links--folio a.nav-tab.active {
-  color: #fff !important;
-  background: #111212 !important;
-  box-shadow: none;
-}
-
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.nav-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-}
-
-.nav-cta--linkedin {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: auto !important;
-  height: auto !important;
-  min-width: 0;
-  padding: 0.2rem 0.35rem !important;
-  border: none;
-  border-radius: 0;
-  background: transparent;
-  font-family: var(--folio-nav-ui);
-  font-size: 0.875rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  line-height: 1;
-  color: #0077b5;
-  transition: background 0.2s, color 0.2s;
-}
-
-.nav-cta--linkedin:hover,
-.nav-cta--linkedin:focus-visible {
-  background: #0077b5;
-  color: #fff;
-  opacity: 1;
-}
-
-.nav-cta--resume {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: auto !important;
-  height: auto !important;
-  border-radius: 0 !important;
-  font-family: var(--folio-nav-ui);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--folio-ink);
-  padding: 0.4rem 0.55rem !important;
-  border: none;
-  background: none;
-  transition: opacity 0.15s;
-}
-
-.nav-cta--resume:hover,
-.nav-cta--resume:focus-visible {
-  background: none;
-  border: none;
-  color: var(--folio-ink);
-  opacity: 0.65;
-}
-
-.nav-cta--contact {
-  display: inline-flex;
-  align-items: center;
-  width: auto !important;
-  height: auto !important;
-  border: 1.5px solid var(--folio-ink);
-  border-radius: 0.45rem !important;
-  padding: 0.4rem 0.85rem !important;
-  font-family: var(--folio-nav-ui);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  background: #fff;
-  color: var(--folio-ink);
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
-}
-
-.nav-cta--contact:hover,
-.nav-cta--contact:focus-visible {
-  background: var(--folio-ink);
-  border-color: var(--folio-ink);
-  color: #fff;
-}
-
-.nav-hamburger {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  color: #111212;
-}
-
-.nav-hamburger__icon {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  width: 18px;
-}
-
-.nav-hamburger__icon span {
-  display: block;
-  height: 2px;
-  background: currentColor;
-  border-radius: 2px;
-  transition: transform 0.2s, opacity 0.2s;
-  transform-origin: center;
-}
-
-.nav-hamburger__icon--open span:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
-}
-.nav-hamburger__icon--open span:nth-child(2) {
-  opacity: 0;
-  transform: scaleX(0);
-}
-.nav-hamburger__icon--open span:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
-}
-
-.nav-mobile-menu {
-  display: none;
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.25s ease;
-  background: #fff;
-  border-top: 1px solid #e8e8e8;
-}
-
-.nav-mobile-menu--open {
-  max-height: 400px;
-}
-
-.nav-mobile-links {
-  list-style: none;
-  margin: 0;
-  padding: 0.5rem 0 1rem;
-}
-
-.nav-mobile-link {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.75rem 1.25rem;
-  font-family: var(--folio-nav-ui);
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: #111212;
-  text-decoration: none;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.nav-mobile-link:hover,
-.nav-mobile-link.active {
-  color: #111212;
-  background: #ececec;
-}
-
-@media (max-width: 720px) {
-  .nav-links--folio .nav-tab svg {
-    display: none;
-  }
-}
-
-@media (max-width: 600px) {
-  .site-nav--folio nav {
-    display: none;
-  }
-
-  .nav-hamburger {
-    display: flex;
-    width: 44px;
-    height: 44px;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .nav-cta--linkedin,
-  .nav-cta--resume {
-    display: none;
-  }
-
-  .nav-actions {
-    gap: 0.35rem;
-  }
-
-  .nav-cta--contact {
-    min-height: 36px;
-    padding: 0.45rem 0.75rem !important;
-  }
-
-  .nav-mobile-menu {
-    display: block;
-  }
-
-  .site-nav--folio .site-nav__inner {
-    justify-content: space-between;
-  }
-}
-
-/* Footer — exact danny-me .site-footer */
-.site-footer {
-  border-top: 1px solid var(--folio-line);
-  margin-top: auto;
-  background: #fff;
-}
-
-.site-footer__inner {
-  max-width: var(--folio-max);
-  margin: 0 auto;
-  padding: 1.5rem var(--folio-gutter) 2rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: space-between;
-  align-items: center;
-  color: #747272;
-  font-family: var(--cs-font);
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.site-footer__links {
-  display: flex;
-  gap: 1rem;
-}
-
-.site-footer a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.site-footer a:hover {
-  color: #111212;
-}
-
-/* Persistent radio — same as portfolio SiteRadio */
+/* Persistent radio â€” same as portfolio SiteRadio */
 .site-radio {
   position: fixed;
   right: max(0.85rem, env(safe-area-inset-right));
@@ -2877,7 +2506,7 @@ h2:focus-visible,
   cursor: pointer;
 }
 
-/* Folio contact — mirrors danny-me CaseStudyContact */
+/* Folio contact â€” mirrors danny-me CaseStudyContact */
 .folio-contact {
   margin-top: 0;
   padding: clamp(3rem, 8vw, 5.5rem) clamp(1.5rem, 5vw, 3.5rem) clamp(2rem, 5vw, 3.5rem);
@@ -2967,7 +2596,7 @@ h2:focus-visible,
 }
 
 .folio-contact__cta-label {
-  font-family: var(--folio-brand-font);
+  font-family: var(--font-brand, "Chubby And Groovy", "Season Mix TRIAL", sans-serif);
   font-size: clamp(1.35rem, 3vw, 1.85rem);
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -3058,12 +2687,12 @@ h2:focus-visible,
   color: var(--cs-accent);
 }
 
-/* Legacy top-nav (kept for older hooks) — hide when portfolio nav is present */
+/* Legacy top-nav (kept for older hooks) â€” hide when portfolio nav is present */
 .site-nav ~ .cs-top-nav {
   display: none;
 }
 
-/* Phase stepper — compact equal-width pills + under-track progress */
+/* Phase stepper â€” compact equal-width pills + under-track progress */
 .cs-phase-stepper {
   width: 100%;
   max-width: 36rem;
@@ -3152,7 +2781,7 @@ h2:focus-visible,
   height: 100%;
   border-radius: 999px;
   background: color-mix(in srgb, var(--cs-brand) 35%, var(--cs-border-subtle));
-  /* No transition — keep mobile progress locked to scroll */
+  /* No transition â€” keep mobile progress locked to scroll */
 }
 
 .cs-phase-stepper__dot {
@@ -3343,7 +2972,7 @@ h2:focus-visible,
 }
 
 
-/* Customer journey — stepper + progress */
+/* Customer journey â€” stepper + progress */
 .cs-journey-progress {
   display: flex;
   gap: 3px;
@@ -3566,7 +3195,7 @@ h2:focus-visible,
   outline-offset: 2px;
 }
 
-/* Act headers — tighter rhythm in compact sections */
+/* Act headers â€” tighter rhythm in compact sections */
 .cs-act-header-compact {
   margin-bottom: 1.25rem;
 }
@@ -3668,7 +3297,7 @@ h2:focus-visible,
   }
 }
 
-/* Journey map swimlanes — design deliverable frame */
+/* Journey map swimlanes â€” design deliverable frame */
 .cs-journey-swimlanes {
   display: flex;
   flex-direction: column;
@@ -3728,7 +3357,7 @@ h2:focus-visible,
   }
 }
 
-/* Flow explorer — chat-first, phone grows with thread */
+/* Flow explorer â€” chat-first, phone grows with thread */
 .cs-flow-explorer--chat-first {
   display: flex;
   flex-direction: column;
@@ -4028,7 +3657,7 @@ h2:focus-visible,
   }
 }
 
-/* Fit-in-viewport flow explorer — header + actions + phone in one screen */
+/* Fit-in-viewport flow explorer â€” header + actions + phone in one screen */
 .cs-flow-explorer__intro {
   margin: 0 0 0.875rem;
   font-size: 0.875rem;
@@ -4180,7 +3809,7 @@ h2:focus-visible,
   max-height: var(--flow-phone-h);
 }
 
-/* Split layout — controls left, large phone right */
+/* Split layout â€” controls left, large phone right */
 .cs-flow-explorer--split {
   --flow-phone-w: min(400px, 44vw);
   --flow-phone-h: min(32rem, calc(100vh - var(--cs-nav-h) - 12rem));
@@ -4266,7 +3895,7 @@ h2:focus-visible,
   width: 100%;
 }
 
-/* Flow picker — grid chips (distinct from section nav + comparison toggle) */
+/* Flow picker â€” grid chips (distinct from section nav + comparison toggle) */
 .cs-flow-picker-tabs.cs-sliding-tabs--pill {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -4497,7 +4126,7 @@ h2:focus-visible,
   max-width: 100%;
 }
 
-/* Single notification — no empty scroll area below the bubble */
+/* Single notification â€” no empty scroll area below the bubble */
 .cs-staff-phone-wrap .cs-wa-phone--device .cs-wa-screen {
   height: auto;
   max-height: none;
@@ -4738,10 +4367,10 @@ h2:focus-visible,
   color: rgb(255 255 255 / 0.88);
 }
 
-/* Lola Connect mobile mock — shared size token for hero + tour + flows */
+/* Lola Connect mobile mock â€” shared size token for hero + tour + flows */
 .cs-lc-phone {
   --cs-lc-phone-w: 15rem;
-  /* True 9:16 — must match motion masters (1080×1920) or cover crops the dolly */
+  /* True 9:16 â€” must match motion masters (1080Ã—1920) or cover crops the dolly */
   --cs-lc-phone-h: calc(var(--cs-lc-phone-w) * 16 / 9);
   width: 100%;
   max-width: var(--cs-lc-phone-w);
@@ -5261,7 +4890,7 @@ h2:focus-visible,
   }
 }
 
-/* Shared pickup alert — identical copy block in WhatsApp bubble + dashboard sheet */
+/* Shared pickup alert â€” identical copy block in WhatsApp bubble + dashboard sheet */
 .cs-staff-pickup-alert {
   display: flex;
   flex-direction: column;
@@ -5343,7 +4972,7 @@ h2:focus-visible,
   }
 }
 
-/* Taller chat in flow explorer — fixed device frame; scroll inside chat */
+/* Taller chat in flow explorer â€” fixed device frame; scroll inside chat */
 .cs-flow-explorer .cs-wa-phone--device .cs-wa-chat {
   flex: 1;
   min-height: 0;
@@ -5351,7 +4980,7 @@ h2:focus-visible,
   max-height: none;
 }
 
-/* Side-by-side validation phones — only when each column fits a full phone */
+/* Side-by-side validation phones â€” only when each column fits a full phone */
 .cs-validation-phones {
   display: grid;
   grid-template-columns: 1fr;
@@ -5373,7 +5002,7 @@ h2:focus-visible,
   align-items: center;
 }
 
-/* Phone beside copy — fixed 300px column, never squeeze the frame */
+/* Phone beside copy â€” fixed 300px column, never squeeze the frame */
 .cs-phone-sidebar-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -5388,7 +5017,7 @@ h2:focus-visible,
   }
 }
 
-/* WhatsApp phone mock — device frame for flow explorer */
+/* WhatsApp phone mock â€” device frame for flow explorer */
 :root {
   --wa-phone-w: 300px;
   --wa-phone-device-w: 390px;
@@ -5462,7 +5091,7 @@ h2:focus-visible,
   -webkit-overflow-scrolling: touch;
 }
 
-/* Mobile — fit WhatsApp mocks inside page + artifact padding (realistic ~360px cap) */
+/* Mobile â€” fit WhatsApp mocks inside page + artifact padding (realistic ~360px cap) */
 @media (max-width: 767px) {
   :root {
     --wa-phone-fit-w: min(
@@ -5631,7 +5260,7 @@ h2:focus-visible,
 
 .cs-wa-chat--fixed,
 .cs-wa-chat--compact {
-  /* legacy — same as default */
+  /* legacy â€” same as default */
 }
 
 .cs-wa-bubble {
@@ -5826,7 +5455,7 @@ h2:focus-visible,
   line-height: 1.35;
 }
 
-/* What shipped — horizontal scroll, one readable phone per card */
+/* What shipped â€” horizontal scroll, one readable phone per card */
 .cs-shipped-scroll {
   display: flex;
   gap: 1.25rem;
@@ -5882,7 +5511,7 @@ h2:focus-visible,
   }
 }
 
-/* ── Hero banner (Fold I) — PDF split: copy left, store right ── */
+/* â”€â”€ Hero banner (Fold I) â€” PDF split: copy left, store right â”€â”€ */
 .cs-hero-banner {
   position: relative;
   overflow: hidden;
@@ -6028,7 +5657,7 @@ h2:focus-visible,
   justify-content: center;
 }
 
-/* Hero — guest WhatsApp + staff Lola Connect side by side */
+/* Hero â€” guest WhatsApp + staff Lola Connect side by side */
 .cs-hero-dual {
   --cs-hero-phone-w: var(--cs-lc-phone-w, 17rem);
   --cs-hero-phone-h: var(--cs-lc-phone-h, 24rem);
@@ -6489,7 +6118,7 @@ h2:focus-visible,
   z-index: 1;
 }
 
-/* Research → decision table (Act 2) */
+/* Research â†’ decision table (Act 2) */
 .cs-research-table-wrap {
   border: 1px solid var(--cs-border);
   border-radius: var(--cs-radius);
@@ -6901,7 +6530,7 @@ h2:focus-visible,
   color: var(--cs-muted);
 }
 
-/* —— Three-fold case study structure —— */
+/* â€”â€” Three-fold case study structure â€”â€” */
 .cs-fold {
   position: relative;
 }
@@ -7127,7 +6756,7 @@ h2:focus-visible,
   }
 }
 
-/* Staff dashboard tour — subsection under alerts */
+/* Staff dashboard tour â€” subsection under alerts */
 .cs-staff-app-tour {
   margin-top: 1.25rem;
   padding-top: 1.25rem;
@@ -7994,7 +7623,7 @@ h2:focus-visible,
   color: var(--cs-ink-muted);
 }
 
-/* Product system spine — prologue */
+/* Product system spine â€” prologue */
 .cs-product-system__intro {
   max-width: 42ch;
   margin-bottom: 1.25rem;
@@ -8069,7 +7698,7 @@ h2:focus-visible,
   color: var(--cs-ink-muted);
 }
 
-/* Scope metrics — Deliver */
+/* Scope metrics â€” Deliver */
 .cs-scope-metrics {
   display: grid;
   gap: 1.75rem;
@@ -8190,7 +7819,7 @@ h2:focus-visible,
   color: var(--cs-brand);
 }
 
-/* ——— Lola Motion: hero reel + feature clips ——— */
+/* â€”â€”â€” Lola Motion: hero reel + feature clips â€”â€”â€” */
 .cs-hero-banner--reel .cs-hero-banner-split {
   align-items: center;
   gap: clamp(1.5rem, 4vw, 2.75rem);
@@ -8203,7 +7832,7 @@ h2:focus-visible,
 }
 
 .cs-feature-video {
-  /* True 9:16 — match 1080×1920 masters. Never scale/crop (dolly + quality). */
+  /* True 9:16 â€” match 1080Ã—1920 masters. Never scale/crop (dolly + quality). */
   --cs-motion-frame-w: 15rem;
   margin: 0;
   width: 100%;
@@ -8316,14 +7945,14 @@ h2:focus-visible,
   text-align: center;
 }
 
-/* Key flows — sticky pin: one copy beat + synced devices (no muddy overlap) */
+/* Key flows â€” sticky pin: one copy beat + synced devices (no muddy overlap) */
 .cs-flows-sticky {
   width: 100%;
 }
 
 .cs-flows-sticky__track {
   position: relative;
-  /* Three equal beats — shorter track keeps text/video in sync */
+  /* Three equal beats â€” shorter track keeps text/video in sync */
   height: 140vh;
   margin-top: 0.75rem;
 }
@@ -8564,7 +8193,7 @@ h2:focus-visible,
   place-items: center;
 }
 
-/* Clear side-by-side devices — gap grows with spread, never negative-margin pile */
+/* Clear side-by-side devices â€” gap grows with spread, never negative-margin pile */
 .cs-flows-sticky__cluster {
   --phone-w: 10.75rem;
   --phone-gap: 1rem;
