@@ -673,7 +673,7 @@ body {
   border-radius: 0.45rem;
   font-family: var(--cs-mono);
   font-weight: 600;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   text-decoration: none;
@@ -721,7 +721,7 @@ body {
   border-radius: 0.45rem;
   font-family: var(--cs-mono);
   font-weight: 600;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   text-decoration: none;
@@ -759,7 +759,7 @@ body {
   border-radius: 0.35rem;
   font-family: var(--cs-mono);
   font-weight: 500;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   text-decoration: none;
@@ -799,7 +799,7 @@ body {
   border-radius: 0.45rem;
   font-family: var(--cs-mono);
   font-weight: 600;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   text-decoration: none;
@@ -2908,10 +2908,11 @@ h2:focus-visible,
 
 .folio-contact__eyebrow {
   font-family: var(--cs-mono, "DM Mono", monospace);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #4f7cff;
+  /* Darkened from #4f7cff (~3.7:1) to clear WCAG AA 4.5:1 on white */
+  color: #2451d6;
   margin-bottom: 0.75rem;
 }
 
@@ -3033,7 +3034,7 @@ h2:focus-visible,
   background: #fff;
   text-decoration: none;
   font-family: var(--cs-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;

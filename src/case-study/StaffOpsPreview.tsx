@@ -320,7 +320,7 @@ function StaffDeskPreview({ screen }: { screen: StaffTourId }) {
       <div className="cs-staff-desk">
         <aside className="cs-staff-desk__side">
           <div className="cs-staff-desk__brand">
-            <img src="/lola-connect-app-icon.png" alt="" width={28} height={28} />
+            <img src="/lola-connect-app-icon.png" alt="Lola Connect" width={28} height={28} />
             <div className="cs-staff-desk__brand-copy">
               <p className="cs-staff-desk__product">
                 <LolaMark variant="inline" />
