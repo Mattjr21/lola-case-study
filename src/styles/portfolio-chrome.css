@@ -206,15 +206,15 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.4rem 0.75rem;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-brand);
-  font-size: var(--text-body-lg);
+  padding: 0.55rem 0.7rem;
+  border-radius: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-meta-lg);
   font-weight: 400;
-  letter-spacing: 0.01em;
-  text-transform: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: #555;
-  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+  transition: color 0.2s var(--ease), background 0.2s var(--ease);
   text-decoration: none;
 }
 
@@ -233,17 +233,17 @@
   box-shadow: none;
 }
 
-/* Beat .nav-links a mono/uppercase cascade — same as danny-me fix */
+/* Keep folio tabs on mono / uppercase — never Chubby (brand is name only) */
 .nav-links--folio a.nav-tab {
-  font-family: var(--font-brand);
-  font-size: var(--text-body-lg);
+  font-family: var(--font-mono);
+  font-size: var(--text-meta-lg);
   font-weight: 400;
-  letter-spacing: 0.01em;
-  text-transform: none;
-  padding: 0.4rem 0.75rem;
-  border-radius: var(--radius-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.55rem 0.7rem;
+  border-radius: 0;
   color: #555;
-  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+  transition: color 0.2s var(--ease), background 0.2s var(--ease);
 }
 
 .site-nav--folio .nav-brand span {
@@ -405,12 +405,13 @@
   align-items: center;
   gap: 0.6rem;
   padding: 0.75rem 1.25rem;
-  font-family: var(--font-brand);
-  font-size: var(--text-body-lg);
+  font-family: var(--font-mono);
+  font-size: var(--text-meta-lg);
   font-weight: 400;
   color: #111212;
   text-decoration: none;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .nav-mobile-link:hover,
